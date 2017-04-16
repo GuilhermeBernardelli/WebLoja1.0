@@ -1,0 +1,173 @@
+C:\Users\berna\Documents\Visual Studio 2015\Projects\WebLoja1.0\WebLoja1.0\bin\ApplicationInsights.config
+C:\Users\berna\Documents\Visual Studio 2015\Projects\WebLoja1.0\WebLoja1.0\bin\roslyn\csc.exe
+C:\Users\berna\Documents\Visual Studio 2015\Projects\WebLoja1.0\WebLoja1.0\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\berna\Documents\Visual Studio 2015\Projects\WebLoja1.0\WebLoja1.0\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\berna\Documents\Visual Studio 2015\Projects\WebLoja1.0\WebLoja1.0\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\berna\Documents\Visual Studio 2015\Projects\WebLoja1.0\WebLoja1.0\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\berna\Documents\Visual Studio 2015\Projects\WebLoja1.0\WebLoja1.0\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\berna\Documents\Visual Studio 2015\Projects\WebLoja1.0\WebLoja1.0\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\berna\Documents\Visual Studio 2015\Projects\WebLoja1.0\WebLoja1.0\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\berna\Documents\Visual Studio 2015\Projects\WebLoja1.0\WebLoja1.0\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\berna\Documents\Visual Studio 2015\Projects\WebLoja1.0\WebLoja1.0\bin\roslyn\vbc.exe
+C:\Users\berna\Documents\Visual Studio 2015\Projects\WebLoja1.0\WebLoja1.0\bin\roslyn\VBCSCompiler.exe
+C:\Users\berna\Documents\Visual Studio 2015\Projects\WebLoja1.0\WebLoja1.0\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\berna\Documents\Visual Studio 2015\Projects\WebLoja1.0\WebLoja1.0\bin\WebLoja1.0.dll.config
+C:\Users\berna\Documents\Visual Studio 2015\Projects\WebLoja1.0\WebLoja1.0\bin\WebLoja1.0.dll
+C:\Users\berna\Documents\Visual Studio 2015\Projects\WebLoja1.0\WebLoja1.0\bin\WebLoja1.0.pdb
+C:\Users\berna\Documents\Visual Studio 2015\Projects\WebLoja1.0\WebLoja1.0\bin\Microsoft.AI.Agent.Intercept.dll
+C:\Users\berna\Documents\Visual Studio 2015\Projects\WebLoja1.0\WebLoja1.0\bin\Microsoft.AI.DependencyCollector.dll
+C:\Users\berna\Documents\Visual Studio 2015\Projects\WebLoja1.0\WebLoja1.0\bin\Microsoft.AI.PerfCounterCollector.dll
+C:\Users\berna\Documents\Visual Studio 2015\Projects\WebLoja1.0\WebLoja1.0\bin\Microsoft.AI.ServerTelemetryChannel.dll
+C:\Users\berna\Documents\Visual Studio 2015\Projects\WebLoja1.0\WebLoja1.0\bin\Microsoft.AI.Web.dll
+C:\Users\berna\Documents\Visual Studio 2015\Projects\WebLoja1.0\WebLoja1.0\bin\Microsoft.AI.WindowsServer.dll
+C:\Users\berna\Documents\Visual Studio 2015\Projects\WebLoja1.0\WebLoja1.0\bin\Microsoft.ApplicationInsights.dll
+C:\Users\berna\Documents\Visual Studio 2015\Projects\WebLoja1.0\WebLoja1.0\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\berna\Documents\Visual Studio 2015\Projects\WebLoja1.0\WebLoja1.0\bin\Microsoft.AI.DependencyCollector.xml
+C:\Users\berna\Documents\Visual Studio 2015\Projects\WebLoja1.0\WebLoja1.0\bin\Microsoft.AI.ServerTelemetryChannel.xml
+C:\Users\berna\Documents\Visual Studio 2015\Projects\WebLoja1.0\WebLoja1.0\bin\Microsoft.AI.Web.xml
+C:\Users\berna\Documents\Visual Studio 2015\Projects\WebLoja1.0\WebLoja1.0\bin\Microsoft.AI.WindowsServer.xml
+C:\Users\berna\Documents\Visual Studio 2015\Projects\WebLoja1.0\WebLoja1.0\bin\Microsoft.ApplicationInsights.xml
+C:\Users\berna\Documents\Visual Studio 2015\Projects\WebLoja1.0\WebLoja1.0\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\berna\Documents\Visual Studio 2015\Projects\WebLoja1.0\WebLoja1.0\obj\Debug\WebLoja1.0.csprojResolveAssemblyReference.cache
+C:\Users\berna\Documents\Visual Studio 2015\Projects\WebLoja1.0\WebLoja1.0\obj\Debug\WebLoja1.0.dll
+C:\Users\berna\Documents\Visual Studio 2015\Projects\WebLoja1.0\WebLoja1.0\obj\Debug\WebLoja1.0.pdb
+C:\Users\berna\Documents\GitHub\WebLoja\WebLoja1.0\WebLoja1.0\bin\ApplicationInsights.config
+C:\Users\berna\Documents\GitHub\WebLoja\WebLoja1.0\WebLoja1.0\bin\roslyn\csc.exe
+C:\Users\berna\Documents\GitHub\WebLoja\WebLoja1.0\WebLoja1.0\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\berna\Documents\GitHub\WebLoja\WebLoja1.0\WebLoja1.0\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\berna\Documents\GitHub\WebLoja\WebLoja1.0\WebLoja1.0\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\berna\Documents\GitHub\WebLoja\WebLoja1.0\WebLoja1.0\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\berna\Documents\GitHub\WebLoja\WebLoja1.0\WebLoja1.0\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\berna\Documents\GitHub\WebLoja\WebLoja1.0\WebLoja1.0\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\berna\Documents\GitHub\WebLoja\WebLoja1.0\WebLoja1.0\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\berna\Documents\GitHub\WebLoja\WebLoja1.0\WebLoja1.0\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\berna\Documents\GitHub\WebLoja\WebLoja1.0\WebLoja1.0\bin\roslyn\vbc.exe
+C:\Users\berna\Documents\GitHub\WebLoja\WebLoja1.0\WebLoja1.0\bin\roslyn\VBCSCompiler.exe
+C:\Users\berna\Documents\GitHub\WebLoja\WebLoja1.0\WebLoja1.0\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\berna\Documents\GitHub\WebLoja\WebLoja1.0\WebLoja1.0\bin\WebLoja1.0.dll.config
+C:\Users\berna\Documents\GitHub\WebLoja\WebLoja1.0\WebLoja1.0\bin\WebLoja1.0.dll
+C:\Users\berna\Documents\GitHub\WebLoja\WebLoja1.0\WebLoja1.0\bin\WebLoja1.0.pdb
+C:\Users\berna\Documents\GitHub\WebLoja\WebLoja1.0\WebLoja1.0\bin\Microsoft.AI.Agent.Intercept.dll
+C:\Users\berna\Documents\GitHub\WebLoja\WebLoja1.0\WebLoja1.0\bin\Microsoft.AI.DependencyCollector.dll
+C:\Users\berna\Documents\GitHub\WebLoja\WebLoja1.0\WebLoja1.0\bin\Microsoft.AI.PerfCounterCollector.dll
+C:\Users\berna\Documents\GitHub\WebLoja\WebLoja1.0\WebLoja1.0\bin\Microsoft.AI.ServerTelemetryChannel.dll
+C:\Users\berna\Documents\GitHub\WebLoja\WebLoja1.0\WebLoja1.0\bin\Microsoft.AI.Web.dll
+C:\Users\berna\Documents\GitHub\WebLoja\WebLoja1.0\WebLoja1.0\bin\Microsoft.AI.WindowsServer.dll
+C:\Users\berna\Documents\GitHub\WebLoja\WebLoja1.0\WebLoja1.0\bin\Microsoft.ApplicationInsights.dll
+C:\Users\berna\Documents\GitHub\WebLoja\WebLoja1.0\WebLoja1.0\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\berna\Documents\GitHub\WebLoja\WebLoja1.0\WebLoja1.0\bin\Microsoft.AI.DependencyCollector.xml
+C:\Users\berna\Documents\GitHub\WebLoja\WebLoja1.0\WebLoja1.0\bin\Microsoft.AI.ServerTelemetryChannel.xml
+C:\Users\berna\Documents\GitHub\WebLoja\WebLoja1.0\WebLoja1.0\bin\Microsoft.AI.Web.xml
+C:\Users\berna\Documents\GitHub\WebLoja\WebLoja1.0\WebLoja1.0\bin\Microsoft.AI.WindowsServer.xml
+C:\Users\berna\Documents\GitHub\WebLoja\WebLoja1.0\WebLoja1.0\bin\Microsoft.ApplicationInsights.xml
+C:\Users\berna\Documents\GitHub\WebLoja\WebLoja1.0\WebLoja1.0\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\berna\Documents\GitHub\WebLoja\WebLoja1.0\WebLoja1.0\obj\Debug\WebLoja1.0.csprojResolveAssemblyReference.cache
+C:\Users\berna\Documents\GitHub\WebLoja\WebLoja1.0\WebLoja1.0\obj\Debug\WebLoja1.0.dll
+C:\Users\berna\Documents\GitHub\WebLoja\WebLoja1.0\WebLoja1.0\obj\Debug\WebLoja1.0.pdb
+C:\Users\berna\Documents\GitHub\WebLoja\WebLoja1.0\WebLoja1.0\bin\EntityFramework.dll
+C:\Users\berna\Documents\GitHub\WebLoja\WebLoja1.0\WebLoja1.0\bin\EntityFramework.xml
+D:\Projetos\Loja de Materiais Construção\WebLoja1.0\WebLoja1.0\bin\ApplicationInsights.config
+D:\Projetos\Loja de Materiais Construção\WebLoja1.0\WebLoja1.0\bin\roslyn\csc.exe
+D:\Projetos\Loja de Materiais Construção\WebLoja1.0\WebLoja1.0\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+D:\Projetos\Loja de Materiais Construção\WebLoja1.0\WebLoja1.0\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+D:\Projetos\Loja de Materiais Construção\WebLoja1.0\WebLoja1.0\bin\roslyn\Microsoft.CodeAnalysis.dll
+D:\Projetos\Loja de Materiais Construção\WebLoja1.0\WebLoja1.0\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+D:\Projetos\Loja de Materiais Construção\WebLoja1.0\WebLoja1.0\bin\roslyn\Microsoft.CSharp.Core.targets
+D:\Projetos\Loja de Materiais Construção\WebLoja1.0\WebLoja1.0\bin\roslyn\Microsoft.VisualBasic.Core.targets
+D:\Projetos\Loja de Materiais Construção\WebLoja1.0\WebLoja1.0\bin\roslyn\System.Collections.Immutable.dll
+D:\Projetos\Loja de Materiais Construção\WebLoja1.0\WebLoja1.0\bin\roslyn\System.Reflection.Metadata.dll
+D:\Projetos\Loja de Materiais Construção\WebLoja1.0\WebLoja1.0\bin\roslyn\vbc.exe
+D:\Projetos\Loja de Materiais Construção\WebLoja1.0\WebLoja1.0\bin\roslyn\VBCSCompiler.exe
+D:\Projetos\Loja de Materiais Construção\WebLoja1.0\WebLoja1.0\bin\roslyn\VBCSCompiler.exe.config
+D:\Projetos\Loja de Materiais Construção\WebLoja1.0\WebLoja1.0\bin\WebLoja1.0.dll.config
+D:\Projetos\Loja de Materiais Construção\WebLoja1.0\WebLoja1.0\bin\WebLoja1.0.dll
+D:\Projetos\Loja de Materiais Construção\WebLoja1.0\WebLoja1.0\bin\WebLoja1.0.pdb
+D:\Projetos\Loja de Materiais Construção\WebLoja1.0\WebLoja1.0\bin\EntityFramework.dll
+D:\Projetos\Loja de Materiais Construção\WebLoja1.0\WebLoja1.0\bin\Microsoft.AI.Agent.Intercept.dll
+D:\Projetos\Loja de Materiais Construção\WebLoja1.0\WebLoja1.0\bin\Microsoft.AI.DependencyCollector.dll
+D:\Projetos\Loja de Materiais Construção\WebLoja1.0\WebLoja1.0\bin\Microsoft.AI.PerfCounterCollector.dll
+D:\Projetos\Loja de Materiais Construção\WebLoja1.0\WebLoja1.0\bin\Microsoft.AI.ServerTelemetryChannel.dll
+D:\Projetos\Loja de Materiais Construção\WebLoja1.0\WebLoja1.0\bin\Microsoft.AI.Web.dll
+D:\Projetos\Loja de Materiais Construção\WebLoja1.0\WebLoja1.0\bin\Microsoft.AI.WindowsServer.dll
+D:\Projetos\Loja de Materiais Construção\WebLoja1.0\WebLoja1.0\bin\Microsoft.ApplicationInsights.dll
+D:\Projetos\Loja de Materiais Construção\WebLoja1.0\WebLoja1.0\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+D:\Projetos\Loja de Materiais Construção\WebLoja1.0\WebLoja1.0\bin\EntityFramework.xml
+D:\Projetos\Loja de Materiais Construção\WebLoja1.0\WebLoja1.0\bin\Microsoft.AI.DependencyCollector.xml
+D:\Projetos\Loja de Materiais Construção\WebLoja1.0\WebLoja1.0\bin\Microsoft.AI.ServerTelemetryChannel.xml
+D:\Projetos\Loja de Materiais Construção\WebLoja1.0\WebLoja1.0\bin\Microsoft.AI.Web.xml
+D:\Projetos\Loja de Materiais Construção\WebLoja1.0\WebLoja1.0\bin\Microsoft.AI.WindowsServer.xml
+D:\Projetos\Loja de Materiais Construção\WebLoja1.0\WebLoja1.0\bin\Microsoft.ApplicationInsights.xml
+D:\Projetos\Loja de Materiais Construção\WebLoja1.0\WebLoja1.0\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+D:\Projetos\Loja de Materiais Construção\WebLoja1.0\WebLoja1.0\obj\Debug\WebLoja1.0.csprojResolveAssemblyReference.cache
+D:\Projetos\Loja de Materiais Construção\WebLoja1.0\WebLoja1.0\obj\Debug\WebLoja1.0.dll
+D:\Projetos\Loja de Materiais Construção\WebLoja1.0\WebLoja1.0\obj\Debug\WebLoja1.0.pdb
+F:\Projetos\Loja de Materiais Construção\WebLoja1.0\WebLoja1.0\bin\ApplicationInsights.config
+F:\Projetos\Loja de Materiais Construção\WebLoja1.0\WebLoja1.0\bin\roslyn\csc.exe
+F:\Projetos\Loja de Materiais Construção\WebLoja1.0\WebLoja1.0\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+F:\Projetos\Loja de Materiais Construção\WebLoja1.0\WebLoja1.0\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+F:\Projetos\Loja de Materiais Construção\WebLoja1.0\WebLoja1.0\bin\roslyn\Microsoft.CodeAnalysis.dll
+F:\Projetos\Loja de Materiais Construção\WebLoja1.0\WebLoja1.0\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+F:\Projetos\Loja de Materiais Construção\WebLoja1.0\WebLoja1.0\bin\roslyn\Microsoft.CSharp.Core.targets
+F:\Projetos\Loja de Materiais Construção\WebLoja1.0\WebLoja1.0\bin\roslyn\Microsoft.VisualBasic.Core.targets
+F:\Projetos\Loja de Materiais Construção\WebLoja1.0\WebLoja1.0\bin\roslyn\System.Collections.Immutable.dll
+F:\Projetos\Loja de Materiais Construção\WebLoja1.0\WebLoja1.0\bin\roslyn\System.Reflection.Metadata.dll
+F:\Projetos\Loja de Materiais Construção\WebLoja1.0\WebLoja1.0\bin\roslyn\vbc.exe
+F:\Projetos\Loja de Materiais Construção\WebLoja1.0\WebLoja1.0\bin\roslyn\VBCSCompiler.exe
+F:\Projetos\Loja de Materiais Construção\WebLoja1.0\WebLoja1.0\bin\roslyn\VBCSCompiler.exe.config
+F:\Projetos\Loja de Materiais Construção\WebLoja1.0\WebLoja1.0\bin\WebLoja1.0.dll.config
+F:\Projetos\Loja de Materiais Construção\WebLoja1.0\WebLoja1.0\bin\WebLoja1.0.dll
+F:\Projetos\Loja de Materiais Construção\WebLoja1.0\WebLoja1.0\bin\WebLoja1.0.pdb
+F:\Projetos\Loja de Materiais Construção\WebLoja1.0\WebLoja1.0\bin\EntityFramework.dll
+F:\Projetos\Loja de Materiais Construção\WebLoja1.0\WebLoja1.0\bin\Microsoft.AI.Agent.Intercept.dll
+F:\Projetos\Loja de Materiais Construção\WebLoja1.0\WebLoja1.0\bin\Microsoft.AI.DependencyCollector.dll
+F:\Projetos\Loja de Materiais Construção\WebLoja1.0\WebLoja1.0\bin\Microsoft.AI.PerfCounterCollector.dll
+F:\Projetos\Loja de Materiais Construção\WebLoja1.0\WebLoja1.0\bin\Microsoft.AI.ServerTelemetryChannel.dll
+F:\Projetos\Loja de Materiais Construção\WebLoja1.0\WebLoja1.0\bin\Microsoft.AI.Web.dll
+F:\Projetos\Loja de Materiais Construção\WebLoja1.0\WebLoja1.0\bin\Microsoft.AI.WindowsServer.dll
+F:\Projetos\Loja de Materiais Construção\WebLoja1.0\WebLoja1.0\bin\Microsoft.ApplicationInsights.dll
+F:\Projetos\Loja de Materiais Construção\WebLoja1.0\WebLoja1.0\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+F:\Projetos\Loja de Materiais Construção\WebLoja1.0\WebLoja1.0\bin\EntityFramework.xml
+F:\Projetos\Loja de Materiais Construção\WebLoja1.0\WebLoja1.0\bin\Microsoft.AI.DependencyCollector.xml
+F:\Projetos\Loja de Materiais Construção\WebLoja1.0\WebLoja1.0\bin\Microsoft.AI.ServerTelemetryChannel.xml
+F:\Projetos\Loja de Materiais Construção\WebLoja1.0\WebLoja1.0\bin\Microsoft.AI.Web.xml
+F:\Projetos\Loja de Materiais Construção\WebLoja1.0\WebLoja1.0\bin\Microsoft.AI.WindowsServer.xml
+F:\Projetos\Loja de Materiais Construção\WebLoja1.0\WebLoja1.0\bin\Microsoft.ApplicationInsights.xml
+F:\Projetos\Loja de Materiais Construção\WebLoja1.0\WebLoja1.0\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+F:\Projetos\Loja de Materiais Construção\WebLoja1.0\WebLoja1.0\obj\Debug\WebLoja1.0.csprojResolveAssemblyReference.cache
+F:\Projetos\Loja de Materiais Construção\WebLoja1.0\WebLoja1.0\obj\Debug\WebLoja1.0.dll
+F:\Projetos\Loja de Materiais Construção\WebLoja1.0\WebLoja1.0\obj\Debug\WebLoja1.0.pdb
+C:\Users\Bernardelli\Documents\Visual Studio 2015\Projects\WebLoja1.0\WebLoja1.0\bin\ApplicationInsights.config
+C:\Users\Bernardelli\Documents\Visual Studio 2015\Projects\WebLoja1.0\WebLoja1.0\bin\roslyn\csc.exe
+C:\Users\Bernardelli\Documents\Visual Studio 2015\Projects\WebLoja1.0\WebLoja1.0\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\Bernardelli\Documents\Visual Studio 2015\Projects\WebLoja1.0\WebLoja1.0\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\Bernardelli\Documents\Visual Studio 2015\Projects\WebLoja1.0\WebLoja1.0\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\Bernardelli\Documents\Visual Studio 2015\Projects\WebLoja1.0\WebLoja1.0\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\Bernardelli\Documents\Visual Studio 2015\Projects\WebLoja1.0\WebLoja1.0\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\Bernardelli\Documents\Visual Studio 2015\Projects\WebLoja1.0\WebLoja1.0\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\Bernardelli\Documents\Visual Studio 2015\Projects\WebLoja1.0\WebLoja1.0\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\Bernardelli\Documents\Visual Studio 2015\Projects\WebLoja1.0\WebLoja1.0\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\Bernardelli\Documents\Visual Studio 2015\Projects\WebLoja1.0\WebLoja1.0\bin\roslyn\vbc.exe
+C:\Users\Bernardelli\Documents\Visual Studio 2015\Projects\WebLoja1.0\WebLoja1.0\bin\roslyn\VBCSCompiler.exe
+C:\Users\Bernardelli\Documents\Visual Studio 2015\Projects\WebLoja1.0\WebLoja1.0\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\Bernardelli\Documents\Visual Studio 2015\Projects\WebLoja1.0\WebLoja1.0\bin\WebLoja1.0.dll.config
+C:\Users\Bernardelli\Documents\Visual Studio 2015\Projects\WebLoja1.0\WebLoja1.0\bin\WebLoja1.0.dll
+C:\Users\Bernardelli\Documents\Visual Studio 2015\Projects\WebLoja1.0\WebLoja1.0\bin\WebLoja1.0.pdb
+C:\Users\Bernardelli\Documents\Visual Studio 2015\Projects\WebLoja1.0\WebLoja1.0\bin\EntityFramework.dll
+C:\Users\Bernardelli\Documents\Visual Studio 2015\Projects\WebLoja1.0\WebLoja1.0\bin\Microsoft.AI.Agent.Intercept.dll
+C:\Users\Bernardelli\Documents\Visual Studio 2015\Projects\WebLoja1.0\WebLoja1.0\bin\Microsoft.AI.DependencyCollector.dll
+C:\Users\Bernardelli\Documents\Visual Studio 2015\Projects\WebLoja1.0\WebLoja1.0\bin\Microsoft.AI.PerfCounterCollector.dll
+C:\Users\Bernardelli\Documents\Visual Studio 2015\Projects\WebLoja1.0\WebLoja1.0\bin\Microsoft.AI.ServerTelemetryChannel.dll
+C:\Users\Bernardelli\Documents\Visual Studio 2015\Projects\WebLoja1.0\WebLoja1.0\bin\Microsoft.AI.Web.dll
+C:\Users\Bernardelli\Documents\Visual Studio 2015\Projects\WebLoja1.0\WebLoja1.0\bin\Microsoft.AI.WindowsServer.dll
+C:\Users\Bernardelli\Documents\Visual Studio 2015\Projects\WebLoja1.0\WebLoja1.0\bin\Microsoft.ApplicationInsights.dll
+C:\Users\Bernardelli\Documents\Visual Studio 2015\Projects\WebLoja1.0\WebLoja1.0\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\Bernardelli\Documents\Visual Studio 2015\Projects\WebLoja1.0\WebLoja1.0\bin\EntityFramework.xml
+C:\Users\Bernardelli\Documents\Visual Studio 2015\Projects\WebLoja1.0\WebLoja1.0\bin\Microsoft.AI.DependencyCollector.xml
+C:\Users\Bernardelli\Documents\Visual Studio 2015\Projects\WebLoja1.0\WebLoja1.0\bin\Microsoft.AI.ServerTelemetryChannel.xml
+C:\Users\Bernardelli\Documents\Visual Studio 2015\Projects\WebLoja1.0\WebLoja1.0\bin\Microsoft.AI.Web.xml
+C:\Users\Bernardelli\Documents\Visual Studio 2015\Projects\WebLoja1.0\WebLoja1.0\bin\Microsoft.AI.WindowsServer.xml
+C:\Users\Bernardelli\Documents\Visual Studio 2015\Projects\WebLoja1.0\WebLoja1.0\bin\Microsoft.ApplicationInsights.xml
+C:\Users\Bernardelli\Documents\Visual Studio 2015\Projects\WebLoja1.0\WebLoja1.0\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\Bernardelli\Documents\Visual Studio 2015\Projects\WebLoja1.0\WebLoja1.0\obj\Debug\WebLoja1.0.dll
+C:\Users\Bernardelli\Documents\Visual Studio 2015\Projects\WebLoja1.0\WebLoja1.0\obj\Debug\WebLoja1.0.pdb
+C:\Users\Bernardelli\Documents\Visual Studio 2015\Projects\WebLoja1.0\WebLoja1.0\obj\Debug\WebLoja1.0.csprojResolveAssemblyReference.cache

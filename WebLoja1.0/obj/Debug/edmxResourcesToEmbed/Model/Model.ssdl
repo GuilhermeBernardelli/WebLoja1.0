@@ -1,0 +1,263 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Cidades">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_Estado" Type="int" Nullable="false" />
+    <Property Name="cidade" Type="varchar" MaxLength="25" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Clientes">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="nome" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="cpf" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="contato" Type="varchar" MaxLength="50" />
+    <Property Name="telefone" Type="varchar" MaxLength="20" />
+    <Property Name="celular" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="endereço" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="numeral" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="bairro" Type="varchar" MaxLength="50" />
+    <Property Name="id_Cidade" Type="int" Nullable="false" />
+    <Property Name="status" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Estados">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="estado" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="sigla" Type="varchar" MaxLength="2" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Fornecedores">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nome" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="cnpj" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="telefone" Type="varchar" MaxLength="20" />
+    <Property Name="celular" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="endereço" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="numeral" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="bairro" Type="varchar" MaxLength="25" />
+    <Property Name="id_Cidade" Type="int" Nullable="false" />
+    <Property Name="contato" Type="varchar" MaxLength="50" />
+    <Property Name="status" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Perfis">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Desc" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Numero" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Produtos">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="cod_produto" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="desc_produto" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="preco_compra" Type="float" Nullable="false" />
+    <Property Name="preco_venda" Type="float" Nullable="false" />
+    <Property Name="imagem" Type="varbinary(max)" />
+    <Property Name="qnt_estoque" Type="int" Nullable="false" />
+    <Property Name="id_fornecedor" Type="int" Nullable="false" />
+    <Property Name="status" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Usuarios">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="registro" Type="int" Nullable="false" />
+    <Property Name="nome" Type="varchar" MaxLength="30" />
+    <Property Name="senha" Type="varchar" MaxLength="16" />
+    <Property Name="num_perfil" Type="int" Nullable="false" />
+    <Property Name="status" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Vendas">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="data_Venda" Type="datetime" />
+    <Property Name="cfp" Type="varchar" MaxLength="13" />
+    <Property Name="cnpj" Type="varchar" MaxLength="30" />
+    <Property Name="produtos_Id" Type="int" />
+    <Property Name="valor_Venda" Type="float" />
+    <Property Name="id_Usuario" Type="int" />
+    <Property Name="id_Cliente" Type="int" Nullable="false" />
+    <Property Name="desconto" Type="int" Nullable="false" />
+    <Property Name="comissao" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Vendas_Produtos">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_venda" Type="int" />
+    <Property Name="id_produto" Type="int" />
+    <Property Name="quantidade" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__Cidades__id_Esta__308E3499">
+    <End Role="Estados" Type="Self.Estados" Multiplicity="1" />
+    <End Role="Cidades" Type="Self.Cidades" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Estados">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Cidades">
+        <PropertyRef Name="id_Estado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Clientes__id_Cid__5B438874">
+    <End Role="Cidades" Type="Self.Cidades" Multiplicity="1" />
+    <End Role="Clientes" Type="Self.Clientes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cidades">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Clientes">
+        <PropertyRef Name="id_Cidade" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Fornecedo__id_Ci__22FF2F51">
+    <End Role="Cidades" Type="Self.Cidades" Multiplicity="1" />
+    <End Role="Fornecedores" Type="Self.Fornecedores" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cidades">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Fornecedores">
+        <PropertyRef Name="id_Cidade" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Produtos__id_for__28B808A7">
+    <End Role="Fornecedores" Type="Self.Fornecedores" Multiplicity="1" />
+    <End Role="Produtos" Type="Self.Produtos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Fornecedores">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Produtos">
+        <PropertyRef Name="id_fornecedor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Usuarios__num_pe__2C88998B">
+    <End Role="Perfis" Type="Self.Perfis" Multiplicity="1" />
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Perfis">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Usuarios">
+        <PropertyRef Name="num_perfil" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Vendas__id_Clien__5C37ACAD">
+    <End Role="Clientes" Type="Self.Clientes" Multiplicity="1" />
+    <End Role="Vendas" Type="Self.Vendas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clientes">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Vendas">
+        <PropertyRef Name="id_Cliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="id_produto">
+    <End Role="Produtos" Type="Self.Produtos" Multiplicity="0..1" />
+    <End Role="Vendas_Produtos" Type="Self.Vendas_Produtos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Produtos">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Vendas_Produtos">
+        <PropertyRef Name="id_produto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="id_usuario">
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1" />
+    <End Role="Vendas" Type="Self.Vendas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuarios">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Vendas">
+        <PropertyRef Name="id_Usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="id_venda">
+    <End Role="Vendas" Type="Self.Vendas" Multiplicity="0..1" />
+    <End Role="Vendas_Produtos" Type="Self.Vendas_Produtos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vendas">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Vendas_Produtos">
+        <PropertyRef Name="id_venda" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DatabaseModelStoreContainer">
+    <EntitySet Name="Cidades" EntityType="Self.Cidades" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Clientes" EntityType="Self.Clientes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Estados" EntityType="Self.Estados" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Fornecedores" EntityType="Self.Fornecedores" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Perfis" EntityType="Self.Perfis" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Produtos" EntityType="Self.Produtos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Vendas" EntityType="Self.Vendas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Vendas_Produtos" EntityType="Self.Vendas_Produtos" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Cidades__id_Esta__308E3499" Association="Self.FK__Cidades__id_Esta__308E3499">
+      <End Role="Estados" EntitySet="Estados" />
+      <End Role="Cidades" EntitySet="Cidades" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Clientes__id_Cid__5B438874" Association="Self.FK__Clientes__id_Cid__5B438874">
+      <End Role="Cidades" EntitySet="Cidades" />
+      <End Role="Clientes" EntitySet="Clientes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Fornecedo__id_Ci__22FF2F51" Association="Self.FK__Fornecedo__id_Ci__22FF2F51">
+      <End Role="Cidades" EntitySet="Cidades" />
+      <End Role="Fornecedores" EntitySet="Fornecedores" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Produtos__id_for__28B808A7" Association="Self.FK__Produtos__id_for__28B808A7">
+      <End Role="Fornecedores" EntitySet="Fornecedores" />
+      <End Role="Produtos" EntitySet="Produtos" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Usuarios__num_pe__2C88998B" Association="Self.FK__Usuarios__num_pe__2C88998B">
+      <End Role="Perfis" EntitySet="Perfis" />
+      <End Role="Usuarios" EntitySet="Usuarios" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Vendas__id_Clien__5C37ACAD" Association="Self.FK__Vendas__id_Clien__5C37ACAD">
+      <End Role="Clientes" EntitySet="Clientes" />
+      <End Role="Vendas" EntitySet="Vendas" />
+    </AssociationSet>
+    <AssociationSet Name="id_produto" Association="Self.id_produto">
+      <End Role="Produtos" EntitySet="Produtos" />
+      <End Role="Vendas_Produtos" EntitySet="Vendas_Produtos" />
+    </AssociationSet>
+    <AssociationSet Name="id_usuario" Association="Self.id_usuario">
+      <End Role="Usuarios" EntitySet="Usuarios" />
+      <End Role="Vendas" EntitySet="Vendas" />
+    </AssociationSet>
+    <AssociationSet Name="id_venda" Association="Self.id_venda">
+      <End Role="Vendas" EntitySet="Vendas" />
+      <End Role="Vendas_Produtos" EntitySet="Vendas_Produtos" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
