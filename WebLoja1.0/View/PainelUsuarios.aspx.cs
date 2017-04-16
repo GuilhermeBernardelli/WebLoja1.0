@@ -76,6 +76,7 @@ namespace WebLoja1._0.View
                 user.nome = txtNome.Text;
                 user.senha = txtSenha.Text;
                 user.num_perfil = novoPerfil;
+                ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "alerta", "alert('Usuário "+txtNome.Text+" salvo com sucesso !!!');", true);
             }
         }
 
