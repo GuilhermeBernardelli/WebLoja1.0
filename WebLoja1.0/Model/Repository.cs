@@ -38,7 +38,14 @@ namespace WebLoja1._0.Model
                     where (usuarios.id == Id)
                     select usuarios).SingleOrDefault();
         }
-                
+
+        public List<Usuarios> pesquisaUsuariosInvalidos()
+        {
+            return (from usuarios in dataEntity.Usuarios
+                    where (usuarios.status == 0)
+                    select usuarios).ToList();
+        }
+
         public Produtos pesquisaProdutoByNome(string pesquisa)
         {
             return (from produtos in dataEntity.Produtos

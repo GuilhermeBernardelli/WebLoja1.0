@@ -10,19 +10,19 @@
         <EntityTypeShape EntityType="DatabaseModel.Estados" Width="1.5" PointX="0.75" PointY="3.875" />
         <EntityTypeShape EntityType="DatabaseModel.Fornecedores" Width="1.5" PointX="5.25" PointY="1.375" />
         <EntityTypeShape EntityType="DatabaseModel.Perfis" Width="1.5" PointX="3" PointY="9.75" />
-        <EntityTypeShape EntityType="DatabaseModel.Usuarios" Width="1.5" PointX="5.25" PointY="9.375" />
         <EntityTypeShape EntityType="DatabaseModel.Vendas" Width="1.5" PointX="7.5" PointY="5" />
         <EntityTypeShape EntityType="DatabaseModel.Vendas_Produtos" Width="1.5" PointX="9.75" PointY="3.875" />
         <AssociationConnector Association="DatabaseModel.FK__Cidades__id_Esta__308E3499" />
         <AssociationConnector Association="DatabaseModel.FK__Clientes__id_Cid__2F9A1060" />
         <AssociationConnector Association="DatabaseModel.FK__Fornecedo__id_Ci__69C6B1F5" />
         <AssociationConnector Association="DatabaseModel.FK__Vendas__id_Clien__46B27FE2" />
-        <AssociationConnector Association="DatabaseModel.FK__Usuarios__num_pe__2739D489" />
-        <AssociationConnector Association="DatabaseModel.id_usuario" />
         <AssociationConnector Association="DatabaseModel.id_venda" />
         <EntityTypeShape EntityType="DatabaseModel.Produtos" Width="1.5" PointX="7.5" PointY="0.75" />
         <AssociationConnector Association="DatabaseModel.FK__Produtos__id_for__28B808A7" />
         <AssociationConnector Association="DatabaseModel.id_produto" />
+        <EntityTypeShape EntityType="DatabaseModel.Usuarios" Width="1.5" PointX="5.25" PointY="9.375" />
+        <AssociationConnector Association="DatabaseModel.FK__Usuarios__num_pe__2C88998B" />
+        <AssociationConnector Association="DatabaseModel.id_usuario" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

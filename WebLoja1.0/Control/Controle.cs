@@ -31,6 +31,11 @@ namespace WebLoja1._0.Control
             return dbRepository.pesquisaSimplesUser(pesquisa);
         }
 
+        public List<Usuarios> usuariosInvalidos()
+        {            
+            return dbRepository.pesquisaUsuariosInvalidos();
+        }
+
         public Produtos pesquisaProdutoNome(string selectedValue)
         {
             string pesquisa = selectedValue;
@@ -84,7 +89,7 @@ namespace WebLoja1._0.Control
             string busca = pesquisa;
 
             return dbRepository.pesquisaFornecedoresByNomeCnpj(busca);
-        }
+        }        
 
         public Cidades pesquisaCidade(string cidade)
         {

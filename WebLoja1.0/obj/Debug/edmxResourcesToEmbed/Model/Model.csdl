@@ -6,7 +6,6 @@
     <EntitySet Name="Estados" EntityType="DatabaseModel.Estados" />
     <EntitySet Name="Fornecedores" EntityType="DatabaseModel.Fornecedores" />
     <EntitySet Name="Perfis" EntityType="DatabaseModel.Perfis" />
-    <EntitySet Name="Usuarios" EntityType="DatabaseModel.Usuarios" />
     <EntitySet Name="Vendas" EntityType="DatabaseModel.Vendas" />
     <EntitySet Name="Vendas_Produtos" EntityType="DatabaseModel.Vendas_Produtos" />
     <AssociationSet Name="FK__Cidades__id_Esta__308E3499" Association="DatabaseModel.FK__Cidades__id_Esta__308E3499">
@@ -25,14 +24,6 @@
       <End Role="Clientes" EntitySet="Clientes" />
       <End Role="Vendas" EntitySet="Vendas" />
     </AssociationSet>
-    <AssociationSet Name="FK__Usuarios__num_pe__2739D489" Association="DatabaseModel.FK__Usuarios__num_pe__2739D489">
-      <End Role="Perfis" EntitySet="Perfis" />
-      <End Role="Usuarios" EntitySet="Usuarios" />
-    </AssociationSet>
-    <AssociationSet Name="id_usuario" Association="DatabaseModel.id_usuario">
-      <End Role="Usuarios" EntitySet="Usuarios" />
-      <End Role="Vendas" EntitySet="Vendas" />
-    </AssociationSet>
     <AssociationSet Name="id_venda" Association="DatabaseModel.id_venda">
       <End Role="Vendas" EntitySet="Vendas" />
       <End Role="Vendas_Produtos" EntitySet="Vendas_Produtos" />
@@ -45,6 +36,15 @@
     <AssociationSet Name="id_produto" Association="DatabaseModel.id_produto">
       <End Role="Produtos" EntitySet="Produtos" />
       <End Role="Vendas_Produtos" EntitySet="Vendas_Produtos" />
+    </AssociationSet>
+    <EntitySet Name="Usuarios" EntityType="DatabaseModel.Usuarios" />
+    <AssociationSet Name="FK__Usuarios__num_pe__2C88998B" Association="DatabaseModel.FK__Usuarios__num_pe__2C88998B">
+      <End Role="Perfis" EntitySet="Perfis" />
+      <End Role="Usuarios" EntitySet="Usuarios" />
+    </AssociationSet>
+    <AssociationSet Name="id_usuario" Association="DatabaseModel.id_usuario">
+      <End Role="Usuarios" EntitySet="Usuarios" />
+      <End Role="Vendas" EntitySet="Vendas" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Cidades">
@@ -110,20 +110,7 @@
     <Property Name="Id" Type="Int32" Nullable="false" />
     <Property Name="Desc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="Numero" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Usuarios" Relationship="DatabaseModel.FK__Usuarios__num_pe__2739D489" FromRole="Perfis" ToRole="Usuarios" />
-  </EntityType>
-  <EntityType Name="Usuarios">
-    <Key>
-      <PropertyRef Name="id" />
-    </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="registro" Type="Int32" Nullable="false" />
-    <Property Name="nome" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-    <Property Name="senha" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
-    <Property Name="num_perfil" Type="Int32" Nullable="false" />
-    <Property Name="status" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Perfis" Relationship="DatabaseModel.FK__Usuarios__num_pe__2739D489" FromRole="Usuarios" ToRole="Perfis" />
-    <NavigationProperty Name="Vendas" Relationship="DatabaseModel.id_usuario" FromRole="Usuarios" ToRole="Vendas" />
+    <NavigationProperty Name="Usuarios" Relationship="DatabaseModel.FK__Usuarios__num_pe__2C88998B" FromRole="Perfis" ToRole="Usuarios" />
   </EntityType>
   <EntityType Name="Vendas">
     <Key>
@@ -140,8 +127,8 @@
     <Property Name="desconto" Type="Int32" Nullable="false" />
     <Property Name="comissao" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Clientes" Relationship="DatabaseModel.FK__Vendas__id_Clien__46B27FE2" FromRole="Vendas" ToRole="Clientes" />
-    <NavigationProperty Name="Usuarios" Relationship="DatabaseModel.id_usuario" FromRole="Vendas" ToRole="Usuarios" />
     <NavigationProperty Name="Vendas_Produtos" Relationship="DatabaseModel.id_venda" FromRole="Vendas" ToRole="Vendas_Produtos" />
+    <NavigationProperty Name="Usuarios" Relationship="DatabaseModel.id_usuario" FromRole="Vendas" ToRole="Usuarios" />
   </EntityType>
   <EntityType Name="Vendas_Produtos">
     <Key>
@@ -202,30 +189,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Usuarios__num_pe__2739D489">
-    <End Type="DatabaseModel.Perfis" Role="Perfis" Multiplicity="1" />
-    <End Type="DatabaseModel.Usuarios" Role="Usuarios" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Perfis">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Usuarios">
-        <PropertyRef Name="num_perfil" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="id_usuario">
-    <End Type="DatabaseModel.Usuarios" Role="Usuarios" Multiplicity="0..1" />
-    <End Type="DatabaseModel.Vendas" Role="Vendas" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Usuarios">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="Vendas">
-        <PropertyRef Name="id_Usuario" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="id_venda">
     <End Type="DatabaseModel.Vendas" Role="Vendas" Multiplicity="0..1" />
     <End Type="DatabaseModel.Vendas_Produtos" Role="Vendas_Produtos" Multiplicity="*" />
@@ -275,6 +238,43 @@
       </Principal>
       <Dependent Role="Vendas_Produtos">
         <PropertyRef Name="id_produto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Usuarios">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="registro" Type="Int32" />
+    <Property Name="nome" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="senha" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Name="num_perfil" Type="Int32" Nullable="false" />
+    <Property Name="status" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Perfis" Relationship="DatabaseModel.FK__Usuarios__num_pe__2C88998B" FromRole="Usuarios" ToRole="Perfis" />
+    <NavigationProperty Name="Vendas" Relationship="DatabaseModel.id_usuario" FromRole="Usuarios" ToRole="Vendas" />
+  </EntityType>
+  <Association Name="FK__Usuarios__num_pe__2C88998B">
+    <End Type="DatabaseModel.Perfis" Role="Perfis" Multiplicity="1" />
+    <End Type="DatabaseModel.Usuarios" Role="Usuarios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Perfis">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Usuarios">
+        <PropertyRef Name="num_perfil" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="id_usuario">
+    <End Type="DatabaseModel.Usuarios" Role="Usuarios" Multiplicity="0..1" />
+    <End Type="DatabaseModel.Vendas" Role="Vendas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuarios">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Vendas">
+        <PropertyRef Name="id_Usuario" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

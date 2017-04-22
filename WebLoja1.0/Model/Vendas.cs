@@ -31,7 +31,7 @@ namespace WebLoja1._0.Model
         public int comissao { get; set; }
     
         public virtual Clientes Clientes { get; set; }
-        public virtual Usuarios Usuarios { get; set; }
         public virtual ICollection<Vendas_Produtos> Vendas_Produtos { get; set; }
+        public virtual Usuarios Usuarios { get; set; }
     }
 }

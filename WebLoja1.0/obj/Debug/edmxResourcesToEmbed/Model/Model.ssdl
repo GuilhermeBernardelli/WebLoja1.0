@@ -75,7 +75,7 @@
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="registro" Type="int" Nullable="false" />
+    <Property Name="registro" Type="int" />
     <Property Name="nome" Type="varchar" MaxLength="30" />
     <Property Name="senha" Type="varchar" MaxLength="16" />
     <Property Name="num_perfil" Type="int" Nullable="false" />

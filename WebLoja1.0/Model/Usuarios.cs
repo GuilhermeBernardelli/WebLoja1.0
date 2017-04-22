@@ -20,7 +20,7 @@ namespace WebLoja1._0.Model
         }
     
         public int id { get; set; }
-        public int registro { get; set; }
+        public Nullable<int> registro { get; set; }
         public string nome { get; set; }
         public string senha { get; set; }
         public int num_perfil { get; set; }
