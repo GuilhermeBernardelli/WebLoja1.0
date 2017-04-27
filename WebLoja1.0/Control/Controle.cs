@@ -60,6 +60,13 @@ namespace WebLoja1._0.Control
             return dbRepository.pesquisaUserById(pesquisa);
         }
 
+        public Produtos pesquisaProdutoCod(string cod)
+        {
+            string codigo = cod;
+
+            return dbRepository.pesquisaProdutoByCodigo(codigo);
+        }
+
         public void salvarProduto(Produtos produto)
         {
             dbRepository.salvarNovoProduto(produto);
@@ -160,6 +167,13 @@ namespace WebLoja1._0.Control
             string pesquisa = busca;
 
             return dbRepository.pesquisaClienteByCpfOrNome(pesquisa);
+        }
+
+        public List<Produtos> pesquisaProdutosValidoNome(string busca)
+        {
+            string pesquisa = busca;
+
+            return dbRepository.pesquisaProdutosValidoByName(pesquisa);
         }
     }
 }

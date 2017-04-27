@@ -20,6 +20,12 @@ namespace WebLoja1._0.View
         List<Fornecedores> listaFornecedores = new List<Fornecedores>();
         Controle controle = new Controle();
         Produtos produto = new Produtos();
+
+        Usuarios user = new Usuarios();
+        Valida teste = new Valida();
+        static int id;
+        static int perfil;
+
         int i;
     
         protected void Page_Load(object sender, EventArgs e)
@@ -27,8 +33,7 @@ namespace WebLoja1._0.View
             lblMensagem.Text = "Catálogo de Produtos";
 
             listaProdutos = controle.pesquisaGeralProd();
-
-            /*
+            
             foreach (Produtos value in listaProdutos)
             {
 
@@ -42,10 +47,29 @@ namespace WebLoja1._0.View
                     
                 }
             }
-            */
+            
 
             if (!IsPostBack)
             {
+                /*/validação de acesso
+                id = Convert.ToInt32(Session["id"]);
+                perfil = Convert.ToInt32(Session["perfil"]);
+
+                if (id != 0 || perfil != 0)
+                {
+                    user = controle.pesquisaUserId(id);
+
+                    if (!teste.ValidaUser(id, perfil))
+                    {
+                        Response.Redirect("~/View/AcessoIndevido.aspx");
+                    }
+                }
+
+                else
+                {
+                    Response.Redirect("~/View/AcessoIndevido.aspx");
+                }*/
+
                 limpaImg();                
                 listaFornecedores = controle.pesquisaFornecedores("");
                 ddlFornecedores.DataSource = listaFornecedores;
@@ -64,7 +88,7 @@ namespace WebLoja1._0.View
             Response.Flush();
 
         }   
-
+        
         protected void gvlProdutos_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -77,12 +101,13 @@ namespace WebLoja1._0.View
             txtNome.Text = produto.desc_produto;
             txtQnt.Text = produto.qnt_estoque.ToString();
             txtPreco.Text = produto.preco_venda.ToString();
+            ddlMedida.SelectedItem.Text = produto.und_medida;
             ddlFornecedores.SelectedValue = produto.id_fornecedor.ToString();
             //converter bytes para image
             //img = produto.image;
 
         }
-
+        
         protected void btnNovo_Click(object sender, EventArgs e)
         {
             flagNovo = true;
@@ -153,6 +178,7 @@ namespace WebLoja1._0.View
                 produto.desc_produto = txtNome.Text;
                 produto.id_fornecedor = Convert.ToInt32(ddlFornecedores.SelectedValue);
                 produto.qnt_estoque = Convert.ToInt32(txtQnt.Text);
+                produto.und_medida = ddlMedida.SelectedItem.Text;
                 produto.imagem = bytes;
                 produto.status = 1;
                 controle.salvaAtualiza();
@@ -167,6 +193,7 @@ namespace WebLoja1._0.View
                 produto.desc_produto = txtNome.Text;
                 produto.id_fornecedor = Convert.ToInt32(ddlFornecedores.SelectedValue);
                 produto.qnt_estoque = Convert.ToInt32(txtQnt.Text);
+                produto.und_medida = ddlMedida.SelectedItem.Text;
                 produto.imagem = bytes;
                 controle.salvaAtualiza();
             }
@@ -240,7 +267,7 @@ namespace WebLoja1._0.View
             btnBusca.TabIndex = 1;
             btnBusca.Focus();
         }
-
+        
         protected void btnBusca_Click(object sender, ImageClickEventArgs e)
         {
             if (txtPesquisa.Text.Length < 3)
@@ -299,5 +326,6 @@ namespace WebLoja1._0.View
 
             lblListaTitulo.Text = "Relação de produtos";
         }
+        
     }
 }

@@ -63,6 +63,7 @@
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="cod_produto" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="desc_produto" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="und_medida" Type="varchar" MaxLength="10" Nullable="false" />
     <Property Name="preco_compra" Type="float" Nullable="false" />
     <Property Name="preco_venda" Type="float" Nullable="false" />
     <Property Name="imagem" Type="varbinary(max)" />
@@ -141,7 +142,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Produtos__id_for__28B808A7">
+  <Association Name="FK__Produtos__id_for__703EA55A">
     <End Role="Fornecedores" Type="Self.Fornecedores" Multiplicity="1" />
     <End Role="Produtos" Type="Self.Produtos" Multiplicity="*" />
     <ReferentialConstraint>
@@ -235,7 +236,7 @@
       <End Role="Cidades" EntitySet="Cidades" />
       <End Role="Fornecedores" EntitySet="Fornecedores" />
     </AssociationSet>
-    <AssociationSet Name="FK__Produtos__id_for__28B808A7" Association="Self.FK__Produtos__id_for__28B808A7">
+    <AssociationSet Name="FK__Produtos__id_for__703EA55A" Association="Self.FK__Produtos__id_for__703EA55A">
       <End Role="Fornecedores" EntitySet="Fornecedores" />
       <End Role="Produtos" EntitySet="Produtos" />
     </AssociationSet>

@@ -58,6 +58,13 @@ namespace WebLoja1._0.Model
             dataEntity.Produtos.Add(produto);
         }
 
+        public Produtos pesquisaProdutoByCodigo(string codigo)
+        {
+            return(from produtos in dataEntity.Produtos
+                    where (produtos.cod_produto.Equals(codigo))
+                    select produtos).SingleOrDefault();
+        }
+
         public Produtos pesquisaProdutoById(int pesquisa)
         {
             return (from produto in dataEntity.Produtos
@@ -138,6 +145,14 @@ namespace WebLoja1._0.Model
             return (from cliente in dataEntity.Clientes
                     where (cliente.cpf.Equals(cpf))
                     select cliente).SingleOrDefault();
+        }
+
+        public List<Produtos> pesquisaProdutosValidoByName(string pesquisa)
+        {
+            return (from produto in dataEntity.Produtos
+                    where produto.desc_produto.Contains(pesquisa)
+                    && produto.status == 1
+                    select produto).ToList();
         }
 
         public Fornecedores pesquisaFornecedoresByCnpj(string cnpj)

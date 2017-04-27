@@ -28,15 +28,6 @@
       <End Role="Vendas" EntitySet="Vendas" />
       <End Role="Vendas_Produtos" EntitySet="Vendas_Produtos" />
     </AssociationSet>
-    <EntitySet Name="Produtos" EntityType="DatabaseModel.Produtos" />
-    <AssociationSet Name="FK__Produtos__id_for__28B808A7" Association="DatabaseModel.FK__Produtos__id_for__28B808A7">
-      <End Role="Fornecedores" EntitySet="Fornecedores" />
-      <End Role="Produtos" EntitySet="Produtos" />
-    </AssociationSet>
-    <AssociationSet Name="id_produto" Association="DatabaseModel.id_produto">
-      <End Role="Produtos" EntitySet="Produtos" />
-      <End Role="Vendas_Produtos" EntitySet="Vendas_Produtos" />
-    </AssociationSet>
     <EntitySet Name="Usuarios" EntityType="DatabaseModel.Usuarios" />
     <AssociationSet Name="FK__Usuarios__num_pe__2C88998B" Association="DatabaseModel.FK__Usuarios__num_pe__2C88998B">
       <End Role="Perfis" EntitySet="Perfis" />
@@ -45,6 +36,15 @@
     <AssociationSet Name="id_usuario" Association="DatabaseModel.id_usuario">
       <End Role="Usuarios" EntitySet="Usuarios" />
       <End Role="Vendas" EntitySet="Vendas" />
+    </AssociationSet>
+    <EntitySet Name="Produtos" EntityType="DatabaseModel.Produtos" />
+    <AssociationSet Name="FK__Produtos__id_for__703EA55A" Association="DatabaseModel.FK__Produtos__id_for__703EA55A">
+      <End Role="Fornecedores" EntitySet="Fornecedores" />
+      <End Role="Produtos" EntitySet="Produtos" />
+    </AssociationSet>
+    <AssociationSet Name="id_produto" Association="DatabaseModel.id_produto">
+      <End Role="Produtos" EntitySet="Produtos" />
+      <End Role="Vendas_Produtos" EntitySet="Vendas_Produtos" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Cidades">
@@ -101,7 +101,7 @@
     <Property Name="contato" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="status" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Cidades" Relationship="DatabaseModel.FK__Fornecedo__id_Ci__69C6B1F5" FromRole="Fornecedores" ToRole="Cidades" />
-    <NavigationProperty Name="Produtos" Relationship="DatabaseModel.FK__Produtos__id_for__28B808A7" FromRole="Fornecedores" ToRole="Produtos" />
+    <NavigationProperty Name="Produtos" Relationship="DatabaseModel.FK__Produtos__id_for__703EA55A" FromRole="Fornecedores" ToRole="Produtos" />
   </EntityType>
   <EntityType Name="Perfis">
     <Key>
@@ -201,46 +201,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityType Name="Produtos">
-    <Key>
-      <PropertyRef Name="id" />
-    </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="cod_produto" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="desc_produto" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
-    <Property Name="preco_compra" Type="Double" Nullable="false" />
-    <Property Name="preco_venda" Type="Double" Nullable="false" />
-    <Property Name="imagem" Type="Binary" MaxLength="Max" FixedLength="false" />
-    <Property Name="qnt_estoque" Type="Int32" Nullable="false" />
-    <Property Name="id_fornecedor" Type="Int32" Nullable="false" />
-    <Property Name="status" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Fornecedores" Relationship="DatabaseModel.FK__Produtos__id_for__28B808A7" FromRole="Produtos" ToRole="Fornecedores" />
-    <NavigationProperty Name="Vendas_Produtos" Relationship="DatabaseModel.id_produto" FromRole="Produtos" ToRole="Vendas_Produtos" />
-  </EntityType>
-  <Association Name="FK__Produtos__id_for__28B808A7">
-    <End Type="DatabaseModel.Fornecedores" Role="Fornecedores" Multiplicity="1" />
-    <End Type="DatabaseModel.Produtos" Role="Produtos" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Fornecedores">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="Produtos">
-        <PropertyRef Name="id_fornecedor" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="id_produto">
-    <End Type="DatabaseModel.Produtos" Role="Produtos" Multiplicity="0..1" />
-    <End Type="DatabaseModel.Vendas_Produtos" Role="Vendas_Produtos" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Produtos">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="Vendas_Produtos">
-        <PropertyRef Name="id_produto" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityType Name="Usuarios">
     <Key>
       <PropertyRef Name="id" />
@@ -275,6 +235,47 @@
       </Principal>
       <Dependent Role="Vendas">
         <PropertyRef Name="id_Usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Produtos">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="cod_produto" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="desc_produto" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="und_medida" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="preco_compra" Type="Double" Nullable="false" />
+    <Property Name="preco_venda" Type="Double" Nullable="false" />
+    <Property Name="imagem" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="qnt_estoque" Type="Int32" Nullable="false" />
+    <Property Name="id_fornecedor" Type="Int32" Nullable="false" />
+    <Property Name="status" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Fornecedores" Relationship="DatabaseModel.FK__Produtos__id_for__703EA55A" FromRole="Produtos" ToRole="Fornecedores" />
+    <NavigationProperty Name="Vendas_Produtos" Relationship="DatabaseModel.id_produto" FromRole="Produtos" ToRole="Vendas_Produtos" />
+  </EntityType>
+  <Association Name="FK__Produtos__id_for__703EA55A">
+    <End Type="DatabaseModel.Fornecedores" Role="Fornecedores" Multiplicity="1" />
+    <End Type="DatabaseModel.Produtos" Role="Produtos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Fornecedores">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Produtos">
+        <PropertyRef Name="id_fornecedor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="id_produto">
+    <End Type="DatabaseModel.Produtos" Role="Produtos" Multiplicity="0..1" />
+    <End Type="DatabaseModel.Vendas_Produtos" Role="Vendas_Produtos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Produtos">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Vendas_Produtos">
+        <PropertyRef Name="id_produto" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

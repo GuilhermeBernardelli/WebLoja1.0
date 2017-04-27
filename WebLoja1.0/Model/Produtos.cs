@@ -22,6 +22,7 @@ namespace WebLoja1._0.Model
         public int id { get; set; }
         public string cod_produto { get; set; }
         public string desc_produto { get; set; }
+        public string und_medida { get; set; }
         public double preco_compra { get; set; }
         public double preco_venda { get; set; }
         public byte[] imagem { get; set; }

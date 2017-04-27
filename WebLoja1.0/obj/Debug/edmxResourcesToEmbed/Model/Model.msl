@@ -88,6 +88,18 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Usuarios">
+      <EntityTypeMapping TypeName="DatabaseModel.Usuarios">
+        <MappingFragment StoreEntitySet="Usuarios">
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="num_perfil" ColumnName="num_perfil" />
+          <ScalarProperty Name="senha" ColumnName="senha" />
+          <ScalarProperty Name="nome" ColumnName="nome" />
+          <ScalarProperty Name="registro" ColumnName="registro" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Produtos">
       <EntityTypeMapping TypeName="DatabaseModel.Produtos">
         <MappingFragment StoreEntitySet="Produtos">
@@ -97,20 +109,9 @@
           <ScalarProperty Name="imagem" ColumnName="imagem" />
           <ScalarProperty Name="preco_venda" ColumnName="preco_venda" />
           <ScalarProperty Name="preco_compra" ColumnName="preco_compra" />
+          <ScalarProperty Name="und_medida" ColumnName="und_medida" />
           <ScalarProperty Name="desc_produto" ColumnName="desc_produto" />
           <ScalarProperty Name="cod_produto" ColumnName="cod_produto" />
-          <ScalarProperty Name="id" ColumnName="id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Usuarios">
-      <EntityTypeMapping TypeName="DatabaseModel.Usuarios">
-        <MappingFragment StoreEntitySet="Usuarios">
-          <ScalarProperty Name="status" ColumnName="status" />
-          <ScalarProperty Name="num_perfil" ColumnName="num_perfil" />
-          <ScalarProperty Name="senha" ColumnName="senha" />
-          <ScalarProperty Name="nome" ColumnName="nome" />
-          <ScalarProperty Name="registro" ColumnName="registro" />
           <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>

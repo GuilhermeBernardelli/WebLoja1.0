@@ -17,12 +17,12 @@
         <AssociationConnector Association="DatabaseModel.FK__Fornecedo__id_Ci__69C6B1F5" />
         <AssociationConnector Association="DatabaseModel.FK__Vendas__id_Clien__46B27FE2" />
         <AssociationConnector Association="DatabaseModel.id_venda" />
-        <EntityTypeShape EntityType="DatabaseModel.Produtos" Width="1.5" PointX="7.5" PointY="0.75" />
-        <AssociationConnector Association="DatabaseModel.FK__Produtos__id_for__28B808A7" />
-        <AssociationConnector Association="DatabaseModel.id_produto" />
         <EntityTypeShape EntityType="DatabaseModel.Usuarios" Width="1.5" PointX="5.25" PointY="9.375" />
         <AssociationConnector Association="DatabaseModel.FK__Usuarios__num_pe__2C88998B" />
         <AssociationConnector Association="DatabaseModel.id_usuario" />
+        <EntityTypeShape EntityType="DatabaseModel.Produtos" Width="1.5" PointX="7.5" PointY="0.75" />
+        <AssociationConnector Association="DatabaseModel.FK__Produtos__id_for__703EA55A" />
+        <AssociationConnector Association="DatabaseModel.id_produto" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

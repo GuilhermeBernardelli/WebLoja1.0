@@ -31,7 +31,7 @@ namespace WebLoja1._0.View
             {
                 preencherRadioListEstado();
 
-                /*/validação de acesso
+                //validação de acesso
                 id = Convert.ToInt32(Session["id"]);
                 perfil = Convert.ToInt32(Session["perfil"]);
 
@@ -48,7 +48,7 @@ namespace WebLoja1._0.View
                 else
                 {
                     Response.Redirect("~/View/AcessoIndevido.aspx");
-                }*/
+                }
             }
 
         }

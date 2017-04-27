@@ -31,15 +31,6 @@ namespace WebLoja1._0.View {
         protected global::System.Web.UI.WebControls.Label lblMensagem;
         
         /// <summary>
-        /// Controle Butons.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel Butons;
-        
-        /// <summary>
         /// Controle PanelProduto.
         /// </summary>
         /// <remarks>
@@ -148,6 +139,24 @@ namespace WebLoja1._0.View {
         protected global::System.Web.UI.WebControls.TextBox txtQnt;
         
         /// <summary>
+        /// Controle lblUnd.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblUnd;
+        
+        /// <summary>
+        /// Controle ddlMedida.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlMedida;
+        
+        /// <summary>
         /// Controle lblFornecedor.
         /// </summary>
         /// <remarks>
@@ -182,6 +191,15 @@ namespace WebLoja1._0.View {
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnImage;
+        
+        /// <summary>
+        /// Controle Butons.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel Butons;
         
         /// <summary>
         /// Controle lblAlerta.
