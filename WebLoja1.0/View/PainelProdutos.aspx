@@ -91,24 +91,24 @@
                     <div align="left" class="auto-style6" style="width: 515px">
                         <br />
                         <asp:Label ID="lblNome" runat="server" Text="Produto :"></asp:Label>
-                        &nbsp;<asp:TextBox ID="txtNome" runat="server" Width="423px" Enabled="False"></asp:TextBox>
+                        &nbsp;<asp:TextBox ID="txtNome" runat="server" Width="436px" Enabled="False"></asp:TextBox>
                         <br />
                         <br />
                         <asp:Label ID="lblCodigo" runat="server" Text="Código :"></asp:Label>
-                        &nbsp;&nbsp;<asp:TextBox ID="txtCodigo" runat="server" Width="278px" Enabled="False"></asp:TextBox>
+                        &nbsp;&nbsp;<asp:TextBox ID="txtCodigo" runat="server" Width="291px" Enabled="False"></asp:TextBox>
                         &nbsp;&nbsp;<asp:Label ID="lblCusto" runat="server" Text="Custo :"></asp:Label>
                         &nbsp;<asp:TextBox ID="txtCusto" runat="server" Width="73px" Enabled="False"></asp:TextBox>
                         <br />
                         <br />
-                        <asp:Label ID="lblPreco" runat="server" Text="Preço :"></asp:Label>
-                        &nbsp;&nbsp;&nbsp;
-                        <asp:TextBox ID="txtPreco" runat="server" Width="70px" Enabled="False"></asp:TextBox>
-                        &nbsp;
-                        <asp:Label ID="lblQnt" runat="server" Text="Qnt :"></asp:Label>
-                        &nbsp;<asp:TextBox ID="txtQnt" runat="server" Width="70px" Enabled="False"></asp:TextBox>
+                        <asp:Label ID="lblIcms" runat="server" Text="ICMS (R$) :"></asp:Label>
+                        &nbsp;<asp:TextBox ID="txtIcms" runat="server" Enabled="False" Width="58px"></asp:TextBox>
+                        &nbsp;<asp:Label ID="lblPreco" runat="server" Text="Preço :"></asp:Label>
+                        &nbsp;<asp:TextBox ID="txtPreco" runat="server" Width="58px" Enabled="False"></asp:TextBox>
+                        &nbsp;<asp:Label ID="lblQnt" runat="server" Text="Qnt :"></asp:Label>
+                        &nbsp;<asp:TextBox ID="txtQnt" runat="server" Width="58px" Enabled="False"></asp:TextBox>
                         &nbsp;
                         <asp:Label ID="lblUnd" runat="server" Text="Und :"></asp:Label>
-                        &nbsp;<asp:DropDownList ID="ddlMedida" runat="server" Height="22px" Width="171px">
+                        &nbsp;<asp:DropDownList ID="ddlMedida" runat="server" Height="26px" Width="62px" Enabled="False">
                             <asp:ListItem>Unidade</asp:ListItem>
                             <asp:ListItem>Caixa</asp:ListItem>
                             <asp:ListItem>Pacote</asp:ListItem>
@@ -116,7 +116,7 @@
                         <br />
                         <br />
                         <asp:Label ID="lblFornecedor" runat="server" Text="Forn. :"></asp:Label>
-                        &nbsp;&nbsp;&nbsp;&nbsp; <asp:DropDownList ID="ddlFornecedores" runat="server" AutoPostBack="True" DataTextField="Nome" DataValueField="Id" Height="22px" Width="431px" Enabled="False">
+                        &nbsp;&nbsp;&nbsp;&nbsp; <asp:DropDownList ID="ddlFornecedores" runat="server" AutoPostBack="True" DataTextField="Nome" DataValueField="Id" Height="22px" Width="443px" Enabled="False">
                         </asp:DropDownList>
                     </div>
                     <asp:FileUpload ID="Upload" runat="server" BackColor="White" CssClass="auto-style5" Font-Size="XX-Small" Height="18px" Width="590px" Enabled="False"/>

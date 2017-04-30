@@ -157,6 +157,7 @@
   <ItemGroup>
     <Compile Include="Control\Controle.cs" />
     <Compile Include="Control\Valida.cs" />
+    <Compile Include="Control\ValidaCpf.cs" />
     <Compile Include="Model\Cidades.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -183,6 +184,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Model.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Pagamentos.cs">
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Perfis.cs">
       <DependentUpon>Model.tt</DependentUpon>

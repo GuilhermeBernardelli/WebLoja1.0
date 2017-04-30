@@ -101,6 +101,7 @@ namespace WebLoja1._0.View
             txtNome.Text = produto.desc_produto;
             txtQnt.Text = produto.qnt_estoque.ToString();
             txtPreco.Text = produto.preco_venda.ToString();
+            txtIcms.Text = produto.ICMS_pago.ToString();
             ddlMedida.SelectedItem.Text = produto.und_medida;
             ddlFornecedores.SelectedValue = produto.id_fornecedor.ToString();
             //converter bytes para image
@@ -116,6 +117,7 @@ namespace WebLoja1._0.View
             txtNome.Enabled = true;
             txtPesquisa.Enabled = true;
             txtPreco.Enabled = true;
+            txtIcms.Enabled = true;
             txtQnt.Enabled = true;
             ddlFornecedores.Enabled = true;
             btnPesquisar.Enabled = false;
@@ -175,6 +177,7 @@ namespace WebLoja1._0.View
                 produto.cod_produto = txtCodigo.Text;
                 produto.preco_compra = Convert.ToDouble(txtCusto.Text);
                 produto.preco_venda = Convert.ToDouble(txtPreco.Text);
+                produto.ICMS_pago = Convert.ToDouble(txtIcms.Text);
                 produto.desc_produto = txtNome.Text;
                 produto.id_fornecedor = Convert.ToInt32(ddlFornecedores.SelectedValue);
                 produto.qnt_estoque = Convert.ToInt32(txtQnt.Text);
@@ -190,6 +193,7 @@ namespace WebLoja1._0.View
                 produto.cod_produto = txtCodigo.Text;
                 produto.preco_compra = Convert.ToDouble(txtCusto.Text);
                 produto.preco_venda = Convert.ToDouble(txtPreco.Text);
+                produto.ICMS_pago = Convert.ToDouble(txtIcms.Text);
                 produto.desc_produto = txtNome.Text;
                 produto.id_fornecedor = Convert.ToInt32(ddlFornecedores.SelectedValue);
                 produto.qnt_estoque = Convert.ToInt32(txtQnt.Text);
@@ -214,6 +218,7 @@ namespace WebLoja1._0.View
             txtCusto.Enabled = false;
             txtNome.Enabled = false;
             txtPreco.Enabled = false;
+            txtIcms.Enabled = false;
             txtQnt.Enabled = false;
             ddlFornecedores.Enabled = false;
             btnPesquisar.Enabled = true;
@@ -225,6 +230,7 @@ namespace WebLoja1._0.View
             txtCodigo.Text = "";
             txtCusto.Text = "";
             txtNome.Text = "";
+            txtIcms.Text = "";
             txtPreco.Text = "";
             txtQnt.Text = "";
             ddlFornecedores.SelectedIndex = -1;
@@ -245,6 +251,7 @@ namespace WebLoja1._0.View
             txtCusto.Enabled = true;
             txtNome.Enabled = true;
             txtPreco.Enabled = true;
+            txtIcms.Enabled = true;
             txtQnt.Enabled = true;
             ddlFornecedores.Enabled = true;
         }

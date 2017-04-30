@@ -76,6 +76,24 @@ namespace WebLoja1._0.View {
         protected global::System.Web.UI.WebControls.TextBox txtCpf;
         
         /// <summary>
+        /// Controle lblRg.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblRg;
+        
+        /// <summary>
+        /// Controle txtRg.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtRg;
+        
+        /// <summary>
         /// Controle lblResponsavel.
         /// </summary>
         /// <remarks>
@@ -92,6 +110,24 @@ namespace WebLoja1._0.View {
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtResponsavel;
+        
+        /// <summary>
+        /// Controle lblCredito.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCredito;
+        
+        /// <summary>
+        /// Controle txtCredito.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtCredito;
         
         /// <summary>
         /// Controle lblTelefone.

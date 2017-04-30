@@ -29,6 +29,7 @@ namespace WebLoja1._0.Model
         public int qnt_estoque { get; set; }
         public int id_fornecedor { get; set; }
         public int status { get; set; }
+        public Nullable<double> ICMS_pago { get; set; }
     
         public virtual Fornecedores Fornecedores { get; set; }
         public virtual ICollection<Vendas_Produtos> Vendas_Produtos { get; set; }

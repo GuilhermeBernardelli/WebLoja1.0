@@ -67,6 +67,8 @@ namespace WebLoja1._0.View
         protected void btnNovo_Click(object sender, EventArgs e)
         {
             txtResponsavel.Enabled = true;
+            txtCredito.Enabled = true;
+            txtRg.Enabled = true;
             txtTelefone.Enabled = true;
             txtCelular.Enabled = true;
             txtEndereço.Enabled = true;
@@ -87,6 +89,8 @@ namespace WebLoja1._0.View
             btnEditar.Enabled = false;
             txtNome.Enabled = true;
             txtCpf.Enabled = true;
+            txtCredito.Enabled = true;
+            txtRg.Enabled = true;
             txtResponsavel.Enabled = true;
             txtTelefone.Enabled = true;
             txtCelular.Enabled = true;
@@ -109,6 +113,8 @@ namespace WebLoja1._0.View
                 cliente.nome = txtNome.Text;
                 cliente.contato = txtResponsavel.Text;
                 cliente.cpf = txtCpf.Text;
+                cliente.rg = txtRg.Text;
+                cliente.creditos = Convert.ToUInt32(txtCredito.Text);
                 cliente.endereço = txtEndereço.Text;
                 cliente.numeral = txtNumero.Text;
                 cliente.bairro = txtBairro.Text;
@@ -126,6 +132,8 @@ namespace WebLoja1._0.View
                 cliente.nome = txtNome.Text;
                 cliente.contato = txtResponsavel.Text;
                 cliente.cpf = txtCpf.Text;
+                cliente.rg = txtRg.Text;
+                cliente.creditos = Convert.ToUInt32(txtCredito.Text);
                 cliente.endereço = txtEndereço.Text;
                 cliente.numeral = txtNumero.Text;
                 cliente.bairro = txtBairro.Text;
@@ -167,6 +175,8 @@ namespace WebLoja1._0.View
             txtNome.Text = "";
             txtResponsavel.Text = "";
             txtCpf.Text = "";
+            txtRg.Text = "";
+            txtCredito.Text = "";
             txtEndereço.Text = "";
             txtNumero.Text = "";
             ddlCidade.SelectedIndex = -1;
@@ -335,6 +345,8 @@ namespace WebLoja1._0.View
             btnVoltar.Enabled = true;
             txtNome.Enabled = true;
             txtCpf.Enabled = true;
+            txtRg.Enabled = false;
+            txtCredito.Enabled = false;
             txtResponsavel.Enabled = false;
             txtTelefone.Enabled = false;
             txtCelular.Enabled = false;
@@ -351,6 +363,8 @@ namespace WebLoja1._0.View
             cliente = controle.pesquisaClienteById(rblClientes.SelectedIndex);
             txtNome.Text = cliente.nome;
             txtCpf.Text = cliente.cpf;
+            txtRg.Text = cliente.rg;
+            txtCredito.Text = cliente.creditos.ToString();
             txtEndereço.Text = cliente.endereço;
             txtBairro.Text = cliente.bairro;
             txtCelular.Text = cliente.celular;

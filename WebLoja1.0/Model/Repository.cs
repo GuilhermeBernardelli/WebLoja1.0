@@ -155,6 +155,11 @@ namespace WebLoja1._0.Model
                     select produto).ToList();
         }
 
+        public void salvarNovaVenda(Vendas venda)
+        {
+            dataEntity.Vendas.Add(venda);
+        }
+
         public Fornecedores pesquisaFornecedoresByCnpj(string cnpj)
         {
             return (from fornecedor in dataEntity.Fornecedores

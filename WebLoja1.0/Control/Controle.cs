@@ -175,5 +175,10 @@ namespace WebLoja1._0.Control
 
             return dbRepository.pesquisaProdutosValidoByName(pesquisa);
         }
+
+        public void salvarVenda(Vendas venda)
+        {
+            dbRepository.salvarNovaVenda(venda);
+        }
     }
 }

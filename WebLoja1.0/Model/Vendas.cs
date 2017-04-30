@@ -24,14 +24,17 @@ namespace WebLoja1._0.Model
         public string cfp { get; set; }
         public string cnpj { get; set; }
         public Nullable<int> produtos_Id { get; set; }
-        public Nullable<double> valor_Venda { get; set; }
-        public Nullable<int> id_Usuario { get; set; }
-        public int id_Cliente { get; set; }
+        public double valor_Venda { get; set; }
+        public int id_Usuario { get; set; }
+        public Nullable<int> id_Cliente { get; set; }
         public int desconto { get; set; }
         public int comissao { get; set; }
+        public int id_pagamento { get; set; }
+        public Nullable<double> ICMS { get; set; }
     
         public virtual Clientes Clientes { get; set; }
-        public virtual ICollection<Vendas_Produtos> Vendas_Produtos { get; set; }
+        public virtual Pagamentos Pagamentos { get; set; }
         public virtual Usuarios Usuarios { get; set; }
+        public virtual ICollection<Vendas_Produtos> Vendas_Produtos { get; set; }
     }
 }
