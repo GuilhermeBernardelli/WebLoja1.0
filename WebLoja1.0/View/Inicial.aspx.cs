@@ -19,7 +19,7 @@ namespace WebLoja1._0.View
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            lblMensagem.Text = "Sistema do Alemão da Construção";
+            lblMensagem.Text = "Sistema do Alemão da Construção 1.0";
 
             if (!IsPostBack)
             {
@@ -42,6 +42,28 @@ namespace WebLoja1._0.View
                     Response.Redirect("~/View/AcessoIndevido.aspx");
                 }
                 
+                if(perfil > 1)
+                {
+                    btnUsuarios.Visible = false;
+                    btnGestao.Visible = false;
+
+                    if (perfil > 2)
+                    {
+                        btnContabilidade.Visible = false;
+
+                        if (perfil == 3)
+                        {
+                            btnFornecedores.Visible = false;
+                            btnClientes.Visible = false;
+                            btnProdutos.Visible = false;
+                        }
+
+                        if (perfil == 4)
+                        {
+                            btnVendas.Visible = false;
+                        }
+                    }
+                }                
             }
         }
 
@@ -68,6 +90,16 @@ namespace WebLoja1._0.View
         protected void btnUsuario_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/View/PainelUsuarios.aspx");
+        }
+
+        protected void btnContabilidade_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/View/PainelContabilidade.aspx");
+        }
+
+        protected void btnGestao_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/View/PainelGestao.aspx");
         }
     }
 }

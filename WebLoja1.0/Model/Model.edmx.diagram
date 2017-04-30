@@ -5,24 +5,26 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="48dce6b3d18c4ee4a95e0d54af48f074" Name="Diagram1">
-        <EntityTypeShape EntityType="DatabaseModel.Cidades" Width="1.5" PointX="3" PointY="3.625" />
-        <EntityTypeShape EntityType="DatabaseModel.Clientes" Width="1.5" PointX="5.25" PointY="5.125" />
-        <EntityTypeShape EntityType="DatabaseModel.Estados" Width="1.5" PointX="0.75" PointY="3.875" />
-        <EntityTypeShape EntityType="DatabaseModel.Fornecedores" Width="1.5" PointX="5.25" PointY="1.375" />
-        <EntityTypeShape EntityType="DatabaseModel.Perfis" Width="1.5" PointX="3" PointY="9.75" />
-        <EntityTypeShape EntityType="DatabaseModel.Usuarios" Width="1.5" PointX="5.25" PointY="9.375" />
-        <EntityTypeShape EntityType="DatabaseModel.Vendas" Width="1.5" PointX="7.5" PointY="5" />
-        <EntityTypeShape EntityType="DatabaseModel.Vendas_Produtos" Width="1.5" PointX="9.75" PointY="3.875" />
+        <EntityTypeShape EntityType="DatabaseModel.Cidades" Width="1.5" PointX="3" PointY="2.875" />
+        <EntityTypeShape EntityType="DatabaseModel.Clientes" Width="1.5" PointX="5.5" PointY="4" />
+        <EntityTypeShape EntityType="DatabaseModel.Estados" Width="1.5" PointX="0.875" PointY="3.375" />
+        <EntityTypeShape EntityType="DatabaseModel.Fornecedores" Width="1.5" PointX="5.375" PointY="0.5" />
+        <EntityTypeShape EntityType="DatabaseModel.Pagamentos" Width="1.5" PointX="7.625" PointY="9.125" />
+        <EntityTypeShape EntityType="DatabaseModel.Perfis" Width="1.5" PointX="3.125" PointY="8" />
+        <EntityTypeShape EntityType="DatabaseModel.Produtos" Width="1.5" PointX="7.625" PointY="0.625" />
+        <EntityTypeShape EntityType="DatabaseModel.Usuarios" Width="1.5" PointX="5.5" PointY="7.625" />
+        <EntityTypeShape EntityType="DatabaseModel.Vendas" Width="1.5" PointX="7.625" PointY="5.125" />
+        <EntityTypeShape EntityType="DatabaseModel.Vendas_Produtos" Width="1.5" PointX="9.875" PointY="3.25" />
         <AssociationConnector Association="DatabaseModel.FK__Cidades__id_Esta__308E3499" />
-        <AssociationConnector Association="DatabaseModel.FK__Clientes__id_Cid__2F9A1060" />
-        <AssociationConnector Association="DatabaseModel.FK__Fornecedo__id_Ci__69C6B1F5" />
-        <AssociationConnector Association="DatabaseModel.FK__Vendas__id_Clien__46B27FE2" />
-        <AssociationConnector Association="DatabaseModel.FK__Usuarios__num_pe__2739D489" />
+        <AssociationConnector Association="DatabaseModel.FK__Clientes__id_Cid__16644E42" />
+        <AssociationConnector Association="DatabaseModel.FK__Fornecedo__id_Ci__22FF2F51" />
+        <AssociationConnector Association="DatabaseModel.FK__Vendas__id_Clien__269AB60B" />
+        <AssociationConnector Association="DatabaseModel.FK__Produtos__id_for__703EA55A" />
+        <AssociationConnector Association="DatabaseModel.FK__Vendas__id_pagam__2882FE7D" />
+        <AssociationConnector Association="DatabaseModel.FK__Usuarios__num_pe__2C88998B" />
+        <AssociationConnector Association="DatabaseModel.id_produto" />
         <AssociationConnector Association="DatabaseModel.id_usuario" />
         <AssociationConnector Association="DatabaseModel.id_venda" />
-        <EntityTypeShape EntityType="DatabaseModel.Produtos" Width="1.5" PointX="7.5" PointY="0.75" />
-        <AssociationConnector Association="DatabaseModel.FK__Produtos__id_for__28B808A7" />
-        <AssociationConnector Association="DatabaseModel.id_produto" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

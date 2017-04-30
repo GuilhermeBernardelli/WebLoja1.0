@@ -22,12 +22,14 @@ namespace WebLoja1._0.Model
         public int id { get; set; }
         public string cod_produto { get; set; }
         public string desc_produto { get; set; }
+        public string und_medida { get; set; }
         public double preco_compra { get; set; }
         public double preco_venda { get; set; }
         public byte[] imagem { get; set; }
         public int qnt_estoque { get; set; }
         public int id_fornecedor { get; set; }
         public int status { get; set; }
+        public Nullable<double> ICMS_pago { get; set; }
     
         public virtual Fornecedores Fornecedores { get; set; }
         public virtual ICollection<Vendas_Produtos> Vendas_Produtos { get; set; }

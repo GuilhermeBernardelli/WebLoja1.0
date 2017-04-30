@@ -31,6 +31,11 @@ namespace WebLoja1._0.Control
             return dbRepository.pesquisaSimplesUser(pesquisa);
         }
 
+        public List<Usuarios> usuariosInvalidos()
+        {            
+            return dbRepository.pesquisaUsuariosInvalidos();
+        }
+
         public Produtos pesquisaProdutoNome(string selectedValue)
         {
             string pesquisa = selectedValue;
@@ -53,6 +58,13 @@ namespace WebLoja1._0.Control
             int pesquisa = user;
 
             return dbRepository.pesquisaUserById(pesquisa);
+        }
+
+        public Produtos pesquisaProdutoCod(string cod)
+        {
+            string codigo = cod;
+
+            return dbRepository.pesquisaProdutoByCodigo(codigo);
         }
 
         public void salvarProduto(Produtos produto)
@@ -84,7 +96,7 @@ namespace WebLoja1._0.Control
             string busca = pesquisa;
 
             return dbRepository.pesquisaFornecedoresByNomeCnpj(busca);
-        }
+        }        
 
         public Cidades pesquisaCidade(string cidade)
         {
@@ -155,6 +167,18 @@ namespace WebLoja1._0.Control
             string pesquisa = busca;
 
             return dbRepository.pesquisaClienteByCpfOrNome(pesquisa);
+        }
+
+        public List<Produtos> pesquisaProdutosValidoNome(string busca)
+        {
+            string pesquisa = busca;
+
+            return dbRepository.pesquisaProdutosValidoByName(pesquisa);
+        }
+
+        public void salvarVenda(Vendas venda)
+        {
+            dbRepository.salvarNovaVenda(venda);
         }
     }
 }

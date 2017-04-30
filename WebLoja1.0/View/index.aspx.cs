@@ -13,19 +13,10 @@ namespace WebLoja1._0.View
     {
         Controle controle = new Controle();
         Usuarios user;
-        static bool flagCadastro = false;
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            lblMensagem.Text = "Bem vindo ao sistema do Alemão da Construção";           
-            if(!txtLogin.Text.Equals(""))
-            {
-                btnCadastrar.Enabled = true;
-            }
-            else
-            {
-                btnCadastrar.Enabled = false;
-            }
+            lblMensagem.Text = "Bem vindo ao sistema do Alemão da Construção";                       
         }
 
         protected void btnLogin_Click(object sender, EventArgs e)
@@ -49,16 +40,9 @@ namespace WebLoja1._0.View
                     {
                         Session["id"] = user.id;
                         Session["perfil"] = user.num_perfil;
-
-                        if (flagCadastro)
-                        {
-                            Response.Redirect("~/View/CadastrarUsuario.aspx");
-                        }
-                        else
-                        {
-                            Response.Redirect("Inicial.aspx");
-                        }
+                        Response.Redirect("Inicial.aspx");                       
                     }
+
                     else
                     {
                         lblAlerta.Text = "Digite um valor válido para Login e Senha";
@@ -70,8 +54,7 @@ namespace WebLoja1._0.View
 
         protected void btnCadastrar_Click(object sender, EventArgs e)
         {
-            flagCadastro = true;
-            btnLogin_Click(sender, e);
+            Response.Redirect("~/View/PainelUsuarios.aspx");
         }
     }
 

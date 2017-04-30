@@ -23,6 +23,8 @@
         <asp:Label ID="lblAlerta" runat="server" Font-Bold="True" Font-Size="Larger"></asp:Label>
         <br />
         <br />
+        <asp:Button ID="btnLogin" runat="server" Text="Login" class="button" Width="90" OnClick="btnLogin_Click" />
+        <br />
         <br />
         <br />
         &nbsp;</asp:Panel>

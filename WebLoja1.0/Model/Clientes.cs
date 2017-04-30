@@ -22,14 +22,16 @@ namespace WebLoja1._0.Model
         public int id { get; set; }
         public string nome { get; set; }
         public string cpf { get; set; }
+        public string rg { get; set; }
+        public string contato { get; set; }
         public string telefone { get; set; }
         public string celular { get; set; }
         public string endereço { get; set; }
         public string numeral { get; set; }
+        public string bairro { get; set; }
         public int id_Cidade { get; set; }
         public int status { get; set; }
-        public string contato { get; set; }
-        public string bairro { get; set; }
+        public Nullable<double> creditos { get; set; }
     
         public virtual Cidades Cidades { get; set; }
         public virtual ICollection<Vendas> Vendas { get; set; }

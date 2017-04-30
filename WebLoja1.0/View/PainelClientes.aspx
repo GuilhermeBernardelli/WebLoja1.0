@@ -52,11 +52,11 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div align="center" class="auto-style6" width="60%" style="height: 656px">
+    <div align="center" class="auto-style6" width="60%" style="height: 672px">
     <div align="center" class="auto-style7" >
-    <asp:Panel ID="pnlPrincipal" runat="server" Height="661px" CssClass="auto-style5" style="overflow-x: scroll; overflow-y: scroll; margin-left: 0px;">
+    <asp:Panel ID="pnlPrincipal" runat="server" Height="668px" CssClass="auto-style5" style="overflow-x: scroll; overflow-y: scroll; margin-left: 0px;">
         <br />
-        <asp:Panel ID="PanelCliente" runat="server" Width="718px" Height="69%" CssClass="auto-style5">
+        <asp:Panel ID="PanelCliente" runat="server" Width="718px" Height="63%" CssClass="auto-style5">
             <asp:Label ID="lblMensagem" runat="server" Font-Bold="True" Font-Size="XX-Large"></asp:Label>
             <br />
             <br />
@@ -66,14 +66,21 @@
             <br />
             <br />
             <asp:Label ID="lblCnpj" runat="server" Text="CNPJ/CPF : "></asp:Label>
-            <asp:TextBox ID="txtCpf" runat="server" Width="256px"></asp:TextBox>
+            <asp:TextBox ID="txtCpf" runat="server" Width="249px"></asp:TextBox>
             &nbsp;
+            <asp:Label ID="lblRg" runat="server" Text="RG : "></asp:Label>
+            <asp:TextBox ID="txtRg" runat="server" Enabled="False" Width="183px"></asp:TextBox>
+            <br />
+            <br />
             <asp:Label ID="lblResponsavel" runat="server" Text="Responsável : "></asp:Label>
-            <asp:TextBox ID="txtResponsavel" runat="server" Width="160px" Enabled="False"></asp:TextBox>
+            <asp:TextBox ID="txtResponsavel" runat="server" Width="225px" Enabled="False"></asp:TextBox>
+            &nbsp;
+            <asp:Label ID="lblCredito" runat="server" Text="Créditos (R$) : "></asp:Label>
+            <asp:TextBox ID="txtCredito" runat="server" Enabled="False" Width="146px"></asp:TextBox>
             <br />
             <br />
             <asp:Label ID="lblTelefone" runat="server" Text="Telefone : "></asp:Label>
-            <asp:TextBox ID="txtTelefone" runat="server" Width="231px" Enabled="False"></asp:TextBox>
+            <asp:TextBox ID="txtTelefone" runat="server" Enabled="False" Width="231px"></asp:TextBox>
             &nbsp;
             <asp:Label ID="lblCelular" runat="server" Text="Celular : "></asp:Label>
             <asp:TextBox ID="txtCelular" runat="server" Width="231px" Enabled="False"></asp:TextBox>
@@ -115,6 +122,8 @@
             <asp:Button ID="btnVoltar" runat="server" class="button" OnClick="btnSair_Click" Text="Sair" Height="26px" Width="90px" />
             <br />
             <br />
+            <br />
+            </asp:Panel>
             <asp:Panel ID="PanelPesquisa" runat="server" CssClass="auto-style5" Height="50px" Width="587px" Visible="False">
                 <div align="left">
                     <asp:RadioButtonList ID="rblClientes" runat="server" Height="21px" AutoPostBack="True" OnSelectedIndexChanged="rblClientes_SelectedIndexChanged">
@@ -122,10 +131,7 @@
                     &nbsp;&nbsp;
                     <asp:Label ID="lblAlerta" runat="server" Font-Bold="True" ForeColor="Red" Visible="False"></asp:Label>
                 </div>
-            </asp:Panel>
-        </asp:Panel>
-        &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;<br />
-        
+            </asp:Panel>                        
         <asp:Panel ID="panelCidade" runat="server" Height="159px" Width="57%" Visible="False" >
             <br />
             <asp:Label ID="Label1" runat="server" Font-Bold="True" Font-Size="X-Large" Text="Incluir Cidade"></asp:Label>

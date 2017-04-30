@@ -38,7 +38,7 @@
         <br />
         <asp:Button ID="btnLogin" runat="server" Text="Entrar" class="button" width="30%" height="10%" Enabled="true" OnClick="btnLogin_Click"/>
        
-        &nbsp;&nbsp;&nbsp;&nbsp; <asp:Button ID="btnCadastrar" width="30%" height="10%" runat="server" Text="Cadastrar" class="button" Enabled="False" OnClick="btnCadastrar_Click"/>
+        &nbsp;&nbsp;&nbsp;&nbsp; <asp:Button ID="btnCadastrar" width="30%" height="10%" runat="server" Text="Cadastrar" class="button" OnClick="btnCadastrar_Click"/>
         <br />
         <asp:Label ID="lblEspaco" runat="server" Visible="False"></asp:Label>
         <br />

@@ -127,8 +127,6 @@
     </Content>
     <Content Include="CSS\StyleSheet.css" />
     <Content Include="View\AcessoIndevido.aspx" />
-    <Content Include="View\CadastrarUsuario.aspx" />
-    <Content Include="View\FileBrowser.aspx" />
     <Content Include="View\index.aspx" />
     <Content Include="View\Inicial.aspx" />
     <Content Include="View\Padrao.Master" />
@@ -159,6 +157,7 @@
   <ItemGroup>
     <Compile Include="Control\Controle.cs" />
     <Compile Include="Control\Valida.cs" />
+    <Compile Include="Control\ValidaCpf.cs" />
     <Compile Include="Model\Cidades.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -186,6 +185,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Model\Pagamentos.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\Perfis.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -208,20 +210,6 @@
     </Compile>
     <Compile Include="View\AcessoIndevido.aspx.designer.cs">
       <DependentUpon>AcessoIndevido.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="View\CadastrarUsuario.aspx.cs">
-      <DependentUpon>CadastrarUsuario.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="View\CadastrarUsuario.aspx.designer.cs">
-      <DependentUpon>CadastrarUsuario.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="View\FileBrowser.aspx.cs">
-      <DependentUpon>FileBrowser.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="View\FileBrowser.aspx.designer.cs">
-      <DependentUpon>FileBrowser.aspx</DependentUpon>
     </Compile>
     <Compile Include="View\index.aspx.cs">
       <DependentUpon>index.aspx</DependentUpon>

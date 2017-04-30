@@ -38,13 +38,16 @@
     color: darkblue;
 }
 
+.button:hover {
+    width: 90px;
+    color: Highlight;
+    background-color: white;
+}
+
 .button {
     width: 90px;
     color: darkblue;
 }
 
-    .button:hover {
-        width: 90px;
-        color: Highlight;
-        background-color: white;
-    }
+    
+
