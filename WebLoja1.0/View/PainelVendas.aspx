@@ -42,11 +42,15 @@
             <asp:Label ID="lblEspaço" runat="server" Width="569px"></asp:Label>
             <asp:Button ID="btnCancelCliente" runat="server" BackColor="Silver" BorderStyle="Outset" Font-Bold="True" Height="21px" Text="X" Width="27px" OnClick="btnCancelCliente_Click" />
             <br />
-            <br />
+            <div align="center">
+                <asp:RadioButton ID="rdbFisica" runat="server" Font-Size="Small" Width="200px" AutoPostBack="True" Checked="True" GroupName="groupPessoa" OnCheckedChanged="rdbFisica_CheckedChanged" Text="Pessoa Fisíca" />
+                <asp:RadioButton ID="rdbJuridica" runat="server" Font-Size="Small" Width="200px" AutoPostBack="True" GroupName="groupPessoa" OnCheckedChanged="rdbJuridica_CheckedChanged" Text="Pessoa Juridíca" />
+            </div>
             &nbsp;&nbsp;&nbsp; <asp:Label ID="lblCliente" runat="server" Font-Bold="True" Text="Cliente : " Font-Size="Small"></asp:Label>
             <asp:TextBox ID="txtCliente" runat="server" BackColor="#FFFF99" Height="14px" Width="338px" Enabled="False"></asp:TextBox>
             &nbsp;
-            <asp:Label ID="lblCpf" runat="server" Font-Bold="True" Font-Size="Small" Text="CPF/CNPJ : "></asp:Label>
+            <asp:Label ID="lblCpf" runat="server" Font-Bold="True" Font-Size="Small" Text="CPF : "></asp:Label>
+            <asp:Label ID="lblCnpj" runat="server" Font-Bold="True" Font-Size="Small" Text="CNPJ : " Visible="False"></asp:Label>
             <asp:TextBox ID="txtCpf" runat="server" BackColor="#FFFF99" Enabled="False" Height="14px" Width="137px"></asp:TextBox>
 &nbsp;
             <asp:Label ID="lblRg" runat="server" Font-Bold="True" Font-Size="Small" Text="RG : "></asp:Label>
@@ -123,12 +127,12 @@
             <%-- &nbsp;<asp:Label ID="lblButton" runat="server" BackColor="Silver" BorderColor="Silver" BorderStyle="Outset" Font-Bold="True" Height="18px" Text="OK" Width="25px"></asp:Label>--%>
             
             &nbsp;&nbsp;<asp:Label ID="lblQuantidade" runat="server" Font-Bold="True" Text="Quantidade :"></asp:Label>
-            &nbsp;<asp:TextBox ID="txtQuantidade" runat="server" Height="25px" Width="66px" BackColor="#FFFF99" Font-Size="Large"></asp:TextBox>
+            &nbsp;<asp:TextBox ID="txtQuantidade" runat="server" Height="25px" Width="66px" BackColor="#FFFF99" Font-Size="Large" AutoPostBack="True" OnTextChanged="txtPesquisaProd_TextChanged"></asp:TextBox>
             &nbsp;<asp:Button ID="btnCodigo" runat="server" BackColor="Silver" BorderStyle="Outset" Font-Bold="True" Height="25px" OnClick="btnCodigo_Click" Text="OK" Width="35px" TabIndex="100" ViewStateMode="Enabled" ValidateRequestMode="Enabled" />
             
             <br />
             &nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<asp:Label ID="lblPesquisa" runat="server" Font-Bold="True" Text="Pesquisar Produtos : "></asp:Label>
-            <asp:TextBox ID="txtPesquisaProd" runat="server" Height="20px" Width="404px" BackColor="#FFFF99"></asp:TextBox>
+            <asp:TextBox ID="txtPesquisaProd" runat="server" Height="20px" Width="404px" BackColor="#FFFF99" AutoPostBack="True"></asp:TextBox>
             <asp:DropDownList ID="ddlPesquisaProd" runat="server" Height="26px" Visible="False" Width="409px" AutoPostBack="True" OnSelectedIndexChanged="ddlPesquisaProd_SelectedIndexChanged" BackColor="#FFFF99">
             </asp:DropDownList>
             &nbsp;<asp:ImageButton ID="btnPesquisa" runat="server" Height="22px" ImageAlign="Middle" Width="22px" img src="../Image/lupa.png" BackColor="Silver" BorderColor="Silver" BorderStyle="Outset" CssClass="auto-style6" OnClick="btnPesquisa_Click"/>
@@ -177,7 +181,7 @@
                     <br />
                     <br />
                     <asp:Label ID="lblRecebido" runat="server" Font-Bold="True" Font-Size="Large" Height="25px" Text="Valor Recebido  : " Visible="False" Width="158px"></asp:Label>
-                    <asp:TextBox ID="txtRecebido" runat="server" Enabled="False" Height="29px" Visible="False" Width="107px" Font-Bold="True" Font-Size="X-Large"></asp:TextBox>
+                    <asp:TextBox ID="txtRecebido" runat="server" Enabled="False" Height="29px" Visible="False" Width="107px" Font-Bold="True" Font-Size="X-Large">0,00</asp:TextBox>
                     &nbsp;<asp:Button ID="btnReceber" runat="server" Text="OK" Enabled="False" Font-Bold="True" Font-Size="Large" OnClick="btnReceber_Click" Visible="False" />
                     <br />
                     <br />
@@ -186,7 +190,7 @@
                 </asp:Panel>
                 <asp:Panel ID="pnlPrazo" runat="server" Height="390px" Width="33%" BackColor="LightGray" HorizontalAlign="Center" style="float:left" BorderStyle="Solid" BorderWidth="1px">
                     <br />
-                    <asp:RadioButton ID="rdbPrazo" runat="server" Text="Pagamento à Prazo" Font-Size="Large" GroupName="grpPagamento" OnCheckedChanged="rdbPrazo_CheckedChanged" AutoPostBack="True" />
+                    <asp:RadioButton ID="rdbPrazo" runat="server" Text="Pagamento à Prazo (Cartão)" Font-Size="Large" GroupName="grpPagamento" OnCheckedChanged="rdbPrazo_CheckedChanged" AutoPostBack="True" />
                     <br />
                     <br />
                     <asp:Label ID="lblTotalFinalPrazo" runat="server" Font-Bold="True" Font-Size="Large" Height="25px" Text="Total  Final : " Width="159px"></asp:Label>
@@ -271,7 +275,7 @@
                 &nbsp;&nbsp;<asp:Label ID="lblCpfCnpj" runat="server" Font-Bold="True" Font-Size="X-Large"></asp:Label>
                 <br />
                 <br />
-                <asp:RadioButton ID="rdbCpf" runat="server" GroupName="NotaPaulista" Text="CPF : " Width="80px" OnCheckedChanged="rdbCpf_CheckedChanged" />
+                <asp:RadioButton ID="rdbCpf" runat="server" GroupName="NotaPaulista" Text="CPF : " Width="80px" OnCheckedChanged="rdbCpf_CheckedChanged" Checked="True" />
                 <asp:TextBox ID="txtNpCpf" runat="server" Height="16px" Width="210px" Font-Size="Large" Enabled="False"></asp:TextBox>
                 <br />
                 <br />

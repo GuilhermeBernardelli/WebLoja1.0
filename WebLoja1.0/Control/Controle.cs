@@ -180,5 +180,20 @@ namespace WebLoja1._0.Control
         {
             dbRepository.salvarNovaVenda(venda);
         }
+
+        public void salvarPagamento(Pagamentos pagamento)
+        {
+            dbRepository.salvarNovoPagamento(pagamento);
+        }
+
+        public void salvaProdutosVendidos(Vendas_Produtos prodVendido)
+        {
+            dbRepository.salvarNovoProdutoVendido(prodVendido);
+        }
+
+        public bool pesquisaPagamentoId(Pagamentos pagamento)
+        {
+            return dbRepository.pesquisaIdPagamento(pagamento);
+        }
     }
 }

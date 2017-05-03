@@ -103,6 +103,24 @@ namespace WebLoja1._0.View {
         protected global::System.Web.UI.WebControls.Button btnCancelCliente;
         
         /// <summary>
+        /// Controle rdbFisica.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButton rdbFisica;
+        
+        /// <summary>
+        /// Controle rdbJuridica.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButton rdbJuridica;
+        
+        /// <summary>
         /// Controle lblCliente.
         /// </summary>
         /// <remarks>
@@ -128,6 +146,15 @@ namespace WebLoja1._0.View {
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblCpf;
+        
+        /// <summary>
+        /// Controle lblCnpj.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCnpj;
         
         /// <summary>
         /// Controle txtCpf.

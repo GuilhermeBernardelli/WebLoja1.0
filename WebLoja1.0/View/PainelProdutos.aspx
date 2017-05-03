@@ -109,14 +109,16 @@
                         &nbsp;
                         <asp:Label ID="lblUnd" runat="server" Text="Und :"></asp:Label>
                         &nbsp;<asp:DropDownList ID="ddlMedida" runat="server" Height="26px" Width="62px" Enabled="False">
-                            <asp:ListItem>Unidade</asp:ListItem>
-                            <asp:ListItem>Caixa</asp:ListItem>
-                            <asp:ListItem>Pacote</asp:ListItem>
+                            <asp:ListItem>UNIDADE</asp:ListItem>
+                            <asp:ListItem>CAIXA</asp:ListItem>
+                            <asp:ListItem>PACOTE</asp:ListItem>
                         </asp:DropDownList>
                         <br />
                         <br />
-                        <asp:Label ID="lblFornecedor" runat="server" Text="Forn. :"></asp:Label>
-                        &nbsp;&nbsp;&nbsp;&nbsp; <asp:DropDownList ID="ddlFornecedores" runat="server" AutoPostBack="True" DataTextField="Nome" DataValueField="Id" Height="22px" Width="443px" Enabled="False">
+                        <asp:Label ID="lblMinimo" runat="server" Text="Min : "></asp:Label>
+                        <asp:TextBox ID="txtMinimo" runat="server" Enabled="False" Width="58px"></asp:TextBox>
+&nbsp;<asp:Label ID="lblFornecedor" runat="server" Text="Forn. :"></asp:Label>
+                        &nbsp;&nbsp;&nbsp;&nbsp; <asp:DropDownList ID="ddlFornecedores" runat="server" AutoPostBack="True" DataTextField="Nome" DataValueField="Id" Height="17px" Width="328px" Enabled="False">
                         </asp:DropDownList>
                     </div>
                     <asp:FileUpload ID="Upload" runat="server" BackColor="White" CssClass="auto-style5" Font-Size="XX-Small" Height="18px" Width="590px" Enabled="False"/>
@@ -193,7 +195,7 @@
                         <SortedDescendingCellStyle BackColor="#D6DFDF" />
                         <SortedDescendingHeaderStyle BackColor="#002876" />
                     </asp:GridView>
-                    <asp:SqlDataSource ID="SqlDataSourceProd" runat="server" ConnectionString="Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Database.mdf;Integrated Security=True;MultipleActiveResultSets=True;Application Name=EntityFramework" ProviderName="System.Data.SqlClient" SelectCommand="SELECT [cod_produto], [desc_produto], [preco_compra], [preco_venda], [qnt_estoque] FROM [Produtos] WHERE [status] = 1"></asp:SqlDataSource>
+                    <asp:SqlDataSource ID="SqlDataSourceProd" runat="server" ConnectionString="Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Database.mdf;Integrated Security=True;MultipleActiveResultSets=True;Application Name=EntityFramework" ProviderName="System.Data.SqlClient" SelectCommand="SELECT [cod_produto], [desc_produto], [preco_compra], [preco_venda], [qnt_estoque] FROM [Produtos] WHERE [status] = 1;"></asp:SqlDataSource>
                     </asp:Panel>
                 
             </div>

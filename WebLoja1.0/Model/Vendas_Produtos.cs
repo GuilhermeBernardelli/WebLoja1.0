@@ -16,6 +16,7 @@ namespace WebLoja1._0.Model
     {
         public int id { get; set; }
         public Nullable<int> id_venda { get; set; }
+        public Nullable<int> num_item { get; set; }
         public Nullable<int> id_produto { get; set; }
         public int quantidade { get; set; }
     

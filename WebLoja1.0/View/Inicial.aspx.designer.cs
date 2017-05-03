@@ -94,6 +94,15 @@ namespace WebLoja1._0.View {
         protected global::System.Web.UI.WebControls.Button btnContabilidade;
         
         /// <summary>
+        /// Controle btnFolhaPg.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnFolhaPg;
+        
+        /// <summary>
         /// Controle btnUsuarios.
         /// </summary>
         /// <remarks>
@@ -110,5 +119,41 @@ namespace WebLoja1._0.View {
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnGestao;
+        
+        /// <summary>
+        /// Controle btnRelatorios.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnRelatorios;
+        
+        /// <summary>
+        /// Controle btn2.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn2;
+        
+        /// <summary>
+        /// Controle btn3.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn3;
+        
+        /// <summary>
+        /// Controle btn4.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn4;
     }
 }

@@ -148,7 +148,10 @@
     <Content Include="scripts\ai.0.15.0-build58334.js" />
     <Content Include="scripts\ai.0.15.0-build58334.min.js" />
     <Content Include="View\PainelClientes.aspx" />
+    <Content Include="View\PainelContabilidade.aspx" />
+    <Content Include="View\PainelFolhaPag.aspx" />
     <Content Include="View\PainelFornecedores.aspx" />
+    <Content Include="View\PainelGestao.aspx" />
     <Content Include="View\PainelProdutos.aspx" />
     <Content Include="View\PainelUsuarios.aspx" />
     <Content Include="View\PainelVendas.aspx" />
@@ -240,12 +243,33 @@
     <Compile Include="View\PainelClientes.aspx.designer.cs">
       <DependentUpon>PainelClientes.aspx</DependentUpon>
     </Compile>
+    <Compile Include="View\PainelContabilidade.aspx.cs">
+      <DependentUpon>PainelContabilidade.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\PainelContabilidade.aspx.designer.cs">
+      <DependentUpon>PainelContabilidade.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\PainelFolhaPag.aspx.cs">
+      <DependentUpon>PainelFolhaPag.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\PainelFolhaPag.aspx.designer.cs">
+      <DependentUpon>PainelFolhaPag.aspx</DependentUpon>
+    </Compile>
     <Compile Include="View\PainelFornecedores.aspx.cs">
       <DependentUpon>PainelFornecedores.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="View\PainelFornecedores.aspx.designer.cs">
       <DependentUpon>PainelFornecedores.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\PainelGestao.aspx.cs">
+      <DependentUpon>PainelGestao.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\PainelGestao.aspx.designer.cs">
+      <DependentUpon>PainelGestao.aspx</DependentUpon>
     </Compile>
     <Compile Include="View\PainelProdutos.aspx.cs">
       <DependentUpon>PainelProdutos.aspx</DependentUpon>
