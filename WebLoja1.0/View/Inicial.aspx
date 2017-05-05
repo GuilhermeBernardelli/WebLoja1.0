@@ -24,8 +24,8 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div align="center" class="auto-style6" style="height: 278px">
     <asp:Panel ID="pnlPrincipal" runat="server" Height="101%" CssClass="auto-style5" Width="550px" HorizontalAlign="Center">
-        <br />
-        <asp:Label ID="lblMensagem" runat="server" Font-Bold="True" Font-Size="XX-Large"></asp:Label>
+        <asp:Button ID="btnCancelCliente" runat="server" BackColor="#CC0000" BorderColor="White" Font-Bold="True" ForeColor="White" Height="21px" OnClick="btnSair_Click"  style="float:right; margin-bottom:15px;" Text="X" Width="27px" />
+        <asp:Label ID="lblMensagem" runat="server" Font-Bold="True" Font-Size="XX-Large" Width="100%"></asp:Label>
         <br />
         <br />
         <br />
@@ -47,11 +47,11 @@
 &nbsp;&nbsp;<asp:Button ID="btnGestao" runat="server" class="button" Height="27px" OnClick="btnGestao_Click" style="margin-top:8px;" Text="Gestão Sist." />
         <br />
         <asp:Button ID="btnRelatorios" runat="server" class="button" Height="27px" style="margin-top:8px;" Text="Relatórios" OnClick="btnRelatorios_Click" />
-&nbsp;&nbsp;<asp:Button ID="btn2" runat="server" class="button" Height="27px" style="margin-top:8px;" Text="Reserva" Visible="False" />
-        &nbsp;
-        <asp:Button ID="btn3" runat="server" class="button" Height="27px" style="margin-top:8px;" Text="Reserva" Visible="False" />
+        &nbsp;&nbsp;<asp:Button ID="btn3" runat="server" class="button" Height="27px" style="margin-top:8px;" Text="Reserva" Visible="False" />
 &nbsp;
         <asp:Button ID="btn4" runat="server" class="button" Height="27px" style="margin-top:8px;" Text="Reserva" Visible="False" />
+        &nbsp;
+        <asp:Button ID="btn5" runat="server" class="button" Height="27px" style="margin-top:8px;" Text="Reserva" Visible="False" />
         </asp:Panel>
         </div>
     

@@ -15,10 +15,16 @@ namespace WebLoja1._0.Control
         {
             user = dbRepository.pesquisaUserById(id);
 
-            if (user.num_perfil == perfil)
+            if (user == null)
+            {
+                return false;
+            }
+
+            else if (user.num_perfil == perfil)
             {
                 return true;
             }
+
             else
             {
                 return false;

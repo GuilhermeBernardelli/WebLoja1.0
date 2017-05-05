@@ -91,6 +91,13 @@ namespace WebLoja1._0.Control
             return dbRepository.pesquisaProdutos();
         }
 
+        public Gerenciamento pesquisaGerenciamento(int id)
+        {
+            int pesquisa = id;
+
+            return dbRepository.pesquisaGerenciamento(pesquisa);
+        }
+
         public List<Fornecedores> pesquisaFornecedores(string pesquisa)
         {
             string busca = pesquisa;
@@ -194,6 +201,25 @@ namespace WebLoja1._0.Control
         public bool pesquisaPagamentoId(Pagamentos pagamento)
         {
             return dbRepository.pesquisaIdPagamento(pagamento);
+        }
+
+        public Vendas pesquisaVendaID(int id)
+        {
+            int valor = id;
+
+            return dbRepository.pesquisaVendabyID(valor);
+        }
+
+        public void salvarEstoque(Estoque estoque)
+        {
+            dbRepository.salvarNovoEstoque(estoque);
+        }
+
+        public Estoque pesquisaProdEstoqueId(int id)
+        {
+            int valor = id;
+
+            return dbRepository.pesquisaEstoqueByProdID(valor);
         }
     }
 }

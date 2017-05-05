@@ -113,5 +113,15 @@ namespace WebLoja1._0.View
         {
             Response.Redirect("~/View/PainelRelatorios.aspx");
         }
+
+        protected void btnSair_Click(object sender, EventArgs e)
+        {
+            Session.RemoveAll();
+            Session.Clear();
+            Session.Abandon();
+            
+            ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "message", "alert('Logout Realizado com Sucesso !!!')", true);
+            Response.RedirectPermanent("~/View/index.aspx");
+        }
     }
 }

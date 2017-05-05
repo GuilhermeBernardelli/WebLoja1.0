@@ -153,6 +153,7 @@
     <Content Include="View\PainelFornecedores.aspx" />
     <Content Include="View\PainelGestao.aspx" />
     <Content Include="View\PainelProdutos.aspx" />
+    <Content Include="View\PainelRelatorios.aspx" />
     <Content Include="View\PainelUsuarios.aspx" />
     <Content Include="View\PainelVendas.aspx" />
     <Content Include="Web.config" />
@@ -170,7 +171,13 @@
     <Compile Include="Model\Estados.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\Estoque.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\Fornecedores.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Gerenciamento.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Model.Context.cs">
@@ -277,6 +284,13 @@
     </Compile>
     <Compile Include="View\PainelProdutos.aspx.designer.cs">
       <DependentUpon>PainelProdutos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\PainelRelatorios.aspx.cs">
+      <DependentUpon>PainelRelatorios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\PainelRelatorios.aspx.designer.cs">
+      <DependentUpon>PainelRelatorios.aspx</DependentUpon>
     </Compile>
     <Compile Include="View\PainelUsuarios.aspx.cs">
       <DependentUpon>PainelUsuarios.aspx</DependentUpon>

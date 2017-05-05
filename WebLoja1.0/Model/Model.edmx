@@ -17,7 +17,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="nome" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="cpf" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="rg" Type="varchar" MaxLength="50" />
@@ -28,6 +28,7 @@
           <Property Name="numeral" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="bairro" Type="varchar" MaxLength="50" />
           <Property Name="id_Cidade" Type="int" Nullable="false" />
+          <Property Name="pessoa_fisica" Type="int" />
           <Property Name="status" Type="int" Nullable="false" />
           <Property Name="creditos" Type="float" />
         </EntityType>
@@ -38,6 +39,19 @@
           <Property Name="id" Type="int" Nullable="false" />
           <Property Name="estado" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="sigla" Type="varchar" MaxLength="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Estoque">
+          <Key>
+            <PropertyRef Name="id_produto" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_produto" Type="int" Nullable="false" />
+          <Property Name="qnt_atual" Type="int" Nullable="false" />
+          <Property Name="qnt_minima" Type="int" Nullable="false" />
+          <Property Name="qnt_maxima" Type="int" />
+          <Property Name="num_local" Type="int" />
+          <Property Name="letra_local" Type="varchar" MaxLength="2" />
+          <Property Name="ref_local" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Fornecedores">
           <Key>
@@ -55,20 +69,53 @@
           <Property Name="contato" Type="varchar" MaxLength="50" />
           <Property Name="status" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="Gerenciamento">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="comissao" Type="float" Nullable="false" />
+          <Property Name="percIcms" Type="float" Nullable="false" />
+          <Property Name="autoDescPerc" Type="float" Nullable="false" />
+          <Property Name="autoDescValor" Type="decimal" Precision="7" Scale="2" Nullable="false" />
+          <Property Name="maxDescPerc" Type="float" Nullable="false" />
+          <Property Name="jurosPrazo3x" Type="float" Nullable="false" />
+          <Property Name="jurosPrazo4x" Type="float" Nullable="false" />
+          <Property Name="jurosPrazo5x" Type="float" Nullable="false" />
+          <Property Name="jurosPrazo6x" Type="float" Nullable="false" />
+          <Property Name="jurosPrazo7x" Type="float" Nullable="false" />
+          <Property Name="jurosPrazo8x" Type="float" Nullable="false" />
+          <Property Name="jurosPrazo9x" Type="float" Nullable="false" />
+          <Property Name="jurosPrazo10x" Type="float" Nullable="false" />
+          <Property Name="jurosPrazo11x" Type="float" Nullable="false" />
+          <Property Name="jurosPrazo12x" Type="float" Nullable="false" />
+          <Property Name="jurosCheque2x" Type="float" Nullable="false" />
+          <Property Name="jurosCheque3x" Type="float" Nullable="false" />
+          <Property Name="jurosCheque4x" Type="float" Nullable="false" />
+          <Property Name="jurosCheque5x" Type="float" Nullable="false" />
+          <Property Name="jurosCheque6x" Type="float" Nullable="false" />
+          <Property Name="jurosCheque7x" Type="float" Nullable="false" />
+          <Property Name="jurosCheque8x" Type="float" Nullable="false" />
+          <Property Name="jurosCheque9x" Type="float" Nullable="false" />
+          <Property Name="jurosCheque10x" Type="float" Nullable="false" />
+          <Property Name="jurosCheque11x" Type="float" Nullable="false" />
+          <Property Name="jurosCheque12x" Type="float" Nullable="false" />
+          <Property Name="lucroMinimo" Type="float" Nullable="false" />
+        </EntityType>
         <EntityType Name="Pagamentos">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="tipoPag" Type="varchar" MaxLength="12" Nullable="false" />
-          <Property Name="formaPag" Type="varchar" MaxLength="12" Nullable="false" />
+          <Property Name="tipoPag" Type="varchar" MaxLength="50" />
+          <Property Name="formaPag" Type="varchar" MaxLength="50" />
           <Property Name="valorTotal" Type="decimal" Precision="7" Scale="2" />
-          <Property Name="qntParcelas" Type="int" Nullable="false" />
+          <Property Name="qntParcelas" Type="int" />
           <Property Name="dataPagamento" Type="datetime" />
-          <Property Name="numParcela" Type="int" Nullable="false" />
-          <Property Name="valorParcela" Type="decimal" Precision="7" Scale="2" Nullable="false" />
-          <Property Name="numChequePrimeiro" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="numChequeUltimo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="numParcela" Type="int" />
+          <Property Name="valorParcela" Type="decimal" Precision="7" Scale="2" />
+          <Property Name="numChequePrimeiro" Type="varchar" MaxLength="50" />
+          <Property Name="numChequeUltimo" Type="varchar" MaxLength="50" />
           <Property Name="id_venda" Type="int" />
         </EntityType>
         <EntityType Name="Perfis">
@@ -84,16 +131,14 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="cod_produto" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="cod_produto" Type="varchar" MaxLength="13" Nullable="false" />
           <Property Name="desc_produto" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="und_medida" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="preco_compra" Type="float" Nullable="false" />
-          <Property Name="preco_venda" Type="float" Nullable="false" />
-          <Property Name="ICMS_pago" Type="float" />
+          <Property Name="preco_compra" Type="decimal" Precision="7" Scale="2" Nullable="false" />
+          <Property Name="preco_venda" Type="decimal" Precision="7" Scale="2" Nullable="false" />
+          <Property Name="ICMS_pago" Type="decimal" Precision="7" Scale="2" Nullable="false" />
           <Property Name="imagem" Type="varbinary(max)" />
-          <Property Name="qnt_estoque" Type="int" Nullable="false" />
           <Property Name="id_fornecedor" Type="int" Nullable="false" />
-          <Property Name="estoque_minimo" Type="int" />
           <Property Name="status" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Usuarios">
@@ -144,7 +189,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Clientes__id_Cid__16644E42">
+        <Association Name="FK__Clientes__id_Cid__390E6C01">
           <End Role="Cidades" Type="Self.Cidades" Multiplicity="1" />
           <End Role="Clientes" Type="Self.Clientes" Multiplicity="*" />
           <ReferentialConstraint>
@@ -153,6 +198,18 @@
             </Principal>
             <Dependent Role="Clientes">
               <PropertyRef Name="id_Cidade" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Estoque__id_prod__7CF981FA">
+          <End Role="Produtos" Type="Self.Produtos" Multiplicity="1" />
+          <End Role="Estoque" Type="Self.Estoque" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Produtos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Estoque">
+              <PropertyRef Name="id_produto" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -180,7 +237,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Produtos__id_for__33BFA6FF">
+        <Association Name="FK__Produtos__id_for__664B26CC">
           <End Role="Fornecedores" Type="Self.Fornecedores" Multiplicity="1" />
           <End Role="Produtos" Type="Self.Produtos" Multiplicity="*" />
           <ReferentialConstraint>
@@ -204,7 +261,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Vendas__id_Clien__4CC05EF3">
+        <Association Name="FK__Vendas__id_Clien__3A02903A">
           <End Role="Clientes" Type="Self.Clientes" Multiplicity="0..1" />
           <End Role="Vendas" Type="Self.Vendas" Multiplicity="*" />
           <ReferentialConstraint>
@@ -256,7 +313,9 @@
           <EntitySet Name="Cidades" EntityType="Self.Cidades" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Clientes" EntityType="Self.Clientes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Estados" EntityType="Self.Estados" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Estoque" EntityType="Self.Estoque" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Fornecedores" EntityType="Self.Fornecedores" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Gerenciamento" EntityType="Self.Gerenciamento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Pagamentos" EntityType="Self.Pagamentos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Perfis" EntityType="Self.Perfis" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Produtos" EntityType="Self.Produtos" Schema="dbo" store:Type="Tables" />
@@ -267,9 +326,13 @@
             <End Role="Estados" EntitySet="Estados" />
             <End Role="Cidades" EntitySet="Cidades" />
           </AssociationSet>
-          <AssociationSet Name="FK__Clientes__id_Cid__16644E42" Association="Self.FK__Clientes__id_Cid__16644E42">
+          <AssociationSet Name="FK__Clientes__id_Cid__390E6C01" Association="Self.FK__Clientes__id_Cid__390E6C01">
             <End Role="Cidades" EntitySet="Cidades" />
             <End Role="Clientes" EntitySet="Clientes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Estoque__id_prod__7CF981FA" Association="Self.FK__Estoque__id_prod__7CF981FA">
+            <End Role="Produtos" EntitySet="Produtos" />
+            <End Role="Estoque" EntitySet="Estoque" />
           </AssociationSet>
           <AssociationSet Name="FK__Fornecedo__id_Ci__22FF2F51" Association="Self.FK__Fornecedo__id_Ci__22FF2F51">
             <End Role="Cidades" EntitySet="Cidades" />
@@ -279,7 +342,7 @@
             <End Role="Vendas" EntitySet="Vendas" />
             <End Role="Pagamentos" EntitySet="Pagamentos" />
           </AssociationSet>
-          <AssociationSet Name="FK__Produtos__id_for__33BFA6FF" Association="Self.FK__Produtos__id_for__33BFA6FF">
+          <AssociationSet Name="FK__Produtos__id_for__664B26CC" Association="Self.FK__Produtos__id_for__664B26CC">
             <End Role="Fornecedores" EntitySet="Fornecedores" />
             <End Role="Produtos" EntitySet="Produtos" />
           </AssociationSet>
@@ -287,7 +350,7 @@
             <End Role="Perfis" EntitySet="Perfis" />
             <End Role="Usuarios" EntitySet="Usuarios" />
           </AssociationSet>
-          <AssociationSet Name="FK__Vendas__id_Clien__4CC05EF3" Association="Self.FK__Vendas__id_Clien__4CC05EF3">
+          <AssociationSet Name="FK__Vendas__id_Clien__3A02903A" Association="Self.FK__Vendas__id_Clien__3A02903A">
             <End Role="Clientes" EntitySet="Clientes" />
             <End Role="Vendas" EntitySet="Vendas" />
           </AssociationSet>
@@ -310,47 +373,24 @@
       <Schema Namespace="DatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="DatabaseEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Cidades" EntityType="DatabaseModel.Cidades" />
-          <EntitySet Name="Clientes" EntityType="DatabaseModel.Clientes" />
           <EntitySet Name="Estados" EntityType="DatabaseModel.Estados" />
           <EntitySet Name="Fornecedores" EntityType="DatabaseModel.Fornecedores" />
           <EntitySet Name="Perfis" EntityType="DatabaseModel.Perfis" />
-          <EntitySet Name="Produtos" EntityType="DatabaseModel.Produtos" />
           <EntitySet Name="Usuarios" EntityType="DatabaseModel.Usuarios" />
           <AssociationSet Name="FK__Cidades__id_Esta__308E3499" Association="DatabaseModel.FK__Cidades__id_Esta__308E3499">
             <End Role="Estados" EntitySet="Estados" />
             <End Role="Cidades" EntitySet="Cidades" />
           </AssociationSet>
-          <AssociationSet Name="FK__Clientes__id_Cid__16644E42" Association="DatabaseModel.FK__Clientes__id_Cid__16644E42">
-            <End Role="Cidades" EntitySet="Cidades" />
-            <End Role="Clientes" EntitySet="Clientes" />
-          </AssociationSet>
           <AssociationSet Name="FK__Fornecedo__id_Ci__22FF2F51" Association="DatabaseModel.FK__Fornecedo__id_Ci__22FF2F51">
             <End Role="Cidades" EntitySet="Cidades" />
             <End Role="Fornecedores" EntitySet="Fornecedores" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Produtos__id_for__703EA55A" Association="DatabaseModel.FK__Produtos__id_for__703EA55A">
-            <End Role="Fornecedores" EntitySet="Fornecedores" />
-            <End Role="Produtos" EntitySet="Produtos" />
           </AssociationSet>
           <AssociationSet Name="FK__Usuarios__num_pe__2C88998B" Association="DatabaseModel.FK__Usuarios__num_pe__2C88998B">
             <End Role="Perfis" EntitySet="Perfis" />
             <End Role="Usuarios" EntitySet="Usuarios" />
           </AssociationSet>
           <EntitySet Name="Vendas_Produtos" EntityType="DatabaseModel.Vendas_Produtos" />
-          <AssociationSet Name="id_produto" Association="DatabaseModel.id_produto">
-            <End Role="Produtos" EntitySet="Produtos" />
-            <End Role="Vendas_Produtos" EntitySet="Vendas_Produtos" />
-          </AssociationSet>
-          <EntitySet Name="Pagamentos" EntityType="DatabaseModel.Pagamentos" />
           <EntitySet Name="Vendas" EntityType="DatabaseModel.Vendas" />
-          <AssociationSet Name="FK__Vendas__id_Clien__4CC05EF3" Association="DatabaseModel.FK__Vendas__id_Clien__4CC05EF3">
-            <End Role="Clientes" EntitySet="Clientes" />
-            <End Role="Vendas" EntitySet="Vendas" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Pagamento__id_ve__17236851" Association="DatabaseModel.FK__Pagamento__id_ve__17236851">
-            <End Role="Vendas" EntitySet="Vendas" />
-            <End Role="Pagamentos" EntitySet="Pagamentos" />
-          </AssociationSet>
           <AssociationSet Name="id_usuario" Association="DatabaseModel.id_usuario">
             <End Role="Usuarios" EntitySet="Usuarios" />
             <End Role="Vendas" EntitySet="Vendas" />
@@ -358,6 +398,35 @@
           <AssociationSet Name="id_venda" Association="DatabaseModel.id_venda">
             <End Role="Vendas" EntitySet="Vendas" />
             <End Role="Vendas_Produtos" EntitySet="Vendas_Produtos" />
+          </AssociationSet>
+          <EntitySet Name="Pagamentos" EntityType="DatabaseModel.Pagamentos" />
+          <AssociationSet Name="FK__Pagamento__id_ve__17236851" Association="DatabaseModel.FK__Pagamento__id_ve__17236851">
+            <End Role="Vendas" EntitySet="Vendas" />
+            <End Role="Pagamentos" EntitySet="Pagamentos" />
+          </AssociationSet>
+          <EntitySet Name="Estoque" EntityType="DatabaseModel.Estoque" />
+          <EntitySet Name="Produtos" EntityType="DatabaseModel.Produtos" />
+          <AssociationSet Name="FK__Estoque__id_prod__7CF981FA" Association="DatabaseModel.FK__Estoque__id_prod__7CF981FA">
+            <End Role="Produtos" EntitySet="Produtos" />
+            <End Role="Estoque" EntitySet="Estoque" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Produtos__id_for__664B26CC" Association="DatabaseModel.FK__Produtos__id_for__664B26CC">
+            <End Role="Fornecedores" EntitySet="Fornecedores" />
+            <End Role="Produtos" EntitySet="Produtos" />
+          </AssociationSet>
+          <AssociationSet Name="id_produto" Association="DatabaseModel.id_produto">
+            <End Role="Produtos" EntitySet="Produtos" />
+            <End Role="Vendas_Produtos" EntitySet="Vendas_Produtos" />
+          </AssociationSet>
+          <EntitySet Name="Gerenciamento" EntityType="DatabaseModel.Gerenciamento" />
+          <EntitySet Name="Clientes" EntityType="DatabaseModel.Clientes" />
+          <AssociationSet Name="FK__Clientes__id_Cid__390E6C01" Association="DatabaseModel.FK__Clientes__id_Cid__390E6C01">
+            <End Role="Cidades" EntitySet="Cidades" />
+            <End Role="Clientes" EntitySet="Clientes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Vendas__id_Clien__3A02903A" Association="DatabaseModel.FK__Vendas__id_Clien__3A02903A">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="Vendas" EntitySet="Vendas" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="Cidades">
@@ -368,28 +437,8 @@
           <Property Name="id_Estado" Type="Int32" Nullable="false" />
           <Property Name="cidade" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Estados" Relationship="DatabaseModel.FK__Cidades__id_Esta__308E3499" FromRole="Cidades" ToRole="Estados" />
-          <NavigationProperty Name="Clientes" Relationship="DatabaseModel.FK__Clientes__id_Cid__16644E42" FromRole="Cidades" ToRole="Clientes" />
           <NavigationProperty Name="Fornecedores" Relationship="DatabaseModel.FK__Fornecedo__id_Ci__22FF2F51" FromRole="Cidades" ToRole="Fornecedores" />
-        </EntityType>
-        <EntityType Name="Clientes">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
-          <Property Name="nome" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="cpf" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="rg" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="contato" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="telefone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="celular" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="endereço" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="numeral" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="bairro" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="id_Cidade" Type="Int32" Nullable="false" />
-          <Property Name="status" Type="Int32" Nullable="false" />
-          <Property Name="creditos" Type="Double" />
-          <NavigationProperty Name="Cidades" Relationship="DatabaseModel.FK__Clientes__id_Cid__16644E42" FromRole="Clientes" ToRole="Cidades" />
-          <NavigationProperty Name="Vendas" Relationship="DatabaseModel.FK__Vendas__id_Clien__4CC05EF3" FromRole="Clientes" ToRole="Vendas" />
+          <NavigationProperty Name="Clientes" Relationship="DatabaseModel.FK__Clientes__id_Cid__390E6C01" FromRole="Cidades" ToRole="Clientes" />
         </EntityType>
         <EntityType Name="Estados">
           <Key>
@@ -416,7 +465,7 @@
           <Property Name="contato" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="status" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Cidades" Relationship="DatabaseModel.FK__Fornecedo__id_Ci__22FF2F51" FromRole="Fornecedores" ToRole="Cidades" />
-          <NavigationProperty Name="Produtos" Relationship="DatabaseModel.FK__Produtos__id_for__703EA55A" FromRole="Fornecedores" ToRole="Produtos" />
+          <NavigationProperty Name="Produtos" Relationship="DatabaseModel.FK__Produtos__id_for__664B26CC" FromRole="Fornecedores" ToRole="Produtos" />
         </EntityType>
         <EntityType Name="Perfis">
           <Key>
@@ -426,25 +475,6 @@
           <Property Name="Desc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Numero" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Usuarios" Relationship="DatabaseModel.FK__Usuarios__num_pe__2C88998B" FromRole="Perfis" ToRole="Usuarios" />
-        </EntityType>
-        <EntityType Name="Produtos">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="cod_produto" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="desc_produto" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="und_medida" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="preco_compra" Type="Double" Nullable="false" />
-          <Property Name="preco_venda" Type="Double" Nullable="false" />
-          <Property Name="imagem" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="qnt_estoque" Type="Int32" Nullable="false" />
-          <Property Name="id_fornecedor" Type="Int32" Nullable="false" />
-          <Property Name="status" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Fornecedores" Relationship="DatabaseModel.FK__Produtos__id_for__703EA55A" FromRole="Produtos" ToRole="Fornecedores" />
-          <Property Name="ICMS_pago" Type="Double" />
-          <NavigationProperty Name="Vendas_Produtos" Relationship="DatabaseModel.id_produto" FromRole="Produtos" ToRole="Vendas_Produtos" />
-          <Property Name="estoque_minimo" Type="Int32" />
         </EntityType>
         <EntityType Name="Usuarios">
           <Key>
@@ -471,18 +501,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Clientes__id_Cid__16644E42">
-          <End Type="DatabaseModel.Cidades" Role="Cidades" Multiplicity="1" />
-          <End Type="DatabaseModel.Clientes" Role="Clientes" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cidades">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Clientes">
-              <PropertyRef Name="id_Cidade" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__Fornecedo__id_Ci__22FF2F51">
           <End Type="DatabaseModel.Cidades" Role="Cidades" Multiplicity="1" />
           <End Type="DatabaseModel.Fornecedores" Role="Fornecedores" Multiplicity="*" />
@@ -492,18 +510,6 @@
             </Principal>
             <Dependent Role="Fornecedores">
               <PropertyRef Name="id_Cidade" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Produtos__id_for__703EA55A">
-          <End Type="DatabaseModel.Fornecedores" Role="Fornecedores" Multiplicity="1" />
-          <End Type="DatabaseModel.Produtos" Role="Produtos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Fornecedores">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Produtos">
-              <PropertyRef Name="id_fornecedor" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -528,37 +534,8 @@
           <Property Name="num_item" Type="Int32" />
           <Property Name="id_produto" Type="Int32" />
           <Property Name="quantidade" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Produtos" Relationship="DatabaseModel.id_produto" FromRole="Vendas_Produtos" ToRole="Produtos" />
           <NavigationProperty Name="Vendas" Relationship="DatabaseModel.id_venda" FromRole="Vendas_Produtos" ToRole="Vendas" />
-        </EntityType>
-        <Association Name="id_produto">
-          <End Type="DatabaseModel.Produtos" Role="Produtos" Multiplicity="0..1" />
-          <End Type="DatabaseModel.Vendas_Produtos" Role="Vendas_Produtos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Produtos">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Vendas_Produtos">
-              <PropertyRef Name="id_produto" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="Pagamentos">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="tipoPag" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
-          <Property Name="formaPag" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
-          <Property Name="valorTotal" Type="Decimal" Precision="7" Scale="2" />
-          <Property Name="qntParcelas" Type="Int32" Nullable="false" />
-          <Property Name="dataPagamento" Type="DateTime" Precision="3" />
-          <Property Name="numParcela" Type="Int32" Nullable="false" />
-          <Property Name="valorParcela" Type="Decimal" Nullable="false" Precision="7" Scale="2" />
-          <Property Name="numChequePrimeiro" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="numChequeUltimo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="id_venda" Type="Int32" />
-          <NavigationProperty Name="Vendas" Relationship="DatabaseModel.FK__Pagamento__id_ve__17236851" FromRole="Pagamentos" ToRole="Vendas" />
+          <NavigationProperty Name="Produtos" Relationship="DatabaseModel.id_produto" FromRole="Vendas_Produtos" ToRole="Produtos" />
         </EntityType>
         <EntityType Name="Vendas">
           <Key>
@@ -574,35 +551,11 @@
           <Property Name="id_Cliente" Type="Int32" />
           <Property Name="desconto" Type="Int32" />
           <Property Name="comissao" Type="Decimal" Precision="10" Scale="2" />
-          <NavigationProperty Name="Clientes" Relationship="DatabaseModel.FK__Vendas__id_Clien__4CC05EF3" FromRole="Vendas" ToRole="Clientes" />
-          <NavigationProperty Name="Pagamentos" Relationship="DatabaseModel.FK__Pagamento__id_ve__17236851" FromRole="Vendas" ToRole="Pagamentos" />
           <NavigationProperty Name="Usuarios" Relationship="DatabaseModel.id_usuario" FromRole="Vendas" ToRole="Usuarios" />
           <NavigationProperty Name="Vendas_Produtos" Relationship="DatabaseModel.id_venda" FromRole="Vendas" ToRole="Vendas_Produtos" />
+          <NavigationProperty Name="Pagamentos" Relationship="DatabaseModel.FK__Pagamento__id_ve__17236851" FromRole="Vendas" ToRole="Pagamentos" />
+          <NavigationProperty Name="Clientes" Relationship="DatabaseModel.FK__Vendas__id_Clien__3A02903A" FromRole="Vendas" ToRole="Clientes" />
         </EntityType>
-        <Association Name="FK__Vendas__id_Clien__4CC05EF3">
-          <End Type="DatabaseModel.Clientes" Role="Clientes" Multiplicity="0..1" />
-          <End Type="DatabaseModel.Vendas" Role="Vendas" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Clientes">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Vendas">
-              <PropertyRef Name="id_Cliente" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Pagamento__id_ve__17236851">
-          <End Type="DatabaseModel.Vendas" Role="Vendas" Multiplicity="0..1" />
-          <End Type="DatabaseModel.Pagamentos" Role="Pagamentos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Vendas">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Pagamentos">
-              <PropertyRef Name="id_venda" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="id_usuario">
           <End Type="DatabaseModel.Usuarios" Role="Usuarios" Multiplicity="1" />
           <End Type="DatabaseModel.Vendas" Role="Vendas" Multiplicity="*" />
@@ -627,6 +580,181 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Pagamentos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tipoPag" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="formaPag" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="valorTotal" Type="Decimal" Precision="7" Scale="2" />
+          <Property Name="qntParcelas" Type="Int32" />
+          <Property Name="dataPagamento" Type="DateTime" Precision="3" />
+          <Property Name="numParcela" Type="Int32" />
+          <Property Name="valorParcela" Type="Decimal" Precision="7" Scale="2" />
+          <Property Name="numChequePrimeiro" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="numChequeUltimo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="id_venda" Type="Int32" />
+          <NavigationProperty Name="Vendas" Relationship="DatabaseModel.FK__Pagamento__id_ve__17236851" FromRole="Pagamentos" ToRole="Vendas" />
+        </EntityType>
+        <Association Name="FK__Pagamento__id_ve__17236851">
+          <End Type="DatabaseModel.Vendas" Role="Vendas" Multiplicity="0..1" />
+          <End Type="DatabaseModel.Pagamentos" Role="Pagamentos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vendas">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Pagamentos">
+              <PropertyRef Name="id_venda" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Estoque">
+          <Key>
+            <PropertyRef Name="id_produto" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_produto" Type="Int32" Nullable="false" />
+          <Property Name="qnt_atual" Type="Int32" Nullable="false" />
+          <Property Name="qnt_minima" Type="Int32" Nullable="false" />
+          <Property Name="qnt_maxima" Type="Int32" />
+          <Property Name="num_local" Type="Int32" />
+          <Property Name="letra_local" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="ref_local" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Produtos" Relationship="DatabaseModel.FK__Estoque__id_prod__7CF981FA" FromRole="Estoque" ToRole="Produtos" />
+          </EntityType>
+        <EntityType Name="Produtos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cod_produto" Type="String" Nullable="false" MaxLength="13" FixedLength="false" Unicode="false" />
+          <Property Name="desc_produto" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="und_medida" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="preco_compra" Type="Decimal" Nullable="false" Precision="7" Scale="2" />
+          <Property Name="preco_venda" Type="Decimal" Nullable="false" Precision="7" Scale="2" />
+          <Property Name="ICMS_pago" Type="Decimal" Nullable="false" Precision="7" Scale="2" />
+          <Property Name="imagem" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="id_fornecedor" Type="Int32" Nullable="false" />
+          <Property Name="status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Estoque" Relationship="DatabaseModel.FK__Estoque__id_prod__7CF981FA" FromRole="Produtos" ToRole="Estoque" />
+          <NavigationProperty Name="Fornecedores" Relationship="DatabaseModel.FK__Produtos__id_for__664B26CC" FromRole="Produtos" ToRole="Fornecedores" />
+          <NavigationProperty Name="Vendas_Produtos" Relationship="DatabaseModel.id_produto" FromRole="Produtos" ToRole="Vendas_Produtos" />
+        </EntityType>
+        <Association Name="FK__Estoque__id_prod__7CF981FA">
+          <End Type="DatabaseModel.Produtos" Role="Produtos" Multiplicity="1" />
+          <End Type="DatabaseModel.Estoque" Role="Estoque" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Produtos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Estoque">
+              <PropertyRef Name="id_produto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Produtos__id_for__664B26CC">
+          <End Type="DatabaseModel.Fornecedores" Role="Fornecedores" Multiplicity="1" />
+          <End Type="DatabaseModel.Produtos" Role="Produtos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fornecedores">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Produtos">
+              <PropertyRef Name="id_fornecedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="id_produto">
+          <End Type="DatabaseModel.Produtos" Role="Produtos" Multiplicity="0..1" />
+          <End Type="DatabaseModel.Vendas_Produtos" Role="Vendas_Produtos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produtos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Vendas_Produtos">
+              <PropertyRef Name="id_produto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Gerenciamento">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="comissao" Type="Double" Nullable="false" />
+          <Property Name="percIcms" Type="Double" Nullable="false" />
+          <Property Name="autoDescPerc" Type="Double" Nullable="false" />
+          <Property Name="autoDescValor" Type="Decimal" Nullable="false" Precision="7" Scale="2" />
+          <Property Name="maxDescPerc" Type="Double" Nullable="false" />
+          <Property Name="jurosPrazo3x" Type="Double" Nullable="false" />
+          <Property Name="jurosPrazo4x" Type="Double" Nullable="false" />
+          <Property Name="jurosPrazo5x" Type="Double" Nullable="false" />
+          <Property Name="jurosPrazo6x" Type="Double" Nullable="false" />
+          <Property Name="jurosPrazo7x" Type="Double" Nullable="false" />
+          <Property Name="jurosPrazo8x" Type="Double" Nullable="false" />
+          <Property Name="jurosPrazo9x" Type="Double" Nullable="false" />
+          <Property Name="jurosPrazo10x" Type="Double" Nullable="false" />
+          <Property Name="jurosPrazo11x" Type="Double" Nullable="false" />
+          <Property Name="jurosPrazo12x" Type="Double" Nullable="false" />
+          <Property Name="jurosCheque2x" Type="Double" Nullable="false" />
+          <Property Name="jurosCheque3x" Type="Double" Nullable="false" />
+          <Property Name="jurosCheque4x" Type="Double" Nullable="false" />
+          <Property Name="jurosCheque5x" Type="Double" Nullable="false" />
+          <Property Name="jurosCheque6x" Type="Double" Nullable="false" />
+          <Property Name="jurosCheque7x" Type="Double" Nullable="false" />
+          <Property Name="jurosCheque8x" Type="Double" Nullable="false" />
+          <Property Name="jurosCheque9x" Type="Double" Nullable="false" />
+          <Property Name="jurosCheque10x" Type="Double" Nullable="false" />
+          <Property Name="jurosCheque11x" Type="Double" Nullable="false" />
+          <Property Name="jurosCheque12x" Type="Double" Nullable="false" />
+          <Property Name="lucroMinimo" Type="Double" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Clientes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nome" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="cpf" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="rg" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="contato" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="telefone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="celular" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="endereço" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="numeral" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="bairro" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="id_Cidade" Type="Int32" Nullable="false" />
+          <Property Name="pessoa_fisica" Type="Int32" />
+          <Property Name="status" Type="Int32" Nullable="false" />
+          <Property Name="creditos" Type="Double" />
+          <NavigationProperty Name="Cidades" Relationship="DatabaseModel.FK__Clientes__id_Cid__390E6C01" FromRole="Clientes" ToRole="Cidades" />
+          <NavigationProperty Name="Vendas" Relationship="DatabaseModel.FK__Vendas__id_Clien__3A02903A" FromRole="Clientes" ToRole="Vendas" />
+        </EntityType>
+        <Association Name="FK__Clientes__id_Cid__390E6C01">
+          <End Type="DatabaseModel.Cidades" Role="Cidades" Multiplicity="1" />
+          <End Type="DatabaseModel.Clientes" Role="Clientes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cidades">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Clientes">
+              <PropertyRef Name="id_Cidade" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Vendas__id_Clien__3A02903A">
+          <End Type="DatabaseModel.Clientes" Role="Clientes" Multiplicity="0..1" />
+          <End Type="DatabaseModel.Vendas" Role="Vendas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Vendas">
+              <PropertyRef Name="id_Cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -638,25 +766,6 @@
               <MappingFragment StoreEntitySet="Cidades">
                 <ScalarProperty Name="cidade" ColumnName="cidade" />
                 <ScalarProperty Name="id_Estado" ColumnName="id_Estado" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Clientes">
-            <EntityTypeMapping TypeName="DatabaseModel.Clientes">
-              <MappingFragment StoreEntitySet="Clientes">
-                <ScalarProperty Name="creditos" ColumnName="creditos" />
-                <ScalarProperty Name="status" ColumnName="status" />
-                <ScalarProperty Name="id_Cidade" ColumnName="id_Cidade" />
-                <ScalarProperty Name="bairro" ColumnName="bairro" />
-                <ScalarProperty Name="numeral" ColumnName="numeral" />
-                <ScalarProperty Name="endereço" ColumnName="endereço" />
-                <ScalarProperty Name="celular" ColumnName="celular" />
-                <ScalarProperty Name="telefone" ColumnName="telefone" />
-                <ScalarProperty Name="contato" ColumnName="contato" />
-                <ScalarProperty Name="rg" ColumnName="rg" />
-                <ScalarProperty Name="cpf" ColumnName="cpf" />
-                <ScalarProperty Name="nome" ColumnName="nome" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -696,24 +805,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Produtos">
-            <EntityTypeMapping TypeName="DatabaseModel.Produtos">
-              <MappingFragment StoreEntitySet="Produtos">
-                <ScalarProperty Name="estoque_minimo" ColumnName="estoque_minimo" />
-                <ScalarProperty Name="ICMS_pago" ColumnName="ICMS_pago" />
-                <ScalarProperty Name="status" ColumnName="status" />
-                <ScalarProperty Name="id_fornecedor" ColumnName="id_fornecedor" />
-                <ScalarProperty Name="qnt_estoque" ColumnName="qnt_estoque" />
-                <ScalarProperty Name="imagem" ColumnName="imagem" />
-                <ScalarProperty Name="preco_venda" ColumnName="preco_venda" />
-                <ScalarProperty Name="preco_compra" ColumnName="preco_compra" />
-                <ScalarProperty Name="und_medida" ColumnName="und_medida" />
-                <ScalarProperty Name="desc_produto" ColumnName="desc_produto" />
-                <ScalarProperty Name="cod_produto" ColumnName="cod_produto" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Usuarios">
             <EntityTypeMapping TypeName="DatabaseModel.Usuarios">
               <MappingFragment StoreEntitySet="Usuarios">
@@ -737,6 +828,22 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Vendas">
+            <EntityTypeMapping TypeName="DatabaseModel.Vendas">
+              <MappingFragment StoreEntitySet="Vendas">
+                <ScalarProperty Name="comissao" ColumnName="comissao" />
+                <ScalarProperty Name="desconto" ColumnName="desconto" />
+                <ScalarProperty Name="id_Cliente" ColumnName="id_Cliente" />
+                <ScalarProperty Name="id_Usuario" ColumnName="id_Usuario" />
+                <ScalarProperty Name="valor_Venda" ColumnName="valor_Venda" />
+                <ScalarProperty Name="ICMS" ColumnName="ICMS" />
+                <ScalarProperty Name="cnpj" ColumnName="cnpj" />
+                <ScalarProperty Name="cpf" ColumnName="cpf" />
+                <ScalarProperty Name="data_Venda" ColumnName="data_Venda" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Pagamentos">
             <EntityTypeMapping TypeName="DatabaseModel.Pagamentos">
               <MappingFragment StoreEntitySet="Pagamentos">
@@ -754,23 +861,91 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Vendas">
-            <EntityTypeMapping TypeName="DatabaseModel.Vendas">
-              <MappingFragment StoreEntitySet="Vendas">
-                <ScalarProperty Name="comissao" ColumnName="comissao" />
-                <ScalarProperty Name="desconto" ColumnName="desconto" />
-                <ScalarProperty Name="id_Cliente" ColumnName="id_Cliente" />
-                <ScalarProperty Name="id_Usuario" ColumnName="id_Usuario" />
-                <ScalarProperty Name="valor_Venda" ColumnName="valor_Venda" />
-                <ScalarProperty Name="ICMS" ColumnName="ICMS" />
-                <ScalarProperty Name="cnpj" ColumnName="cnpj" />
-                <ScalarProperty Name="cpf" ColumnName="cpf" />
-                <ScalarProperty Name="data_Venda" ColumnName="data_Venda" />
+          <EntitySetMapping Name="Estoque">
+            <EntityTypeMapping TypeName="DatabaseModel.Estoque">
+              <MappingFragment StoreEntitySet="Estoque">
+                <ScalarProperty Name="ref_local" ColumnName="ref_local" />
+                <ScalarProperty Name="letra_local" ColumnName="letra_local" />
+                <ScalarProperty Name="num_local" ColumnName="num_local" />
+                <ScalarProperty Name="qnt_maxima" ColumnName="qnt_maxima" />
+                <ScalarProperty Name="qnt_minima" ColumnName="qnt_minima" />
+                <ScalarProperty Name="qnt_atual" ColumnName="qnt_atual" />
+                <ScalarProperty Name="id_produto" ColumnName="id_produto" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-        </EntityContainerMapping>
+          <EntitySetMapping Name="Produtos">
+            <EntityTypeMapping TypeName="DatabaseModel.Produtos">
+              <MappingFragment StoreEntitySet="Produtos">
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="id_fornecedor" ColumnName="id_fornecedor" />
+                <ScalarProperty Name="imagem" ColumnName="imagem" />
+                <ScalarProperty Name="ICMS_pago" ColumnName="ICMS_pago" />
+                <ScalarProperty Name="preco_venda" ColumnName="preco_venda" />
+                <ScalarProperty Name="preco_compra" ColumnName="preco_compra" />
+                <ScalarProperty Name="und_medida" ColumnName="und_medida" />
+                <ScalarProperty Name="desc_produto" ColumnName="desc_produto" />
+                <ScalarProperty Name="cod_produto" ColumnName="cod_produto" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Gerenciamento">
+            <EntityTypeMapping TypeName="DatabaseModel.Gerenciamento">
+              <MappingFragment StoreEntitySet="Gerenciamento">
+                <ScalarProperty Name="lucroMinimo" ColumnName="lucroMinimo" />
+                <ScalarProperty Name="jurosCheque12x" ColumnName="jurosCheque12x" />
+                <ScalarProperty Name="jurosCheque11x" ColumnName="jurosCheque11x" />
+                <ScalarProperty Name="jurosCheque10x" ColumnName="jurosCheque10x" />
+                <ScalarProperty Name="jurosCheque9x" ColumnName="jurosCheque9x" />
+                <ScalarProperty Name="jurosCheque8x" ColumnName="jurosCheque8x" />
+                <ScalarProperty Name="jurosCheque7x" ColumnName="jurosCheque7x" />
+                <ScalarProperty Name="jurosCheque6x" ColumnName="jurosCheque6x" />
+                <ScalarProperty Name="jurosCheque5x" ColumnName="jurosCheque5x" />
+                <ScalarProperty Name="jurosCheque4x" ColumnName="jurosCheque4x" />
+                <ScalarProperty Name="jurosCheque3x" ColumnName="jurosCheque3x" />
+                <ScalarProperty Name="jurosCheque2x" ColumnName="jurosCheque2x" />
+                <ScalarProperty Name="jurosPrazo12x" ColumnName="jurosPrazo12x" />
+                <ScalarProperty Name="jurosPrazo11x" ColumnName="jurosPrazo11x" />
+                <ScalarProperty Name="jurosPrazo10x" ColumnName="jurosPrazo10x" />
+                <ScalarProperty Name="jurosPrazo9x" ColumnName="jurosPrazo9x" />
+                <ScalarProperty Name="jurosPrazo8x" ColumnName="jurosPrazo8x" />
+                <ScalarProperty Name="jurosPrazo7x" ColumnName="jurosPrazo7x" />
+                <ScalarProperty Name="jurosPrazo6x" ColumnName="jurosPrazo6x" />
+                <ScalarProperty Name="jurosPrazo5x" ColumnName="jurosPrazo5x" />
+                <ScalarProperty Name="jurosPrazo4x" ColumnName="jurosPrazo4x" />
+                <ScalarProperty Name="jurosPrazo3x" ColumnName="jurosPrazo3x" />
+                <ScalarProperty Name="maxDescPerc" ColumnName="maxDescPerc" />
+                <ScalarProperty Name="autoDescValor" ColumnName="autoDescValor" />
+                <ScalarProperty Name="autoDescPerc" ColumnName="autoDescPerc" />
+                <ScalarProperty Name="percIcms" ColumnName="percIcms" />
+                <ScalarProperty Name="comissao" ColumnName="comissao" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clientes">
+            <EntityTypeMapping TypeName="DatabaseModel.Clientes">
+              <MappingFragment StoreEntitySet="Clientes">
+                <ScalarProperty Name="creditos" ColumnName="creditos" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="pessoa_fisica" ColumnName="pessoa_fisica" />
+                <ScalarProperty Name="id_Cidade" ColumnName="id_Cidade" />
+                <ScalarProperty Name="bairro" ColumnName="bairro" />
+                <ScalarProperty Name="numeral" ColumnName="numeral" />
+                <ScalarProperty Name="endereço" ColumnName="endereço" />
+                <ScalarProperty Name="celular" ColumnName="celular" />
+                <ScalarProperty Name="telefone" ColumnName="telefone" />
+                <ScalarProperty Name="contato" ColumnName="contato" />
+                <ScalarProperty Name="rg" ColumnName="rg" />
+                <ScalarProperty Name="cpf" ColumnName="cpf" />
+                <ScalarProperty Name="nome" ColumnName="nome" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

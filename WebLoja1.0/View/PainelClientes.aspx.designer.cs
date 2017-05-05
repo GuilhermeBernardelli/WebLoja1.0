@@ -94,6 +94,24 @@ namespace WebLoja1._0.View {
         protected global::System.Web.UI.WebControls.TextBox txtRg;
         
         /// <summary>
+        /// Controle rdbFisica.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButton rdbFisica;
+        
+        /// <summary>
+        /// Controle rdbJuridica.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButton rdbJuridica;
+        
+        /// <summary>
         /// Controle lblResponsavel.
         /// </summary>
         /// <remarks>

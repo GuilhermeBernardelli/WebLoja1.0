@@ -22,6 +22,15 @@ namespace WebLoja1._0.View {
         protected global::System.Web.UI.WebControls.Panel pnlPrincipal;
         
         /// <summary>
+        /// Controle btnCancelCliente.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCancelCliente;
+        
+        /// <summary>
         /// Controle lblMensagem.
         /// </summary>
         /// <remarks>
@@ -130,15 +139,6 @@ namespace WebLoja1._0.View {
         protected global::System.Web.UI.WebControls.Button btnRelatorios;
         
         /// <summary>
-        /// Controle btn2.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn2;
-        
-        /// <summary>
         /// Controle btn3.
         /// </summary>
         /// <remarks>
@@ -155,5 +155,14 @@ namespace WebLoja1._0.View {
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btn4;
+        
+        /// <summary>
+        /// Controle btn5.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn5;
     }
 }

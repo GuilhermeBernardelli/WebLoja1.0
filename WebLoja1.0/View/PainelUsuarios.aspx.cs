@@ -36,8 +36,7 @@ namespace WebLoja1._0.View
                 if (id != 0 || perfil != 0)
                 {
                     user = controle.pesquisaUserId(id);
-                    //lblUser.Text = user.nome;
-                    if (!teste.ValidaUser(id, perfil) || user.num_perfil != 1)
+                    if (!teste.ValidaUser(id, perfil) || user.num_perfil > 1)
                     {
                         Response.Redirect("~/View/AcessoIndevido.aspx");                        
                     }
@@ -50,8 +49,6 @@ namespace WebLoja1._0.View
                 else
                 {
                     cadastrar_usuario();
-                    //validação temporaria
-                    //validar_usuarios();
                 }
 
             }

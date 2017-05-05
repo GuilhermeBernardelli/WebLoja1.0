@@ -16,7 +16,12 @@ namespace WebLoja1._0.View
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            lblMensagem.Text = "Bem vindo ao sistema do Alemão da Construção";                       
+            lblMensagem.Text = "Bem vindo ao sistema do Alemão da Construção";
+            //Acesso Forçado durante testes
+            //REMOVER APÓS CONCLUSÃO
+            Session["id"] = 1;
+            Session["perfil"] = 1;
+            Response.Redirect("Inicial.aspx");
         }
 
         protected void btnLogin_Click(object sender, EventArgs e)

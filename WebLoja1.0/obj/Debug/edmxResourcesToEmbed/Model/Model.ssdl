@@ -12,7 +12,7 @@
     <Key>
       <PropertyRef Name="id" />
     </Key>
-    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="nome" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="cpf" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="rg" Type="varchar" MaxLength="50" />
@@ -23,6 +23,7 @@
     <Property Name="numeral" Type="varchar" MaxLength="10" Nullable="false" />
     <Property Name="bairro" Type="varchar" MaxLength="50" />
     <Property Name="id_Cidade" Type="int" Nullable="false" />
+    <Property Name="pessoa_fisica" Type="int" />
     <Property Name="status" Type="int" Nullable="false" />
     <Property Name="creditos" Type="float" />
   </EntityType>
@@ -33,6 +34,19 @@
     <Property Name="id" Type="int" Nullable="false" />
     <Property Name="estado" Type="varchar" MaxLength="25" Nullable="false" />
     <Property Name="sigla" Type="varchar" MaxLength="2" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Estoque">
+    <Key>
+      <PropertyRef Name="id_produto" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_produto" Type="int" Nullable="false" />
+    <Property Name="qnt_atual" Type="int" Nullable="false" />
+    <Property Name="qnt_minima" Type="int" Nullable="false" />
+    <Property Name="qnt_maxima" Type="int" />
+    <Property Name="num_local" Type="int" />
+    <Property Name="letra_local" Type="varchar" MaxLength="2" />
+    <Property Name="ref_local" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Fornecedores">
     <Key>
@@ -50,20 +64,53 @@
     <Property Name="contato" Type="varchar" MaxLength="50" />
     <Property Name="status" Type="int" Nullable="false" />
   </EntityType>
+  <EntityType Name="Gerenciamento">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="comissao" Type="float" Nullable="false" />
+    <Property Name="percIcms" Type="float" Nullable="false" />
+    <Property Name="autoDescPerc" Type="float" Nullable="false" />
+    <Property Name="autoDescValor" Type="decimal" Precision="7" Scale="2" Nullable="false" />
+    <Property Name="maxDescPerc" Type="float" Nullable="false" />
+    <Property Name="jurosPrazo3x" Type="float" Nullable="false" />
+    <Property Name="jurosPrazo4x" Type="float" Nullable="false" />
+    <Property Name="jurosPrazo5x" Type="float" Nullable="false" />
+    <Property Name="jurosPrazo6x" Type="float" Nullable="false" />
+    <Property Name="jurosPrazo7x" Type="float" Nullable="false" />
+    <Property Name="jurosPrazo8x" Type="float" Nullable="false" />
+    <Property Name="jurosPrazo9x" Type="float" Nullable="false" />
+    <Property Name="jurosPrazo10x" Type="float" Nullable="false" />
+    <Property Name="jurosPrazo11x" Type="float" Nullable="false" />
+    <Property Name="jurosPrazo12x" Type="float" Nullable="false" />
+    <Property Name="jurosCheque2x" Type="float" Nullable="false" />
+    <Property Name="jurosCheque3x" Type="float" Nullable="false" />
+    <Property Name="jurosCheque4x" Type="float" Nullable="false" />
+    <Property Name="jurosCheque5x" Type="float" Nullable="false" />
+    <Property Name="jurosCheque6x" Type="float" Nullable="false" />
+    <Property Name="jurosCheque7x" Type="float" Nullable="false" />
+    <Property Name="jurosCheque8x" Type="float" Nullable="false" />
+    <Property Name="jurosCheque9x" Type="float" Nullable="false" />
+    <Property Name="jurosCheque10x" Type="float" Nullable="false" />
+    <Property Name="jurosCheque11x" Type="float" Nullable="false" />
+    <Property Name="jurosCheque12x" Type="float" Nullable="false" />
+    <Property Name="lucroMinimo" Type="float" Nullable="false" />
+  </EntityType>
   <EntityType Name="Pagamentos">
     <Key>
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="tipoPag" Type="varchar" MaxLength="12" Nullable="false" />
-    <Property Name="formaPag" Type="varchar" MaxLength="12" Nullable="false" />
+    <Property Name="tipoPag" Type="varchar" MaxLength="50" />
+    <Property Name="formaPag" Type="varchar" MaxLength="50" />
     <Property Name="valorTotal" Type="decimal" Precision="7" Scale="2" />
-    <Property Name="qntParcelas" Type="int" Nullable="false" />
+    <Property Name="qntParcelas" Type="int" />
     <Property Name="dataPagamento" Type="datetime" />
-    <Property Name="numParcela" Type="int" Nullable="false" />
-    <Property Name="valorParcela" Type="decimal" Precision="7" Scale="2" Nullable="false" />
-    <Property Name="numChequePrimeiro" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="numChequeUltimo" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="numParcela" Type="int" />
+    <Property Name="valorParcela" Type="decimal" Precision="7" Scale="2" />
+    <Property Name="numChequePrimeiro" Type="varchar" MaxLength="50" />
+    <Property Name="numChequeUltimo" Type="varchar" MaxLength="50" />
     <Property Name="id_venda" Type="int" />
   </EntityType>
   <EntityType Name="Perfis">
@@ -79,16 +126,14 @@
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="cod_produto" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="cod_produto" Type="varchar" MaxLength="13" Nullable="false" />
     <Property Name="desc_produto" Type="varchar" MaxLength="30" Nullable="false" />
     <Property Name="und_medida" Type="varchar" MaxLength="10" Nullable="false" />
-    <Property Name="preco_compra" Type="float" Nullable="false" />
-    <Property Name="preco_venda" Type="float" Nullable="false" />
-    <Property Name="ICMS_pago" Type="float" />
+    <Property Name="preco_compra" Type="decimal" Precision="7" Scale="2" Nullable="false" />
+    <Property Name="preco_venda" Type="decimal" Precision="7" Scale="2" Nullable="false" />
+    <Property Name="ICMS_pago" Type="decimal" Precision="7" Scale="2" Nullable="false" />
     <Property Name="imagem" Type="varbinary(max)" />
-    <Property Name="qnt_estoque" Type="int" Nullable="false" />
     <Property Name="id_fornecedor" Type="int" Nullable="false" />
-    <Property Name="estoque_minimo" Type="int" />
     <Property Name="status" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Usuarios">
@@ -139,7 +184,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Clientes__id_Cid__16644E42">
+  <Association Name="FK__Clientes__id_Cid__390E6C01">
     <End Role="Cidades" Type="Self.Cidades" Multiplicity="1" />
     <End Role="Clientes" Type="Self.Clientes" Multiplicity="*" />
     <ReferentialConstraint>
@@ -148,6 +193,18 @@
       </Principal>
       <Dependent Role="Clientes">
         <PropertyRef Name="id_Cidade" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Estoque__id_prod__7CF981FA">
+    <End Role="Produtos" Type="Self.Produtos" Multiplicity="1" />
+    <End Role="Estoque" Type="Self.Estoque" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Produtos">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Estoque">
+        <PropertyRef Name="id_produto" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -175,7 +232,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Produtos__id_for__33BFA6FF">
+  <Association Name="FK__Produtos__id_for__664B26CC">
     <End Role="Fornecedores" Type="Self.Fornecedores" Multiplicity="1" />
     <End Role="Produtos" Type="Self.Produtos" Multiplicity="*" />
     <ReferentialConstraint>
@@ -199,7 +256,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Vendas__id_Clien__4CC05EF3">
+  <Association Name="FK__Vendas__id_Clien__3A02903A">
     <End Role="Clientes" Type="Self.Clientes" Multiplicity="0..1" />
     <End Role="Vendas" Type="Self.Vendas" Multiplicity="*" />
     <ReferentialConstraint>
@@ -251,7 +308,9 @@
     <EntitySet Name="Cidades" EntityType="Self.Cidades" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Clientes" EntityType="Self.Clientes" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Estados" EntityType="Self.Estados" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Estoque" EntityType="Self.Estoque" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Fornecedores" EntityType="Self.Fornecedores" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Gerenciamento" EntityType="Self.Gerenciamento" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Pagamentos" EntityType="Self.Pagamentos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Perfis" EntityType="Self.Perfis" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Produtos" EntityType="Self.Produtos" Schema="dbo" store:Type="Tables" />
@@ -262,9 +321,13 @@
       <End Role="Estados" EntitySet="Estados" />
       <End Role="Cidades" EntitySet="Cidades" />
     </AssociationSet>
-    <AssociationSet Name="FK__Clientes__id_Cid__16644E42" Association="Self.FK__Clientes__id_Cid__16644E42">
+    <AssociationSet Name="FK__Clientes__id_Cid__390E6C01" Association="Self.FK__Clientes__id_Cid__390E6C01">
       <End Role="Cidades" EntitySet="Cidades" />
       <End Role="Clientes" EntitySet="Clientes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Estoque__id_prod__7CF981FA" Association="Self.FK__Estoque__id_prod__7CF981FA">
+      <End Role="Produtos" EntitySet="Produtos" />
+      <End Role="Estoque" EntitySet="Estoque" />
     </AssociationSet>
     <AssociationSet Name="FK__Fornecedo__id_Ci__22FF2F51" Association="Self.FK__Fornecedo__id_Ci__22FF2F51">
       <End Role="Cidades" EntitySet="Cidades" />
@@ -274,7 +337,7 @@
       <End Role="Vendas" EntitySet="Vendas" />
       <End Role="Pagamentos" EntitySet="Pagamentos" />
     </AssociationSet>
-    <AssociationSet Name="FK__Produtos__id_for__33BFA6FF" Association="Self.FK__Produtos__id_for__33BFA6FF">
+    <AssociationSet Name="FK__Produtos__id_for__664B26CC" Association="Self.FK__Produtos__id_for__664B26CC">
       <End Role="Fornecedores" EntitySet="Fornecedores" />
       <End Role="Produtos" EntitySet="Produtos" />
     </AssociationSet>
@@ -282,7 +345,7 @@
       <End Role="Perfis" EntitySet="Perfis" />
       <End Role="Usuarios" EntitySet="Usuarios" />
     </AssociationSet>
-    <AssociationSet Name="FK__Vendas__id_Clien__4CC05EF3" Association="Self.FK__Vendas__id_Clien__4CC05EF3">
+    <AssociationSet Name="FK__Vendas__id_Clien__3A02903A" Association="Self.FK__Vendas__id_Clien__3A02903A">
       <End Role="Clientes" EntitySet="Clientes" />
       <End Role="Vendas" EntitySet="Vendas" />
     </AssociationSet>

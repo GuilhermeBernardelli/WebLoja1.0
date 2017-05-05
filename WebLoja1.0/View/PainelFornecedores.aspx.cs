@@ -16,12 +16,15 @@ namespace WebLoja1._0.View
         List<Cidades> listaCidades = new List<Cidades>();
         Fornecedores fornecedor = new Fornecedores();
         Cidades cidade = new Cidades();
+
         Controle controle = new Controle();
         Usuarios user = new Usuarios();
         Valida teste = new Valida();
         static int id;
         static int perfil;
+
         static bool flagNovo = true;
+        static int id_fornecedor = 0;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -39,7 +42,7 @@ namespace WebLoja1._0.View
                 {
                     user = controle.pesquisaUserId(id);
                     //lblUser.Text = user.nome;
-                    if (!teste.ValidaUser(id, perfil))
+                    if (!teste.ValidaUser(id, perfil) || user.num_perfil == 3)
                     {
                         Response.Redirect("~/View/AcessoIndevido.aspx");
                     }
@@ -102,49 +105,67 @@ namespace WebLoja1._0.View
 
         protected void btnSalvar_Click(object sender, EventArgs e)
         {
-            if (validaCampos() && flagNovo)
+
+            if (!txtCnpj.Text.All(char.IsNumber) && txtCnpj.Text.Length > 13)
             {
-                fornecedor = new Fornecedores();
-                controle.salvarFornecedor(fornecedor);
-                fornecedor.nome = txtNome.Text;
-                fornecedor.contato = txtResponsavel.Text;
-                fornecedor.cnpj = txtCnpj.Text;
-                fornecedor.endereço = txtEndereço.Text;
-                fornecedor.numeral = txtNumero.Text;
-                fornecedor.bairro = txtBairro.Text;
-                fornecedor.telefone = txtTelefone.Text;
-                fornecedor.celular = txtCelular.Text;
-                fornecedor.id_Cidade = ddlCidade.SelectedIndex;
-                fornecedor.status = Convert.ToInt32(chkStatus.Checked);
-                controle.salvaAtualiza();
-                btnLimpar_Click(sender, e);
+                ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "message", "alert('O campo \"Cnpj\" deve conter somente números e ao menos 14 caracteres.');", true);
+            }            
+            else if (!txtTelefone.Text.All(char.IsNumber) || txtTelefone.Text.Length < 7)
+            {
+                ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "message", "alert('O campo \"Telefone\" deve conter somente números e no minimo 8 caracteres.');", true);
             }
-
-            else if (validaCampos() && !flagNovo)
+            else if (!txtCelular.Text.All(char.IsNumber) || txtTelefone.Text.Length < 8)
             {
-                fornecedor = controle.pesquisaFornecedorCpnj(txtCnpj.Text);
-                fornecedor.nome = txtNome.Text;
-                fornecedor.contato = txtResponsavel.Text;
-                fornecedor.cnpj = txtCnpj.Text;
-                fornecedor.endereço = txtEndereço.Text;
-                fornecedor.numeral = txtNumero.Text;
-                fornecedor.bairro = txtBairro.Text;
-                fornecedor.telefone = txtTelefone.Text;
-                fornecedor.celular = txtCelular.Text;
-                fornecedor.status = Convert.ToInt32(chkStatus.Checked);
-
-                cidade = controle.pesquisaCidade(ddlCidade.SelectedItem.Text);
-
-                fornecedor.id_Cidade = cidade.id;
-
-                controle.salvaAtualiza();
-                btnLimpar_Click(sender, e);
+                ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "message", "alert('O campo \"Celular\" deve conter somente números e no minimo 9 caracteres.');", true);
             }
 
             else
             {
-                lblAlertaPreenchimento.Visible = true;
-                lblAlertaPreenchimento.Text = "O preenchimento dos campos é obrigatório";
+                if (validaCampos() && flagNovo)
+                {
+                    fornecedor = new Fornecedores();
+                    controle.salvarFornecedor(fornecedor);
+                    fornecedor.nome = txtNome.Text.ToUpper().Trim();
+                    fornecedor.contato = txtResponsavel.Text.ToUpper().Trim();
+                    fornecedor.cnpj = txtCnpj.Text.Trim();
+                    fornecedor.endereço = txtEndereço.Text.ToUpper().Trim();
+                    fornecedor.numeral = txtNumero.Text.Trim();
+                    fornecedor.bairro = txtBairro.Text.ToUpper().Trim();
+                    fornecedor.telefone = txtTelefone.Text.Trim();
+                    fornecedor.celular = txtCelular.Text.Trim();
+                    fornecedor.id_Cidade = ddlCidade.SelectedIndex;
+                    fornecedor.status = Convert.ToInt32(chkStatus.Checked);
+                    controle.salvaAtualiza();
+                    btnLimpar_Click(sender, e);
+                }
+
+                else if (validaCampos() && !flagNovo)
+                {
+                    fornecedor = new Fornecedores();
+                    fornecedor = controle.pesquisaFornecedorById(id_fornecedor);
+                    fornecedor.nome = txtNome.Text.ToUpper().Trim();
+                    fornecedor.contato = txtResponsavel.Text.ToUpper().Trim();
+                    fornecedor.cnpj = txtCnpj.Text.Trim();
+                    fornecedor.endereço = txtEndereço.Text.ToUpper().Trim();
+                    fornecedor.numeral = txtNumero.Text.Trim();
+                    fornecedor.bairro = txtBairro.Text.ToUpper().Trim();
+                    fornecedor.telefone = txtTelefone.Text.Trim();
+                    fornecedor.celular = txtCelular.Text.Trim();
+                    fornecedor.status = Convert.ToInt32(chkStatus.Checked);
+
+                    cidade = controle.pesquisaCidade(ddlCidade.SelectedItem.Text);
+
+                    fornecedor.id_Cidade = cidade.id;
+
+                    controle.salvaAtualiza();
+                    btnLimpar_Click(sender, e);
+                }
+
+                else
+                {
+                    lblAlertaPreenchimento.Visible = true;
+                    lblAlertaPreenchimento.Text = "O preenchimento dos campos é obrigatório";
+                }
             }
         }
 
@@ -348,7 +369,8 @@ namespace WebLoja1._0.View
         protected void rblFornecedores_SelectedIndexChanged(object sender, EventArgs e)
         {
             fornecedor = new Fornecedores();
-            fornecedor = controle.pesquisaFornecedorById(rblFornecedores.SelectedIndex);
+            fornecedor = controle.pesquisaFornecedorById(Convert.ToInt32(rblFornecedores.SelectedValue));
+            id_fornecedor = fornecedor.id;
             txtNome.Text = fornecedor.nome;
             txtCnpj.Text = fornecedor.cnpj;
             txtEndereço.Text = fornecedor.endereço;

@@ -85,6 +85,24 @@ namespace WebLoja1._0.View {
         protected global::System.Web.UI.WebControls.TextBox txtCodigo;
         
         /// <summary>
+        /// Controle lblUnd.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblUnd;
+        
+        /// <summary>
+        /// Controle ddlMedida.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlMedida;
+        
+        /// <summary>
         /// Controle lblCusto.
         /// </summary>
         /// <remarks>
@@ -139,6 +157,24 @@ namespace WebLoja1._0.View {
         protected global::System.Web.UI.WebControls.TextBox txtPreco;
         
         /// <summary>
+        /// Controle lblFornecedor.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblFornecedor;
+        
+        /// <summary>
+        /// Controle ddlFornecedores.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlFornecedores;
+        
+        /// <summary>
         /// Controle lblQnt.
         /// </summary>
         /// <remarks>
@@ -155,24 +191,6 @@ namespace WebLoja1._0.View {
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtQnt;
-        
-        /// <summary>
-        /// Controle lblUnd.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblUnd;
-        
-        /// <summary>
-        /// Controle ddlMedida.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlMedida;
         
         /// <summary>
         /// Controle lblMinimo.
@@ -193,22 +211,76 @@ namespace WebLoja1._0.View {
         protected global::System.Web.UI.WebControls.TextBox txtMinimo;
         
         /// <summary>
-        /// Controle lblFornecedor.
+        /// Controle lblMaximo.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblFornecedor;
+        protected global::System.Web.UI.WebControls.Label lblMaximo;
         
         /// <summary>
-        /// Controle ddlFornecedores.
+        /// Controle txtMaximo.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlFornecedores;
+        protected global::System.Web.UI.WebControls.TextBox txtMaximo;
+        
+        /// <summary>
+        /// Controle lblNumLocal.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblNumLocal;
+        
+        /// <summary>
+        /// Controle txtNumLocal.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtNumLocal;
+        
+        /// <summary>
+        /// Controle lblLetraLocal.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblLetraLocal;
+        
+        /// <summary>
+        /// Controle txtLetraLocal.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtLetraLocal;
+        
+        /// <summary>
+        /// Controle lblRefLocal.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblRefLocal;
+        
+        /// <summary>
+        /// Controle txtRefLocal.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtRefLocal;
         
         /// <summary>
         /// Controle Upload.
@@ -310,6 +382,15 @@ namespace WebLoja1._0.View {
         protected global::System.Web.UI.WebControls.Button btnVoltar;
         
         /// <summary>
+        /// Controle Label1.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label1;
+        
+        /// <summary>
         /// Controle panelPesquisa.
         /// </summary>
         /// <remarks>
@@ -371,14 +452,5 @@ namespace WebLoja1._0.View {
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gvlProdutos;
-        
-        /// <summary>
-        /// Controle SqlDataSourceProd.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSourceProd;
     }
 }

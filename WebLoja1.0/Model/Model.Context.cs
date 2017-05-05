@@ -26,14 +26,16 @@ namespace WebLoja1._0.Model
         }
     
         public DbSet<Cidades> Cidades { get; set; }
-        public DbSet<Clientes> Clientes { get; set; }
         public DbSet<Estados> Estados { get; set; }
         public DbSet<Fornecedores> Fornecedores { get; set; }
         public DbSet<Perfis> Perfis { get; set; }
-        public DbSet<Produtos> Produtos { get; set; }
         public DbSet<Usuarios> Usuarios { get; set; }
         public DbSet<Vendas_Produtos> Vendas_Produtos { get; set; }
-        public DbSet<Pagamentos> Pagamentos { get; set; }
         public DbSet<Vendas> Vendas { get; set; }
+        public DbSet<Pagamentos> Pagamentos { get; set; }
+        public DbSet<Estoque> Estoque { get; set; }
+        public DbSet<Produtos> Produtos { get; set; }
+        public DbSet<Gerenciamento> Gerenciamento { get; set; }
+        public DbSet<Clientes> Clientes { get; set; }
     }
 }

@@ -30,6 +30,7 @@ namespace WebLoja1._0.Model
         public string numeral { get; set; }
         public string bairro { get; set; }
         public int id_Cidade { get; set; }
+        public Nullable<int> pessoa_fisica { get; set; }
         public int status { get; set; }
         public Nullable<double> creditos { get; set; }
     
