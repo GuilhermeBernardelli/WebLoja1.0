@@ -16,12 +16,15 @@ namespace WebLoja1._0.View
         List<Cidades> listaCidades = new List<Cidades>();
         Clientes cliente = new Clientes();
         Cidades cidade = new Cidades();
+
         Controle controle = new Controle();
         Usuarios user = new Usuarios();
         Valida teste = new Valida();
         static int id;
         static int perfil;
+
         static bool flagNovo = true;
+        static int id_cliente = 0;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -39,7 +42,7 @@ namespace WebLoja1._0.View
                 {
                     user = controle.pesquisaUserId(id);
                     //lblUser.Text = user.nome;
-                    if (!teste.ValidaUser(id, perfil))
+                    if (!teste.ValidaUser(id, perfil) || user.num_perfil == 3)
                     {
                         Response.Redirect("~/View/AcessoIndevido.aspx");
                     }
@@ -51,6 +54,21 @@ namespace WebLoja1._0.View
                 }
             }
 
+        }
+
+        public string removePontuacaoToNumber(string texto)
+        {
+            char[] saida;
+            saida = texto.ToCharArray();
+            texto = "";
+            for (int i = 0; i < saida.Length; i++)
+            {
+                if (saida[i].Equals("0123456789"))
+                {
+                    texto = texto + saida[i];
+                }
+            }            
+            return texto;
         }
 
         private void preencherRadioListEstado()
@@ -74,6 +92,8 @@ namespace WebLoja1._0.View
             txtEndereço.Enabled = true;
             txtNumero.Enabled = true;
             txtBairro.Enabled = true;
+            rdbFisica.Enabled = true;
+            rdbJuridica.Enabled = true;
             ddlEstado.Enabled = true;
             btnSalvar.Enabled = true;
             btnPesquisar.Enabled = false;
@@ -87,6 +107,8 @@ namespace WebLoja1._0.View
             chkStatus.Enabled = true;
             btnSalvar.Enabled = true;
             btnEditar.Enabled = false;
+            rdbFisica.Enabled = true;
+            rdbJuridica.Enabled = true;
             txtNome.Enabled = true;
             txtCpf.Enabled = true;
             txtCredito.Enabled = true;
@@ -106,53 +128,105 @@ namespace WebLoja1._0.View
 
         protected void btnSalvar_Click(object sender, EventArgs e)
         {
-            if (validaCampos() && flagNovo)
+            
+            if (!txtNome.Text.Any(char.IsLetter) || !txtNome.Text.Any(char.IsWhiteSpace))
             {
-                cliente = new Clientes();
-                controle.salvarCliente(cliente);
-                cliente.nome = txtNome.Text;
-                cliente.contato = txtResponsavel.Text;
-                cliente.cpf = txtCpf.Text;
-                cliente.rg = txtRg.Text;
-                cliente.creditos = Convert.ToUInt32(txtCredito.Text);
-                cliente.endereço = txtEndereço.Text;
-                cliente.numeral = txtNumero.Text;
-                cliente.bairro = txtBairro.Text;
-                cliente.telefone = txtTelefone.Text;
-                cliente.celular = txtCelular.Text;
-                cliente.id_Cidade = Convert.ToInt32(ddlCidade.SelectedValue);
-                cliente.status = Convert.ToInt32(chkStatus.Checked);
-                controle.salvaAtualiza();
-                btnLimpar_Click(sender, e);
+                ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "message", "alert('O campo \"Nome\" deve conter somente letras.');", true);
             }
-
-            else if (validaCampos() && !flagNovo)
+            else if (!txtRg.Text.All(char.IsNumber))
             {
-                cliente = controle.pesquisaClienteCpf(txtCpf.Text);
-                cliente.nome = txtNome.Text;
-                cliente.contato = txtResponsavel.Text;
-                cliente.cpf = txtCpf.Text;
-                cliente.rg = txtRg.Text;
-                cliente.creditos = Convert.ToUInt32(txtCredito.Text);
-                cliente.endereço = txtEndereço.Text;
-                cliente.numeral = txtNumero.Text;
-                cliente.bairro = txtBairro.Text;
-                cliente.telefone = txtTelefone.Text;
-                cliente.celular = txtCelular.Text;
-                cliente.status = Convert.ToInt32(chkStatus.Checked);
-
-                cidade = controle.pesquisaCidade(ddlCidade.SelectedItem.Text);
-
-                cliente.id_Cidade = cidade.id;
-
-                controle.salvaAtualiza();
-                btnLimpar_Click(sender, e);
+                ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "message", "alert('O campo \"RG\" deve conter somente números.');", true);
             }
-
+            else if (!txtCpf.Text.All(char.IsNumber) && txtCpf.Text.Length > 10)
+            {
+                ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "message", "alert('O campo \"Cpf\" deve conter somente números e ao menos 11 caracteres.');", true);
+            }
+            else if (!txtCredito.Text.Any(char.IsNumber) || !txtCredito.Text.Any(char.IsPunctuation))
+            {
+                ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "message", "alert('O campo \"Crédito\" deve conter valor financeiro.');", true);
+            }
+            else if (!txtTelefone.Text.All(char.IsNumber) || txtTelefone.Text.Length < 7)
+            {
+                ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "message", "alert('O campo \"Telefone\" deve conter somente números e no minimo 8 caracteres.');", true);
+            }
+            else if (!txtCelular.Text.All(char.IsNumber) || txtTelefone.Text.Length < 8)
+            {
+                ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "message", "alert('O campo \"Celular\" deve conter somente números e no minimo 9 caracteres.');", true);
+            }
+            
             else
             {
-                lblAlertaPreenchimento.Visible = true;
-                lblAlertaPreenchimento.Text = "O preenchimento dos campos é obrigatório";
+            
+                if (validaCampos() && flagNovo)
+                {
+                    cliente = new Clientes();
+                    controle.salvarCliente(cliente);
+                    cliente.nome = txtNome.Text.ToUpper().Trim();
+                    cliente.contato = txtResponsavel.Text.ToUpper().Trim();
+                    cliente.cpf = txtCpf.Text.Trim();
+                    cliente.rg = txtRg.Text.Trim();
+                    cliente.creditos = Convert.ToUInt32(txtCredito.Text.Trim());
+                    cliente.endereço = txtEndereço.Text.ToUpper().Trim();
+                    cliente.numeral = txtNumero.Text.Trim();
+                    cliente.bairro = txtBairro.Text.ToUpper().Trim();
+                    cliente.telefone = txtTelefone.Text.Trim();
+                    cliente.celular = txtCelular.Text.Trim();
+                    cliente.id_Cidade = Convert.ToInt32(ddlCidade.SelectedValue);
+                    cliente.status = Convert.ToInt32(chkStatus.Checked);
+
+                    if (rdbFisica.Checked)
+                    {
+                        cliente.pessoa_fisica = 1;
+                    }
+
+                    else
+                    {
+                        cliente.pessoa_fisica = 0;
+                    }
+
+                    controle.salvaAtualiza();
+                    btnLimpar_Click(sender, e);
+                }
+
+                else if (validaCampos() && !flagNovo)
+                {
+                    cliente = new Clientes();
+                    cliente = controle.pesquisaClienteById(id_cliente);
+                    cliente.nome = txtNome.Text.ToUpper().Trim();
+                    cliente.contato = txtResponsavel.Text.ToUpper().Trim();
+                    cliente.cpf = txtCpf.Text.Trim();
+                    cliente.rg = txtRg.Text.Trim();
+                    cliente.creditos = Convert.ToDouble(txtCredito.Text.Trim());
+                    cliente.endereço = txtEndereço.Text.ToUpper().Trim();
+                    cliente.numeral = txtNumero.Text.Trim();
+                    cliente.bairro = txtBairro.Text.ToUpper().Trim();
+                    cliente.telefone = txtTelefone.Text.Trim();
+                    cliente.celular = txtCelular.Text.Trim();
+                    cliente.status = Convert.ToInt32(chkStatus.Checked);
+
+                    cidade = controle.pesquisaCidade(ddlCidade.SelectedItem.Text);
+
+                    cliente.id_Cidade = cidade.id;
+
+                    if (rdbFisica.Checked)
+                    {
+                        cliente.pessoa_fisica = 1;
+                    }
+
+                    else
+                    {
+                        cliente.pessoa_fisica = 0;
+                    }
+
+                    controle.salvaAtualiza();
+                    btnLimpar_Click(sender, e);
+                }
+
+                else
+                {
+                    lblAlertaPreenchimento.Visible = true;
+                    lblAlertaPreenchimento.Text = "O preenchimento de todos os campos é obrigatório";
+                }
             }
         }
 
@@ -183,6 +257,7 @@ namespace WebLoja1._0.View
             txtTelefone.Text = "";
             txtCelular.Text = "";
             txtBairro.Text = "";
+            rdbFisica.Checked = true;
             chkStatus.Checked = false;
             ddlCidade.SelectedIndex = -1;
             ddlEstado.SelectedIndex = -1;
@@ -204,19 +279,35 @@ namespace WebLoja1._0.View
             if (!txtNome.Text.Equals(""))
             {
                 listaClientes = controle.pesquisaClientesCompleta(txtNome.Text);
-                carregaListaCliente(listaClientes);
+                if(listaClientes.Count == 0)
+                {
+                    lblAlerta.Visible = true;
+                    lblAlerta.Text = "Não existem registros com os paramêtros (CPF/CNPJ ou Nome) de pesquisa.";
+                }
+                else
+                {
+                    carregaListaCliente(listaClientes);
+                }
             }
 
             else if (!txtCpf.Text.Equals(""))
             {
                 listaClientes = controle.pesquisaClientesCompleta(txtCpf.Text);
-                carregaListaCliente(listaClientes);
+                if (listaClientes.Count == 0)
+                {
+                    lblAlerta.Visible = true;
+                    lblAlerta.Text = "Não existem registros com os paramêtros (CPF/CNPJ ou Nome) de pesquisa.";
+                }
+                else
+                {
+                    carregaListaCliente(listaClientes);
+                }
             }
 
             else
             {
                 lblAlerta.Visible = true;
-                lblAlerta.Text = "É necessário ao menos colocar um dos paramêtros (CNPJ ou Nome) para pesquisa.";
+                lblAlerta.Text = "É necessário ao menos colocar um dos paramêtros (CPF/CNPJ ou Nome) para pesquisa.";
             }
 
         }
@@ -343,6 +434,9 @@ namespace WebLoja1._0.View
             chkStatus.Enabled = false;
             btnSalvar.Enabled = false;
             btnVoltar.Enabled = true;
+            rdbFisica.Enabled = false;
+            rdbFisica.Checked = true;
+            rdbJuridica.Enabled = false;
             txtNome.Enabled = true;
             txtCpf.Enabled = true;
             txtRg.Enabled = false;
@@ -355,16 +449,32 @@ namespace WebLoja1._0.View
             txtBairro.Enabled = false;
             ddlCidade.Enabled = false;
             ddlEstado.Enabled = false;
+
+            rblClientes.Items.Clear();
         }
 
         protected void rblClientes_SelectedIndexChanged(object sender, EventArgs e)
         {
             cliente = new Clientes();
-            cliente = controle.pesquisaClienteById(rblClientes.SelectedIndex);
+            cliente = controle.pesquisaClienteById(Convert.ToInt32(rblClientes.SelectedValue));
+
+            if (cliente.pessoa_fisica == 1)
+            {
+                rdbFisica.Checked = true;
+                rdbJuridica.Checked = false;
+            }
+
+            else
+            {
+                rdbFisica.Checked = false;
+                rdbJuridica.Checked = true;
+            }
+
+            id_cliente = cliente.id;
             txtNome.Text = cliente.nome;
             txtCpf.Text = cliente.cpf;
             txtRg.Text = cliente.rg;
-            txtCredito.Text = cliente.creditos.ToString();
+            txtCredito.Text = Convert.ToDecimal(cliente.creditos).ToString("0.00");
             txtEndereço.Text = cliente.endereço;
             txtBairro.Text = cliente.bairro;
             txtCelular.Text = cliente.celular;
@@ -372,11 +482,11 @@ namespace WebLoja1._0.View
             txtResponsavel.Text = cliente.contato;
             txtTelefone.Text = cliente.telefone;
             ddlEstado.SelectedValue = cliente.Cidades.id_Estado.ToString();
-            ddlCidade.SelectedValue = cliente.id_Cidade.ToString();
+            //ddlCidade.SelectedValue = cliente.id_Cidade.ToString();
             chkStatus.Checked = Convert.ToBoolean(cliente.status);
             preencherRadioList(ddlEstado.SelectedIndex);
 
-            //ddlCidade.SelectedItem.Text = cliente.Cidades.cidade;
+            ddlCidade.SelectedItem.Text = cliente.Cidades.cidade;
 
             PanelPesquisa.Visible = false;
             btnPesquisar.Enabled = false;

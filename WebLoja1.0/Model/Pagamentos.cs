@@ -14,20 +14,18 @@ namespace WebLoja1._0.Model
     
     public partial class Pagamentos
     {
-        public Pagamentos()
-        {
-            this.Vendas = new HashSet<Vendas>();
-        }
-    
         public int id { get; set; }
         public string tipoPag { get; set; }
         public string formaPag { get; set; }
-        public int qntParcelas { get; set; }
-        public int numParcela { get; set; }
-        public decimal valorParcela { get; set; }
+        public Nullable<decimal> valorTotal { get; set; }
+        public Nullable<int> qntParcelas { get; set; }
+        public Nullable<System.DateTime> dataPagamento { get; set; }
+        public Nullable<int> numParcela { get; set; }
+        public Nullable<decimal> valorParcela { get; set; }
         public string numChequePrimeiro { get; set; }
         public string numChequeUltimo { get; set; }
+        public Nullable<int> id_venda { get; set; }
     
-        public virtual ICollection<Vendas> Vendas { get; set; }
+        public virtual Vendas Vendas { get; set; }
     }
 }

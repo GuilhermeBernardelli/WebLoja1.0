@@ -75,8 +75,16 @@ namespace WebLoja1._0.Model
         public List<Produtos> pesquisaProdutoByNomeId(string busca)
         {
             return (from produto in dataEntity.Produtos
-                    where (produto.desc_produto.Contains(busca))
+                    where (produto.desc_produto.Contains(busca)
+                    || produto.cod_produto == busca)
                     select produto).ToList();
+        }
+
+        public Gerenciamento pesquisaGerenciamento(int pesquisa)
+        {
+            return (from gerencia in dataEntity.Gerenciamento
+                    where gerencia.Id == pesquisa
+                    select gerencia).SingleOrDefault();
         }
 
         public List<Produtos> pesquisaProdutos()
@@ -135,8 +143,8 @@ namespace WebLoja1._0.Model
         {
             return (from cliente in dataEntity.Clientes
                     where (cliente.cpf.Equals(pesquisa)
-                    || cliente.nome.Contains(pesquisa))
-                    && cliente.status == 1
+                    || (cliente.nome.Contains(pesquisa)
+                    && cliente.status == 1))        
                     select cliente).ToList();
         }
 
@@ -150,9 +158,54 @@ namespace WebLoja1._0.Model
         public List<Produtos> pesquisaProdutosValidoByName(string pesquisa)
         {
             return (from produto in dataEntity.Produtos
-                    where produto.desc_produto.Contains(pesquisa)
-                    && produto.status == 1
+                    where (produto.desc_produto.Contains(pesquisa)
+                    && produto.status == 1)
+                    orderby produto.desc_produto
                     select produto).ToList();
+        }
+
+        public void salvarNovoPagamento(Pagamentos pagamento)
+        {
+            dataEntity.Pagamentos.Add(pagamento);
+        }
+
+        public void salvarNovoProdutoVendido(Vendas_Produtos prodVendido)
+        {
+            dataEntity.Vendas_Produtos.Add(prodVendido);
+        }
+
+        public Vendas pesquisaVendabyID(int valor)
+        {
+            return (from venda in dataEntity.Vendas
+                    where (venda.id == valor)
+                    select venda).SingleOrDefault();
+        }
+
+        public Estoque pesquisaEstoqueByProdID(int valor)
+        {
+            return (from estoque in dataEntity.Estoque
+                    where (estoque.id_produto == valor)
+                    select estoque).SingleOrDefault();
+        }
+
+        public void salvarNovoEstoque(Estoque estoque)
+        {
+            dataEntity.Estoque.Add(estoque);
+        }
+
+        public bool pesquisaIdPagamento(Pagamentos pagamento)
+        {
+            List<Pagamentos> pag = (from pagamentos in dataEntity.Pagamentos
+                                    where (pagamentos.id == (pagamento.id))
+                                    select pagamentos).ToList();
+            if(pag.Count > 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
 
         public void salvarNovaVenda(Vendas venda)
@@ -171,7 +224,8 @@ namespace WebLoja1._0.Model
         {
             return (from fornecedor in dataEntity.Fornecedores
                     where (fornecedor.cnpj.Equals(pesquisa)
-                    || fornecedor.nome.Contains(pesquisa))
+                    || (fornecedor.nome.Contains(pesquisa)
+                    && fornecedor.status == 1))
                     select fornecedor).ToList();
         }
 

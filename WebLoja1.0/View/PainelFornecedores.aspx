@@ -54,7 +54,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div align="center" class="auto-style6" width="60%" style="height: 656px">
     <div align="center" class="auto-style7" >
-    <asp:Panel ID="pnlPrincipal" runat="server" Height="661px" CssClass="auto-style5" style="overflow-x: scroll; overflow-y: scroll; margin-left: 0px;">
+    <asp:Panel ID="pnlPrincipal" runat="server" Height="661px" CssClass="auto-style5" width="750px" style="overflow-x: scroll; overflow-y: scroll; margin-left: 0px;">
         <br />
         <asp:Panel ID="PanelFornecedor" runat="server" Width="718px" Height="69%" CssClass="auto-style5">
             <asp:Label ID="lblMensagem" runat="server" Font-Bold="True" Font-Size="XX-Large"></asp:Label>

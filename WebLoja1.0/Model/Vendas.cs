@@ -17,24 +17,23 @@ namespace WebLoja1._0.Model
         public Vendas()
         {
             this.Vendas_Produtos = new HashSet<Vendas_Produtos>();
+            this.Pagamentos = new HashSet<Pagamentos>();
         }
     
         public int id { get; set; }
-        public Nullable<System.DateTime> data_Venda { get; set; }
-        public string cfp { get; set; }
+        public System.DateTime data_Venda { get; set; }
+        public string cpf { get; set; }
         public string cnpj { get; set; }
-        public Nullable<int> produtos_Id { get; set; }
-        public double valor_Venda { get; set; }
+        public Nullable<double> ICMS { get; set; }
+        public Nullable<double> valor_Venda { get; set; }
         public int id_Usuario { get; set; }
         public Nullable<int> id_Cliente { get; set; }
-        public int desconto { get; set; }
-        public int comissao { get; set; }
-        public int id_pagamento { get; set; }
-        public Nullable<double> ICMS { get; set; }
+        public Nullable<int> desconto { get; set; }
+        public Nullable<decimal> comissao { get; set; }
     
-        public virtual Clientes Clientes { get; set; }
-        public virtual Pagamentos Pagamentos { get; set; }
         public virtual Usuarios Usuarios { get; set; }
         public virtual ICollection<Vendas_Produtos> Vendas_Produtos { get; set; }
+        public virtual ICollection<Pagamentos> Pagamentos { get; set; }
+        public virtual Clientes Clientes { get; set; }
     }
 }

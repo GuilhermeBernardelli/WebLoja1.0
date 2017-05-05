@@ -46,10 +46,12 @@ namespace WebLoja1._0.View
                 {
                     btnUsuarios.Visible = false;
                     btnGestao.Visible = false;
+                    btnRelatorios.Visible = false;
 
                     if (perfil > 2)
                     {
                         btnContabilidade.Visible = false;
+                        btnFolhaPg.Visible = false;
 
                         if (perfil == 3)
                         {
@@ -100,6 +102,26 @@ namespace WebLoja1._0.View
         protected void btnGestao_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/View/PainelGestao.aspx");
+        }
+
+        protected void btnFolhaPg_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/View/PainelFolhaPag.aspx");
+        }
+
+        protected void btnRelatorios_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/View/PainelRelatorios.aspx");
+        }
+
+        protected void btnSair_Click(object sender, EventArgs e)
+        {
+            Session.RemoveAll();
+            Session.Clear();
+            Session.Abandon();
+            
+            ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "message", "alert('Logout Realizado com Sucesso !!!')", true);
+            Response.RedirectPermanent("~/View/index.aspx");
         }
     }
 }

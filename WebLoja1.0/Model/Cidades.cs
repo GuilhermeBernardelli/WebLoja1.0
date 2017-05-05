@@ -16,8 +16,8 @@ namespace WebLoja1._0.Model
     {
         public Cidades()
         {
-            this.Clientes = new HashSet<Clientes>();
             this.Fornecedores = new HashSet<Fornecedores>();
+            this.Clientes = new HashSet<Clientes>();
         }
     
         public int id { get; set; }
@@ -25,7 +25,7 @@ namespace WebLoja1._0.Model
         public string cidade { get; set; }
     
         public virtual Estados Estados { get; set; }
-        public virtual ICollection<Clientes> Clientes { get; set; }
         public virtual ICollection<Fornecedores> Fornecedores { get; set; }
+        public virtual ICollection<Clientes> Clientes { get; set; }
     }
 }
