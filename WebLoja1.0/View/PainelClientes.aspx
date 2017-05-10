@@ -56,7 +56,7 @@
     <div align="center" class="auto-style7">
     <asp:Panel ID="pnlPrincipal" runat="server" Height="668px" width="750px" CssClass="auto-style5" style="overflow-x: scroll; overflow-y: scroll; margin-left: 0px;">
         <br />
-        <asp:Panel ID="PanelCliente" runat="server" Width="718px" Height="63%" CssClass="auto-style5">
+        <asp:Panel ID="PanelCliente" runat="server" Width="718px" Height="66%" CssClass="auto-style5">
             <asp:Label ID="lblMensagem" runat="server" Font-Bold="True" Font-Size="XX-Large"></asp:Label>
             <br />
             <br />
@@ -79,18 +79,24 @@
             <asp:TextBox ID="txtResponsavel" runat="server" Width="274px" Enabled="False"></asp:TextBox>
             &nbsp;
             <asp:Label ID="lblCredito" runat="server" Text="Créditos (R$) : "></asp:Label>
-            <asp:TextBox ID="txtCredito" runat="server" Enabled="False" Width="114px"></asp:TextBox>
+            <asp:TextBox ID="txtCredito" runat="server" Enabled="False" Width="114px" AutoPostBack="True" OnTextChanged="txtCredito_TextChanged"></asp:TextBox>
+            <br />
+            <asp:RadioButton ID="rdbDinheiro" runat="server" AutoPostBack="True" Checked="True" Enabled="False" Font-Size="Small" GroupName="groupCred" style="float:right; margin-right:68px;" Text="R$" Width="60px" Visible="False" />
+            <asp:RadioButton ID="rdbTef" runat="server" AutoPostBack="True" Enabled="False" Font-Size="Small" GroupName="groupCred" style="float:right;" Text="TEF" Width="60px" Visible="False" />
             <br />
             <br />
             <asp:Label ID="lblTelefone" runat="server" Text="Telefone : "></asp:Label>
-            <asp:TextBox ID="txtTelefone" runat="server" Enabled="False" Width="228px"></asp:TextBox>
+            <asp:TextBox ID="txtTelefone" runat="server" Enabled="False" Width="125px"></asp:TextBox>
             &nbsp;
             <asp:Label ID="lblCelular" runat="server" Text="Celular : "></asp:Label>
-            <asp:TextBox ID="txtCelular" runat="server" Width="228px" Enabled="False"></asp:TextBox>
+            <asp:TextBox ID="txtCelular" runat="server" Width="125px" Enabled="False"></asp:TextBox>
+            &nbsp;
+            <asp:Label ID="lblRecado" runat="server" Text="Recado    : "></asp:Label>
+            <asp:TextBox ID="txtRecado" runat="server" Enabled="False" Width="125px"></asp:TextBox>
             <br />
             <br />
             <asp:Label ID="lblEndereco" runat="server" Text="Endereço : "></asp:Label>
-            <asp:TextBox ID="txtEndereço" runat="server" Width="535px" Enabled="False"></asp:TextBox>
+            <asp:TextBox ID="txtEndereço" runat="server" Enabled="False" Width="535px"></asp:TextBox>
             &nbsp;<br /> <br />
             &nbsp;<asp:Label ID="lblNumero" runat="server" Text="Nº : "></asp:Label>
             <asp:TextBox ID="txtNumero" runat="server" Width="86px" Enabled="False"></asp:TextBox>

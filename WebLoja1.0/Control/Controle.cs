@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.UI.WebControls;
 using WebLoja1._0.Model;
 
 namespace WebLoja1._0.Control
@@ -67,6 +68,16 @@ namespace WebLoja1._0.Control
             return dbRepository.pesquisaProdutoByCodigo(codigo);
         }
 
+        public List<Estoque> pesquisaEstoqueRelatorio()
+        {
+            return dbRepository.pesquisaEstoqueOrdened();
+        }
+
+        public List<Tipos_Movimentacao> pesquisaTiposMovimento()
+        {
+            return dbRepository.pesquisaTiposMov();
+        }
+
         public void salvarProduto(Produtos produto)
         {
             dbRepository.salvarNovoProduto(produto);
@@ -89,6 +100,13 @@ namespace WebLoja1._0.Control
         public List<Produtos> pesquisaGeralProd()
         {
             return dbRepository.pesquisaProdutos();
+        }
+
+        public List<Tipos_Movimentacao> pesquisaTiposMovimento(string pesquisa)
+        {
+            string busca = pesquisa;
+
+            return dbRepository.pesquisaTiposMovimentoByDesc(busca);
         }
 
         public Gerenciamento pesquisaGerenciamento(int id)
@@ -119,6 +137,13 @@ namespace WebLoja1._0.Control
             return dbRepository.pesquisaCidadesByEstado(pesquisa);
         }
 
+        public List<Tipos_Movimentacao> pesquisaSubTipoMov(string valor)
+        {
+            string busca = valor;
+
+            return dbRepository.pesquisaSubTiposMovimentoByDesc(busca);
+        }
+
         public void salvarCidade(Cidades cidade)
         {
             dbRepository.salvarNovaCidade(cidade);
@@ -134,6 +159,14 @@ namespace WebLoja1._0.Control
             int valor = Id;
 
             return dbRepository.pesquisaFornecedoresID(valor);
+        }
+
+        public List<Movimentos> pesquisaMovPeriodo(DateTime txtDtInicio, DateTime txtDtFim)
+        {
+            DateTime dtInicio = txtDtInicio;
+            DateTime dtFim = txtDtFim;
+
+            return dbRepository.pesquisaMovimentoIntervalo(dtInicio, dtFim);
         }
 
         public Fornecedores pesquisaFornecedorCpnj(string pesquisa)
@@ -167,6 +200,15 @@ namespace WebLoja1._0.Control
             int id = selectedIndex;
 
             return dbRepository.pesquisaClienteId(id);
+        }
+
+        public int pesquisaCompletaIDTipoMov(string descricao, string subTipo, string formaPg)
+        {
+            string desc = descricao;
+            string tipo = subTipo;
+            string form = formaPg;
+
+            return dbRepository.pesquisaMovimentoID(desc, tipo, form);
         }
 
         public List<Clientes> pesquisaClientesCompleta(string busca)
@@ -220,6 +262,31 @@ namespace WebLoja1._0.Control
             int valor = id;
 
             return dbRepository.pesquisaEstoqueByProdID(valor);
+        }
+
+        public void salvarMovimento(Movimentos movimento)
+        {
+            dbRepository.salvarNovoMovimento(movimento);
+        }
+
+        public Tipos_Movimentacao pesquisaTiposMovimentoId(int? id_tipo)
+        {
+            return dbRepository.pesquisaTipoMovById(id_tipo);
+        }
+
+        public List<Vendas> pesquisaVendasGeral()
+        {
+            return dbRepository.pesquisaVendas();
+        }
+
+        public List<Pagamentos> pesquisaPagamentosGeral()
+        {
+            return dbRepository.pesquisaPagamentosTotais();
+        }
+
+        public List<Movimentos> pesquisaMovimentosGeral()
+        {
+            return dbRepository.pesquisaMovimentosTotais();
         }
     }
 }

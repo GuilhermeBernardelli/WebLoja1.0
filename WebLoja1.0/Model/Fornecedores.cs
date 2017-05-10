@@ -30,6 +30,7 @@ namespace WebLoja1._0.Model
         public int id_Cidade { get; set; }
         public string contato { get; set; }
         public int status { get; set; }
+        public string recado { get; set; }
     
         public virtual Cidades Cidades { get; set; }
         public virtual ICollection<Produtos> Produtos { get; set; }

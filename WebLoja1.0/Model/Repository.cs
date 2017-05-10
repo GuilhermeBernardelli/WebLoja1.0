@@ -65,11 +65,79 @@ namespace WebLoja1._0.Model
                     select produtos).SingleOrDefault();
         }
 
+        public List<Estoque> pesquisaEstoqueOrdened()
+        {
+            return (from estoque in dataEntity.Estoque
+                    where estoque.Produtos.status == 1
+                    orderby estoque.qnt_atual
+                    select estoque).ToList();
+        }
+
+        public List<Tipos_Movimentacao> pesquisaTiposMov()
+        {
+            List<Tipos_Movimentacao> lista = (from tipoMov in dataEntity.Tipos_Movimentacao
+                                              where tipoMov.mostrar == true
+                                              orderby tipoMov.descricao
+                                              select tipoMov).ToList();
+
+            List<Tipos_Movimentacao> listaAux = new List<Tipos_Movimentacao>();
+            
+            for (int i = 0; i < lista.Count; i++)
+            {
+                if(i == 0)
+                {
+                    listaAux.Add(lista[i]);
+                }
+                else if (!lista[i].descricao.Equals(lista[i - 1].descricao))
+                {
+                    listaAux.Add(lista[i]);
+                }
+               
+            }
+
+            return listaAux;
+        }
+
+        public List<Tipos_Movimentacao> pesquisaTiposMovimentoByDesc(string busca)
+        {
+
+            List<Tipos_Movimentacao> lista = (from tipos in dataEntity.Tipos_Movimentacao
+                                              where tipos.descricao.Equals(busca)
+                                              && tipos.mostrar == true
+                                              orderby tipos.sub_tipo
+                                              select tipos).ToList();
+
+            List<Tipos_Movimentacao> listaAux = new List<Tipos_Movimentacao>();
+
+            for (int i = 0; i < lista.Count; i++)
+            {
+                if (i == 0)
+                {
+                    listaAux.Add(lista[i]);
+                }
+                else if (!lista[i].sub_tipo.Equals(lista[i - 1].sub_tipo))
+                {
+                    listaAux.Add(lista[i]);
+                }
+
+            }
+
+            return listaAux;
+        }
+
         public Produtos pesquisaProdutoById(int pesquisa)
         {
             return (from produto in dataEntity.Produtos
                     where (produto.id == pesquisa)
                     select produto).SingleOrDefault();
+        }
+
+        public List<Tipos_Movimentacao> pesquisaSubTiposMovimentoByDesc(string busca)
+        {
+            return (from tipos in dataEntity.Tipos_Movimentacao
+                    where tipos.sub_tipo.Equals(busca)
+                    orderby tipos.forma_pag
+                    select tipos).ToList();
         }
 
         public List<Produtos> pesquisaProdutoByNomeId(string busca)
@@ -101,6 +169,14 @@ namespace WebLoja1._0.Model
                     select estados).ToList();
         }
 
+        public List<Movimentos> pesquisaMovimentoIntervalo(DateTime dtInicio, DateTime dtFim)
+        {
+            return (from movimento in dataEntity.Movimentos
+                    where movimento.data >= dtInicio
+                    && movimento.data <= dtFim
+                    select movimento).ToList();
+        }
+
         public List<Cidades> pesquisaCidadesByEstado(int pesquisa)
         {
             return (from cidade in dataEntity.Cidades
@@ -108,6 +184,26 @@ namespace WebLoja1._0.Model
                     || cidade.id_Estado == 0)
                     orderby cidade.cidade
                     select cidade).ToList();
+        }
+
+        public int pesquisaMovimentoID(string desc, string tipo, string form)
+        {
+            if (form != null)
+            {
+                return (from movimento in dataEntity.Tipos_Movimentacao
+                        where (movimento.descricao.Equals(desc)
+                        && movimento.sub_tipo.Equals(tipo)
+                        && movimento.forma_pag.Equals(form))
+                        select movimento.id).SingleOrDefault();
+            }
+            else
+            {
+                return (from movimento in dataEntity.Tipos_Movimentacao
+                        where (movimento.descricao.Equals(desc)
+                        && movimento.sub_tipo.Equals(tipo))
+                        select movimento.id).SingleOrDefault();
+            }
+            
         }
 
         public Cidades pesquisaCidadeByName(string pesquisa)
@@ -127,11 +223,39 @@ namespace WebLoja1._0.Model
             dataEntity.Cidades.Remove(cidade);
         }
 
+        public List<Vendas> pesquisaVendas()
+        {
+            return (from venda in dataEntity.Vendas               
+                    select venda).ToList();
+        }
+
+        public List<Pagamentos> pesquisaPagamentosTotais()
+        {
+            return (from pagamento in dataEntity.Pagamentos
+                    where pagamento.tipoPag != null
+                    orderby pagamento.dataPagamento
+                    select pagamento).ToList();
+        }
+
+        public List<Movimentos> pesquisaMovimentosTotais()
+        {
+            return (from movimento in dataEntity.Movimentos
+                    orderby movimento.id_tipo
+                    select movimento).ToList();
+        }
+
         public Clientes pesquisaClienteId(int id)
         {
             return (from cliente in dataEntity.Clientes
                     where (cliente.id == (id))
                     select cliente).SingleOrDefault();
+        }
+
+        public Tipos_Movimentacao pesquisaTipoMovById(int? id_tipo)
+        {
+            return (from tipos in dataEntity.Tipos_Movimentacao
+                    where tipos.id == (id_tipo)
+                    select tipos).SingleOrDefault();
         }
 
         public void salvarNovoCliente(Clientes cliente)
@@ -167,6 +291,11 @@ namespace WebLoja1._0.Model
         public void salvarNovoPagamento(Pagamentos pagamento)
         {
             dataEntity.Pagamentos.Add(pagamento);
+        }
+
+        public void salvarNovoMovimento(Movimentos movimento)
+        {
+            dataEntity.Movimentos.Add(movimento);
         }
 
         public void salvarNovoProdutoVendido(Vendas_Produtos prodVendido)

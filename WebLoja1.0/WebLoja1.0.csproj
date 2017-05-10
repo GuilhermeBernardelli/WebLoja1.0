@@ -168,6 +168,9 @@
     <Compile Include="Model\Clientes.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\Contabilidade.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\Estados.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -195,6 +198,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Model\Movimentos.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\Pagamentos.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -205,6 +211,9 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Repository.cs" />
+    <Compile Include="Model\Tipos_Movimentacao.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\Usuarios.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>

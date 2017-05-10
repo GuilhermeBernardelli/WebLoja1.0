@@ -121,11 +121,11 @@
         <asp:Panel ID="pnlAdjacente" runat="server" Height="95px" Width="1200px">
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <asp:Label ID="lblCodigo" runat="server" Font-Bold="True" Text="Código Produto : "></asp:Label>
-            <asp:TextBox ID="txtCodigo" runat="server" Width="427px" CssClass="auto-style6" Height="23px" BackColor="#FFFF99" Font-Size="Large" AutoPostBack="True" OnTextChanged="txtCodigo_TextChanged"></asp:TextBox>
+            <asp:TextBox ID="txtCodigo" runat="server" Width="427px" CssClass="auto-style6" Height="23px" BackColor="#FFFF99" Font-Size="Large" OnTextChanged="txtCodigo_TextChanged" MaxLength="13"></asp:TextBox>
             <%-- &nbsp;<asp:Label ID="lblButton" runat="server" BackColor="Silver" BorderColor="Silver" BorderStyle="Outset" Font-Bold="True" Height="18px" Text="OK" Width="25px"></asp:Label>--%>
             
             &nbsp;&nbsp;<asp:Label ID="lblQuantidade" runat="server" Font-Bold="True" Text="Quantidade :"></asp:Label>
-            &nbsp;<asp:TextBox ID="txtQuantidade" runat="server" Height="25px" Width="66px" BackColor="#FFFF99" Font-Size="Large" AutoPostBack="True" OnTextChanged="txtPesquisaProd_TextChanged"></asp:TextBox>
+            &nbsp;<asp:TextBox ID="txtQuantidade" runat="server" Height="25px" Width="66px" BackColor="#FFFF99" Font-Size="Large" OnTextChanged="txtQuantidade_TextChanged"></asp:TextBox>
             &nbsp;<asp:Button ID="btnCodigo" runat="server" BackColor="Silver" BorderStyle="Outset" Font-Bold="True" Height="25px" OnClick="btnCodigo_Click" Text="OK" Width="35px" TabIndex="100" ViewStateMode="Enabled" ValidateRequestMode="Enabled" />
             
             <br />

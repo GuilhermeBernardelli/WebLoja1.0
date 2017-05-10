@@ -41,16 +41,14 @@
         &nbsp;
         <asp:Button ID="btnFornecedores" runat="server" class="button" OnClick="btnFornecedores_Click" Text="Fornecedor" Height="27px"/>
         <br />
-        <asp:Button ID="btnContabilidade" runat="server" class="button" OnClick="btnContabilidade_Click" Text="Contabil." style="margin-top:8px;" Height="27px"/>
+        <asp:Button ID="btnContabilidade" runat="server" class="button" OnClick="btnContabilidade_Click" Text="Contábil" style="margin-top:8px;" Height="27px"/>
         &nbsp;&nbsp;<asp:Button ID="btnFolhaPg" runat="server" class="button" Height="27px" OnClick="btnFolhaPg_Click" style="margin-top:8px;" Text="Folha Pag." />
         &nbsp;&nbsp;<asp:Button ID="btnUsuarios" runat="server" class="button" Height="27px" OnClick="btnUsuario_Click" style="margin-top:8px;" Text="Usuários" />
 &nbsp;&nbsp;<asp:Button ID="btnGestao" runat="server" class="button" Height="27px" OnClick="btnGestao_Click" style="margin-top:8px;" Text="Gestão Sist." />
         <br />
         <asp:Button ID="btnRelatorios" runat="server" class="button" Height="27px" style="margin-top:8px;" Text="Relatórios" OnClick="btnRelatorios_Click" />
-        &nbsp;&nbsp;<asp:Button ID="btn3" runat="server" class="button" Height="27px" style="margin-top:8px;" Text="Reserva" Visible="False" />
-&nbsp;
+        <asp:Button ID="btn3" runat="server" class="button" Height="27px" style="margin-top:8px;" Text="Reserva" Visible="False" />
         <asp:Button ID="btn4" runat="server" class="button" Height="27px" style="margin-top:8px;" Text="Reserva" Visible="False" />
-        &nbsp;
         <asp:Button ID="btn5" runat="server" class="button" Height="27px" style="margin-top:8px;" Text="Reserva" Visible="False" />
         </asp:Panel>
         </div>

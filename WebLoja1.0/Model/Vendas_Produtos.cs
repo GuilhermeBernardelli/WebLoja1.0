@@ -20,7 +20,7 @@ namespace WebLoja1._0.Model
         public Nullable<int> id_produto { get; set; }
         public int quantidade { get; set; }
     
-        public virtual Vendas Vendas { get; set; }
         public virtual Produtos Produtos { get; set; }
+        public virtual Vendas Vendas { get; set; }
     }
 }

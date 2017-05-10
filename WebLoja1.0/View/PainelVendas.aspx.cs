@@ -29,6 +29,7 @@ namespace WebLoja1._0.View
         static Pagamentos pagamento = new Pagamentos();
         static Vendas_Produtos prodVendido = new Vendas_Produtos();
         static Gerenciamento gerencia = new Gerenciamento();
+        static Movimentos movimento = new Movimentos();
 
         //variaveis internas
         static List<int> QntProd = new List<int>();
@@ -36,7 +37,11 @@ namespace WebLoja1._0.View
         static bool notaPaulista = false;
         static string nfpCpf = null;
         static string nfpCnpj = null;
-        static double icmsTotal;
+        static double icmsTotal = 0;
+        static double valorVenda = 0;
+        static double valorComissao = 0;
+        static int mov_id;
+        static int id_venda;
         static Color corPadrao;
         bool existe = false;
         int qntTemp = 0;
@@ -44,234 +49,261 @@ namespace WebLoja1._0.View
         static bool pessoaFisica = true;
         static double valorDevido = 0.00;
         static bool entrada = false;
+
         //desconto manual
         static double descManual = 0;
-
 
         //variaveis associadas as regras de negócio, deverão ser editaveis por meio de base de dados gerencial        
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            pnlPrincipal.DefaultButton = btnCodigo.ID;
-            txtCodigo.Focus();
-
-            if (!IsPostBack)
+            try
             {
-                corPadrao = pnlPrincipal.BackColor;
-                txtDesconto.Text = "0";
+                pnlPrincipal.DefaultButton = btnCodigo.ID;
+                txtQuantidade.Focus();
 
-                situacaoInicial();
-                Response.Clear();
-
-                produto = new Produtos();
-                ListaProd = new List<Produtos>();
-                gerencia = controle.pesquisaGerenciamento(1);
-
-                //atribuição de texto as label's de titulo dos paineis
-                lblPanelDescontos.Text = "Atribuir Desconto ao Total";
-                lblMensagem.Text = "  Sistema de vendas - Alemão da Construção";
-
-                //validação de acesso
-                id = Convert.ToInt32(Session["id"]);
-                perfil = Convert.ToInt32(Session["perfil"]);
-
-                if (id != 0 || perfil != 0)
+                if (!IsPostBack)
                 {
-                    user = controle.pesquisaUserId(id);
-                    lblUser.Text = user.nome;
-                    if (!teste.ValidaUser(id, perfil) || user.num_perfil == 4)
+                    corPadrao = pnlPrincipal.BackColor;
+                    txtDesconto.Text = "0";
+
+                    situacaoInicial();
+                    Response.Clear();
+
+                    produto = new Produtos();
+                    ListaProd = new List<Produtos>();
+                    gerencia = controle.pesquisaGerenciamento(1);
+
+                    //atribuição de texto as label's de titulo dos paineis
+                    lblPanelDescontos.Text = "Atribuir Desconto ao Total";
+                    lblMensagem.Text = "  Sistema de vendas - Alemão da Construção";
+
+                    //validação de acesso
+                    id = Convert.ToInt32(Session["id"]);
+                    perfil = Convert.ToInt32(Session["perfil"]);
+
+                    if (id != 0 || perfil != 0)
+                    {
+                        user = controle.pesquisaUserId(id);
+                        lblUser.Text = user.nome;
+                        if (!teste.ValidaUser(id, perfil) || user.num_perfil == 4)
+                        {
+                            Response.Redirect("~/View/AcessoIndevido.aspx");
+                        }
+
+                    }
+
+                    else
                     {
                         Response.Redirect("~/View/AcessoIndevido.aspx");
                     }
-                    
                 }
-
-                else
-                {
-                    Response.Redirect("~/View/AcessoIndevido.aspx");
-                }
+            }
+            catch
+            {
+                ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "message", "alert('Falha na função inicial, por favor, tente novamente.');", true);
             }
         }
 
         protected void btnCodigo_Click(object sender, EventArgs e)
         {
-            //Verifica se o campo com o código do produto foi digitado
-            if (txtCodigo.Text.Equals(""))
+            try
             {
-
-            }
-            //em caso positivo armazena o produto referente ao código ou nulo
-            else
-            {               
-                produto = controle.pesquisaProdutoCod(txtCodigo.Text);
-            }
-
-            //Verifica se existe um produto valido referente ao código
-            if (produto == null)
-            {
-                //em caso negativo limpa os campos e informa o usuário
-                ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "alerta", "alert('O código inserido não corresponde a nenhum produto cadastrado, tente novamente, ou solicite o cadastro deste produto');", true);
-                txtCodigo.Text = "";
-                txtQuantidade.Text = "";
-            }
-            else
-            {
-                btnCorrigir.Enabled = true;
-                btnVender.Enabled = true;
-
-                //validação de inserção repetida de produto
-                existe = false;
-                //validação de quantidade
-                qntTemp = 0;
-                esgotado = false;
-
-                if (txtQuantidade.Text.Equals(""))
+                //Verifica se o campo com o código do produto foi digitado
+                if (txtCodigo.Text.Equals(""))
                 {
-                    qntTemp = 1;                    
-                }
-                else
-                {
-                    qntTemp = Convert.ToInt32(txtQuantidade.Text);
-                }
-
-                if (produto.Estoque.qnt_atual < qntTemp)
-                {
-                    txtQuantidade.Text = "";
-                    txtCodigo.Text = "";
                     txtCodigo.Focus();
-                    ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "alerta", "alert('Desculpe, no momento possuímos " + produto.Estoque.qnt_atual + " unidade(s) de " + produto.desc_produto + ".');", true);                    
+                    pnlPrincipal.DefaultButton = btnCodigo.ID;
                 }
+                //em caso positivo armazena o produto referente ao código ou nulo
                 else
                 {
-                    for (int i = 0; i < ListaProd.Count; i++)
+                    produto = controle.pesquisaProdutoCod(txtCodigo.Text);
+                }
+
+                //Verifica se existe um produto valido referente ao código
+                if (produto == null)
+                {
+                    //em caso negativo limpa os campos e informa o usuário
+                    ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "alerta", "alert('O código inserido não corresponde a nenhum produto cadastrado, tente novamente, ou solicite o cadastro deste produto');", true);
+                    txtCodigo.Text = "";
+                }
+                else if (!txtCodigo.Text.Equals(""))
+                {
+                    btnCorrigir.Enabled = true;
+                    btnVender.Enabled = true;
+
+                    //validação de inserção repetida de produto
+                    existe = false;
+                    //validação de quantidade
+                    qntTemp = 0;
+                    esgotado = false;
+
+                    if (txtQuantidade.Text.Equals(""))
                     {
-                        if (ListaProd[i].id == produto.id)
-                        {
-                            if (produto.Estoque.qnt_atual < QntProd[i] + qntTemp)
-                            {
-                                esgotado = true;
-                                qntTemp = QntProd[i];
-                            }
-                            else
-                            {
-                                if (txtQuantidade.Text.Equals(""))
-                                {
-                                    QntProd[i] = QntProd[i] + 1;
-                                    qntTemp = 1;                                    
-                                }
-                                else
-                                {
-                                    QntProd[i] = QntProd[i] + Convert.ToInt32(txtQuantidade.Text);
-                                    qntTemp = Convert.ToInt32(txtQuantidade.Text);                                    
-                                }
-                                existe = true;
-                            }
-                        }
-                    }
-                    if (esgotado)
-                    {
-                        esgotado = false;
-                        txtCodigo.Text = "";
-                        txtQuantidade.Text = "";
-                        pnlPrincipal.DefaultButton = btnCodigo.ID;
-                        ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "alerta", "alert('Desculpe, no momento possuímos " + (produto.Estoque.qnt_atual - qntTemp) + " unidade(s) de " + produto.desc_produto + ".');", true);
+                        qntTemp = 1;
                     }
                     else
                     {
-                        if (!existe)
+                        qntTemp = Convert.ToInt32(txtQuantidade.Text);
+                    }
+
+                    if (produto.Estoque.qnt_atual < qntTemp)
+                    {
+                        txtQuantidade.Text = "";
+                        txtCodigo.Text = "";
+                        txtCodigo.Focus();
+                        ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "alerta", "alert('Desculpe, no momento possuímos " + produto.Estoque.qnt_atual + " unidade(s) de " + produto.desc_produto + ".');", true);
+                    }
+                    else
+                    {
+                        for (int i = 0; i < ListaProd.Count; i++)
                         {
-                            ListaProd.Add(produto);
-                            QntProd.Add(qntTemp);                            
+                            if (ListaProd[i].id == produto.id)
+                            {
+                                if (produto.Estoque.qnt_atual < QntProd[i] + qntTemp)
+                                {
+                                    esgotado = true;
+                                    qntTemp = QntProd[i];
+                                }
+                                else
+                                {
+                                    if (txtQuantidade.Text.Equals(""))
+                                    {
+                                        QntProd[i] = QntProd[i] + 1;
+                                        qntTemp = 1;
+                                    }
+                                    else
+                                    {
+                                        QntProd[i] = QntProd[i] + Convert.ToInt32(txtQuantidade.Text);
+                                        qntTemp = Convert.ToInt32(txtQuantidade.Text);
+                                    }
+                                    existe = true;
+                                }
+                            }
                         }
-
-                        txtSubTotal.Text = (Convert.ToDecimal(txtSubTotal.Text) + qntTemp * Convert.ToDecimal(produto.preco_venda)).ToString("0.00");
-
-                        if (descManual > 0)
+                        if (esgotado)
                         {
-                            txtTotalVista.Text = (Convert.ToDecimal(Convert.ToDouble(txtSubTotal.Text) - (Convert.ToDouble(txtSubTotal.Text) * descManual))).ToString("0.00");
+                            esgotado = false;
+                            txtCodigo.Text = "";
+                            txtQuantidade.Text = "";
+                            pnlPrincipal.DefaultButton = btnCodigo.ID;
+                            ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "alerta", "alert('Desculpe, no momento possuímos " + (produto.Estoque.qnt_atual - qntTemp) + " unidade(s) de " + produto.desc_produto + ".');", true);
                         }
                         else
                         {
-                            if (Convert.ToDecimal(txtSubTotal.Text) > gerencia.autoDescValor)
+                            if (!existe)
                             {
-                                txtTotalVista.Text = (Convert.ToDecimal(Convert.ToDouble(txtSubTotal.Text) - (Convert.ToDouble(txtSubTotal.Text) * gerencia.autoDescPerc))).ToString("0.00");
+                                ListaProd.Add(produto);
+                                QntProd.Add(qntTemp);
+                            }
+
+                            txtSubTotal.Text = (Convert.ToDecimal(txtSubTotal.Text) + qntTemp * Convert.ToDecimal(produto.preco_venda)).ToString("0.00");
+
+                            if (descManual > 0)
+                            {
+                                txtTotalVista.Text = (Convert.ToDecimal(Convert.ToDouble(txtSubTotal.Text) - (Convert.ToDouble(txtSubTotal.Text) * descManual))).ToString("0.00");
                             }
                             else
                             {
-                                txtTotalVista.Text = txtSubTotal.Text;
+                                if (Convert.ToDecimal(txtSubTotal.Text) > gerencia.autoDescValor)
+                                {
+                                    txtTotalVista.Text = (Convert.ToDecimal(Convert.ToDouble(txtSubTotal.Text) - (Convert.ToDouble(txtSubTotal.Text) * gerencia.autoDescPerc))).ToString("0.00");
+                                }
+                                else
+                                {
+                                    txtTotalVista.Text = txtSubTotal.Text;
+                                }
                             }
+                            preencheDataListVendas(ListaProd);
+                            AdicionaCheckListVendas(ListaProd);
+                            txtCodigo.Text = "";
+                            txtQuantidade.Text = "";
                         }
-                        preencheDataListVendas(ListaProd);
-                        AdicionaCheckListVendas(ListaProd);
-                        txtCodigo.Text = "";
-                        txtQuantidade.Text = "";
                     }
                 }
+            }
+            catch
+            {
+                ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "message", "alert('Falha ao registrar a compra, por favor, tente novamente.');", true);
             }
         }
 
         private void preencheDataListVendas(List<Produtos> ListaProd)
         {
-            icmsTotal = 0;
-            dlProdVenda.DataSource = ListaProd;
-            dlProdVenda.DataTextField = "desc_produto";
-            dlProdVenda.DataValueField = "id";
-            dlProdVenda.DataBind();
-            dlProdValor.DataSource = ListaProd;
-            dlProdValor.DataTextField = "preco_venda";
-            dlProdValor.DataValueField = "id";
-            dlProdValor.DataBind();
-            dlProdQnt.DataSource = QntProd;
-            dlProdQnt.DataBind();
-            for (int i = 0; i < ListaProd.Count; i++)
+            try
             {
-                icmsTotal = icmsTotal + Convert.ToDouble(-ListaProd[i].ICMS_pago * QntProd[i]);
-                string texto = "";
-                if (i < 9)
+                icmsTotal = 0;
+                dlProdVenda.DataSource = ListaProd;
+                dlProdVenda.DataTextField = "desc_produto";
+                dlProdVenda.DataValueField = "id";
+                dlProdVenda.DataBind();
+                dlProdValor.DataSource = ListaProd;
+                dlProdValor.DataTextField = "preco_venda";
+                dlProdValor.DataValueField = "id";
+                dlProdValor.DataBind();
+                dlProdQnt.DataSource = QntProd;
+                dlProdQnt.DataBind();
+                for (int i = 0; i < ListaProd.Count; i++)
                 {
-                    texto = "0" + (i + 1).ToString() + " - " + ListaProd[i].desc_produto;                                        
-                }
+                    icmsTotal = icmsTotal + Convert.ToDouble(-ListaProd[i].ICMS_pago * QntProd[i]);
+                    string texto = "";
+                    if (i < 9)
+                    {
+                        texto = "0" + (i + 1).ToString() + " - " + ListaProd[i].desc_produto;
+                    }
 
-                else
-                {
-                    texto = (i + 1).ToString() + " - " + ListaProd[i].desc_produto;                                        
+                    else
+                    {
+                        texto = (i + 1).ToString() + " - " + ListaProd[i].desc_produto;
+                    }
+                    for (int j = 0; j < 300; j++)
+                    {
+                        texto = texto + ".";
+                    }
+
+                    dlProdVenda.Items[i].Text = texto;
+                    dlProdQnt.Items[i].Text = "Qnt " + QntProd[i].ToString() + "..............";
+                    dlProdValor.Items[i].Text = (QntProd[i] * Convert.ToDecimal(dlProdValor.Items[i].Text)).ToString("0.00");
                 }
-                for (int j = 0; j < 300; j++)
-                {
-                    texto = texto + ".";
-                }
-                
-                dlProdVenda.Items[i].Text = texto;
-                dlProdQnt.Items[i].Text = "Qnt " + QntProd[i].ToString() + "..............";
-                dlProdValor.Items[i].Text = (QntProd[i] * Convert.ToDecimal(dlProdValor.Items[i].Text)).ToString("0.00");
+            }
+            catch
+            {
+                ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "message", "alert('Falha o incluir produtos na lista de compras, por favor, tente novamente.');", true);
             }
 
         }
 
         private void AdicionaCheckListVendas(List<Produtos> ListaProd)
-        {            
-            chkProdVenda.DataSource = ListaProd;
-            chkProdVenda.DataTextField = "desc_produto";
-            chkProdVenda.DataValueField = "id";
-            chkProdVenda.DataBind();
-
-            for (int i = 0; i < ListaProd.Count; i++)
+        {
+            try
             {
-                string texto = "";
-                if (i < 9)
+                chkProdVenda.DataSource = ListaProd;
+                chkProdVenda.DataTextField = "desc_produto";
+                chkProdVenda.DataValueField = "id";
+                chkProdVenda.DataBind();
+
+                for (int i = 0; i < ListaProd.Count; i++)
                 {
-                    texto = "0" + (i + 1).ToString() + " - " + ListaProd[i].desc_produto;
+                    string texto = "";
+                    if (i < 9)
+                    {
+                        texto = "0" + (i + 1).ToString() + " - " + ListaProd[i].desc_produto;
+                    }
+
+                    else
+                    {
+                        texto = (i + 1).ToString() + " - " + ListaProd[i].desc_produto;
+                    }
+                    texto = texto + " ....... Qnt : ";
+                    texto = texto + QntProd[i].ToString() + " ....... Valor : " + Convert.ToDecimal(dlProdValor.Items[i].Text).ToString("0.00");
+                    chkProdVenda.Items[i].Text = texto;
                 }
-
-                else
-                {
-                    texto = (i + 1).ToString() + " - " + ListaProd[i].desc_produto;
-                }                
-                texto = texto + " ....... Qnt : ";                
-                texto = texto + QntProd[i].ToString() + " ....... Valor : " + Convert.ToDecimal(dlProdValor.Items[i].Text).ToString("0.00");
-                chkProdVenda.Items[i].Text = texto;                        
             }
-
+            catch
+            {
+                ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "message", "alert('Falha ao remover produto da lista, por favor, tente novamente.');", true);
+            }
         }
 
         protected void btnCorrigir_Click(object sender, EventArgs e)
@@ -304,61 +336,68 @@ namespace WebLoja1._0.View
 
         protected void btnRemover_Click(object sender, EventArgs e)
         {
-            dlProdVenda.Visible = true;
-            dlProdValor.Visible = true;
-            dlProdQnt.Visible = true;
-            chkProdVenda.Visible = false;
-            pnlRelacaoProdutos.Visible = false;
-            btnCorrigir.Visible = true;
-            btnRemover.Visible = false;
-
-            txtCodigo.Enabled = true;
-            txtQuantidade.Enabled = true;
-            txtPesquisaProd.Enabled = true;
-            btnCodigo.Enabled = true;
-            btnPesquisa.Enabled = true;
-            btnVender.Enabled = true;
-
-            bool teste = false;
-            for (int i = 0; i < ListaProd.Count; i++)
+            try
             {
-                if (teste)
-                {
-                    teste = false;
-                    i--;
-                }
-                if (chkProdVenda.Items[i].Selected)
-                {
-                    txtSubTotal.Text = (Convert.ToDecimal(txtSubTotal.Text) - QntProd[i] * Convert.ToDecimal(ListaProd[i].preco_venda)).ToString("0.00");
-                    ListaProd.RemoveAt(i);
-                    QntProd.RemoveAt(i);
+                dlProdVenda.Visible = true;
+                dlProdValor.Visible = true;
+                dlProdQnt.Visible = true;
+                chkProdVenda.Visible = false;
+                pnlRelacaoProdutos.Visible = false;
+                btnCorrigir.Visible = true;
+                btnRemover.Visible = false;
 
-                    if (descManual > 0)
+                txtCodigo.Enabled = true;
+                txtQuantidade.Enabled = true;
+                txtPesquisaProd.Enabled = true;
+                btnCodigo.Enabled = true;
+                btnPesquisa.Enabled = true;
+                btnVender.Enabled = true;
+
+                bool teste = false;
+                for (int i = 0; i < ListaProd.Count; i++)
+                {
+                    if (teste)
                     {
-                        txtTotalVista.Text = (Convert.ToDecimal(Convert.ToDouble(txtSubTotal.Text) - (Convert.ToDouble(txtSubTotal.Text) * descManual))).ToString("0.00");
+                        teste = false;
+                        i--;
                     }
-                    else
+                    if (chkProdVenda.Items[i].Selected)
                     {
-                        if (Convert.ToDecimal(txtSubTotal.Text) > gerencia.autoDescValor)
+                        txtSubTotal.Text = (Convert.ToDecimal(txtSubTotal.Text) - QntProd[i] * Convert.ToDecimal(ListaProd[i].preco_venda)).ToString("0.00");
+                        ListaProd.RemoveAt(i);
+                        QntProd.RemoveAt(i);
+
+                        if (descManual > 0)
                         {
-                            txtTotalVista.Text = (Convert.ToDecimal(Convert.ToDouble(txtSubTotal.Text) - (Convert.ToDouble(txtSubTotal.Text) * gerencia.autoDescPerc))).ToString("0.00");
+                            txtTotalVista.Text = (Convert.ToDecimal(Convert.ToDouble(txtSubTotal.Text) - (Convert.ToDouble(txtSubTotal.Text) * descManual))).ToString("0.00");
                         }
                         else
                         {
-                            txtTotalVista.Text = txtSubTotal.Text;
+                            if (Convert.ToDecimal(txtSubTotal.Text) > gerencia.autoDescValor)
+                            {
+                                txtTotalVista.Text = (Convert.ToDecimal(Convert.ToDouble(txtSubTotal.Text) - (Convert.ToDouble(txtSubTotal.Text) * gerencia.autoDescPerc))).ToString("0.00");
+                            }
+                            else
+                            {
+                                txtTotalVista.Text = txtSubTotal.Text;
+                            }
                         }
-                    }
 
-                    teste = true;
-                }                                
-            }                        
-            if(ListaProd.Count == 0)
-            {
-                btnVender.Enabled = false;
-                btnCorrigir.Enabled = false;
+                        teste = true;
+                    }
+                }
+                if (ListaProd.Count == 0)
+                {
+                    btnVender.Enabled = false;
+                    btnCorrigir.Enabled = false;
+                }
+                preencheDataListVendas(ListaProd);
+                AdicionaCheckListVendas(ListaProd);
             }
-            preencheDataListVendas(ListaProd);
-            AdicionaCheckListVendas(ListaProd);
+            catch
+            {
+                ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "message", "alert('Falha na remoção de produtos, por favor, tente novamente.');", true);
+            }
         }
 
         protected void btnCancelar_Click(object sender, EventArgs e)
@@ -371,103 +410,128 @@ namespace WebLoja1._0.View
             clienteCadastrado = true;
             pnlCliente.Visible = true;
             btnCliente.Enabled = false;
-            //lblEspaçoButton.Visible = false;
             pnlPrincipal.DefaultButton = btnPesquisaClientes.ID;
         }
 
         protected void btnPesquisa_Click(object sender, ImageClickEventArgs e)
-        {            
-            //pesquisa e preenchimento de drop down list
-            PesquisaProd = controle.pesquisaProdutosValidoNome(txtPesquisaProd.Text);
-
-            if (PesquisaProd.Count == 0)
+        {
+            try
             {
-                ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "alerta", "alert('Não existem produtos com a expressão \"" + txtPesquisaProd.Text + "\".');", true);
-                txtPesquisaProd.Text = "";
-            }
-            else
-            {
-                btnPesquisa.Visible = false;
-                txtPesquisaProd.Visible = false;
-                ddlPesquisaProd.Visible = true;
+                //pesquisa e preenchimento de drop down list
+                PesquisaProd = controle.pesquisaProdutosValidoNome(txtPesquisaProd.Text);
 
-                ddlPesquisaProd.Items.Clear();
-
-                ddlPesquisaProd.Items.Add("Selecione um dos itens");
-                ddlPesquisaProd.Items[0].Text = "Selecione um dos itens";
-                int x = 1;
-                foreach (Produtos value in PesquisaProd)
+                if (PesquisaProd.Count == 0)
                 {
-                    ddlPesquisaProd.Items.Add("desc_produto");
-                    ddlPesquisaProd.Items[x].Value = value.id.ToString();
-                    ddlPesquisaProd.Items[x].Text = PesquisaProd[x - 1].desc_produto + " - Compra R$" + Convert.ToDecimal(PesquisaProd[x - 1].preco_compra).ToString("0.00") + " - Venda R$" + Convert.ToDecimal(PesquisaProd[x - 1].preco_venda).ToString("0.00");
-                    x++;
+                    ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "alerta", "alert('Não existem produtos com a expressão \"" + txtPesquisaProd.Text + "\".');", true);
+                    txtPesquisaProd.Text = "";
+                }
+                else
+                {
+                    btnPesquisa.Visible = false;
+                    txtPesquisaProd.Visible = false;
+                    ddlPesquisaProd.Visible = true;
+
+                    ddlPesquisaProd.Items.Clear();
+
+                    ddlPesquisaProd.Items.Add("Selecione um dos itens");
+                    ddlPesquisaProd.Items[0].Text = "Selecione um dos itens";
+                    int x = 1;
+                    foreach (Produtos value in PesquisaProd)
+                    {
+                        ddlPesquisaProd.Items.Add("desc_produto");
+                        ddlPesquisaProd.Items[x].Value = value.id.ToString();
+                        ddlPesquisaProd.Items[x].Text = PesquisaProd[x - 1].desc_produto + " - Compra R$" + Convert.ToDecimal(PesquisaProd[x - 1].preco_compra).ToString("0.00") + " - Venda R$" + Convert.ToDecimal(PesquisaProd[x - 1].preco_venda).ToString("0.00");
+                        x++;
+                    }
                 }
             }
-
+            catch
+            {
+                ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "message", "alert('Falha na pesquisa de produtos, por favor, tente novamente.');", true);
+            }
         }
 
         protected void ddlPesquisaProd_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //txtQuantidade.Focus();            
-            pnlPrincipal.DefaultButton = btnCodigo.ID;
-            produto = controle.pesquisaProdutoId(Convert.ToInt32(ddlPesquisaProd.SelectedValue));
-            txtCodigo.Text = produto.cod_produto;
-            btnPesquisa.Visible = true;
-            ddlPesquisaProd.Visible = false;
-            txtPesquisaProd.Visible = true;
-            txtPesquisaProd.Text = "";
+            try
+            {
+                //txtQuantidade.Focus();            
+                pnlPrincipal.DefaultButton = btnCodigo.ID;
+                produto = controle.pesquisaProdutoId(Convert.ToInt32(ddlPesquisaProd.SelectedValue));
+                txtCodigo.Text = produto.cod_produto;
+                btnPesquisa.Visible = true;
+                ddlPesquisaProd.Visible = false;
+                txtPesquisaProd.Visible = true;
+                txtPesquisaProd.Text = "";
+            }
+            catch
+            {
+                ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "message", "alert('Falha na seleção do produto, por favor, tente novamente.');", true);
+            }
         }
 
         protected void btnPesquisaClientes_Click(object sender, ImageClickEventArgs e)
         {
-            //lblEspaçoButton.Visible = true;
-            txtPesquisaCliente.Visible = false;
-            btnPesquisaClientes.Visible = false;
-            ddlClientes.Visible = true;
-
-            ListaClientes = controle.pesquisaClientesCompleta(txtPesquisaCliente.Text);
-
-            ddlClientes.Items.Clear();
-            ddlClientes.Items.Add("Selecione o cliente");
-            ddlClientes.Items[0].Text = "Selecione o cliente";
-            int x = 1;
-
-            foreach (Clientes value in ListaClientes)
+            try
             {
-                ddlClientes.Items.Add("nome");
-                ddlClientes.Items[x].Value = value.id.ToString();
-                ddlClientes.Items[x].Text = ListaClientes[x - 1].nome + " - CPF/CNPJ : " + ListaClientes[x - 1].cpf;
-                x++;
+                txtPesquisaCliente.Visible = false;
+                btnPesquisaClientes.Visible = false;
+                ddlClientes.Visible = true;
+
+                ListaClientes = controle.pesquisaClientesCompleta(txtPesquisaCliente.Text);
+
+                ddlClientes.Items.Clear();
+                ddlClientes.Items.Add("Selecione o cliente");
+                ddlClientes.Items[0].Text = "Selecione o cliente";
+                int x = 1;
+
+                foreach (Clientes value in ListaClientes)
+                {
+                    ddlClientes.Items.Add("nome");
+                    ddlClientes.Items[x].Value = value.id.ToString();
+                    ddlClientes.Items[x].Text = ListaClientes[x - 1].nome + " - CPF/CNPJ : " + ListaClientes[x - 1].cpf;
+                    x++;
+                }
+            }
+            catch
+            {
+                ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "message", "alert('Falha na exibição da relação de clientes, por favor, tente novamente.');", true);
             }
         }
 
         protected void ddlClientes_SelectedIndexChanged(object sender, EventArgs e)
         {
-            cliente = controle.pesquisaClienteById(Convert.ToInt32(ddlClientes.SelectedValue));                   
-            ddlClientes.Visible = false;
-            txtPesquisaCliente.Visible = true;
-            txtPesquisaCliente.Text = "";
-            txtCliente.Text = cliente.nome;
-            txtCpf.Text = cliente.cpf;
-            if (cliente.pessoa_fisica == 1)
+            try
             {
-                rdbFisica.Checked = true;
+                cliente = controle.pesquisaClienteById(Convert.ToInt32(ddlClientes.SelectedValue));
+                ddlClientes.Visible = false;
+                txtPesquisaCliente.Visible = true;
+                txtPesquisaCliente.Text = "";
+                txtCliente.Text = cliente.nome;
+                txtCpf.Text = cliente.cpf;
+                if (cliente.pessoa_fisica == 1)
+                {
+                    rdbFisica.Checked = true;
+                }
+                else
+                {
+                    rdbJuridica.Checked = true;
+                }
+                txtRg.Text = cliente.rg;
+                txtContato.Text = cliente.contato;
+                txtTelefone.Text = cliente.telefone;
+                txtCelular.Text = cliente.celular;
+                txtTelefone.Text = cliente.telefone;
+                txtEndereco.Text = cliente.endereço;
+                txtNumero.Text = cliente.numeral;
+                txtBairro.Text = cliente.bairro;
+                txtCreditos.Text = Convert.ToDecimal(cliente.creditos).ToString("0.00");
+                txtCidade.Text = cliente.Cidades.cidade + " / " + cliente.Cidades.Estados.sigla;
             }
-            else
+            catch
             {
-                rdbJuridica.Checked = true;
+                ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "message", "alert('Falha na seleção do cliente, por favor, tente novamente.');", true);
             }
-            txtRg.Text = cliente.rg;
-            txtContato.Text = cliente.contato;
-            txtTelefone.Text = cliente.telefone;
-            txtCelular.Text = cliente.celular;
-            txtTelefone.Text = cliente.telefone;
-            txtEndereco.Text = cliente.endereço;
-            txtNumero.Text = cliente.numeral;
-            txtBairro.Text = cliente.bairro;
-            txtCreditos.Text = Convert.ToDecimal(cliente.creditos).ToString("0.00");
-            txtCidade.Text = cliente.Cidades.cidade + " / " + cliente.Cidades.Estados.sigla;
         }
 
         protected void btnCancelCliente_Click(object sender, EventArgs e)
@@ -505,14 +569,21 @@ namespace WebLoja1._0.View
 
         protected void btnAceitaDesc_Click(object sender, EventArgs e)
         {
-            descManual = Convert.ToDouble(txtDesconto.Text) / 100;
-            txtTotalVista.Text = (Convert.ToDecimal(Convert.ToDouble(txtSubTotal.Text) - (Convert.ToDouble(txtSubTotal.Text) * descManual))).ToString("0.00");
-            pnlDescontos.Visible = false;
-            pnlBasico.Visible = true;
-            pnlAdjacente.Visible = true;
-            if (clienteCadastrado)
+            try
             {
-                pnlCliente.Visible = true;
+                descManual = Convert.ToDouble(txtDesconto.Text) / 100;
+                txtTotalVista.Text = (Convert.ToDecimal(Convert.ToDouble(txtSubTotal.Text) - (Convert.ToDouble(txtSubTotal.Text) * descManual))).ToString("0.00");
+                pnlDescontos.Visible = false;
+                pnlBasico.Visible = true;
+                pnlAdjacente.Visible = true;
+                if (clienteCadastrado)
+                {
+                    pnlCliente.Visible = true;
+                }
+            }
+            catch
+            {
+                ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "message", "alert('Falha na conceção de desconto, por favor, tente novamente.');", true);
             }
         }
 
@@ -531,55 +602,59 @@ namespace WebLoja1._0.View
 
         protected void btnVender_Click(object sender, EventArgs e)
         {
-            if (gerencia.maxDescPerc < descManual + gerencia.autoDescPerc)
+            try
             {
-                ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "message", "alert('Os descontos cedidos excedem o desconto máximo de "+ gerencia.maxDescPerc + ", solicite liberação a um administrador.');", true);
+                if (gerencia.maxDescPerc < descManual + gerencia.autoDescPerc)
+                {
+                    ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "message", "alert('Os descontos cedidos excedem o desconto máximo de " + gerencia.maxDescPerc + ", solicite liberação a um administrador.');", true);
+                }
+                else
+                {
+                    pnlPagamento.Visible = true;
+                    pnlAdjacente.Visible = false;
+                    pnlBasico.Visible = false;
+                    pnlCliente.Visible = false;
+
+                    lblValorVista.Text = txtTotalVista.Text;
+                    lblValorCheque.Text = txtSubTotal.Text;
+                    lblValorPrazo.Text = txtSubTotal.Text;
+
+                    lblValorParcela.Text = (Convert.ToDecimal(lblValorPrazo.Text) / 2).ToString("0.00");
+                    lblValorParcelaCheque.Text = lblValorCheque.Text;
+                    ddlQntCheques.SelectedIndex = 0;
+                    ddlParcelas.SelectedIndex = 0;
+
+                    //valorDevido = Convert.ToDouble(txtSubTotal.Text);
+                    venda = new Vendas();
+                    controle.salvarVenda(venda);
+                    venda.data_Venda = DateTime.Now;
+                    venda.id_Usuario = user.id;
+                    if (clienteCadastrado)
+                    {
+                        venda.id_Cliente = cliente.id;
+
+                        if (pessoaFisica)
+                        {
+                            venda.cnpj = "";
+                            venda.cpf = cliente.cpf;
+                        }
+                        else
+                        {
+                            venda.cnpj = cliente.cpf;
+                            venda.cpf = "";
+                        }
+                    }
+                    venda.desconto = Convert.ToInt32(txtDesconto.Text);
+                    venda.comissao = 0;
+                    venda.ICMS = icmsTotal;
+                    venda.valor_Venda = 0;
+                    controle.salvaAtualiza();
+                    id_venda = venda.id;
+                }
             }
-            else
+            catch
             {
-                pnlPagamento.Visible = true;
-                pnlAdjacente.Visible = false;
-                pnlBasico.Visible = false;
-                pnlCliente.Visible = false;
-
-                if (clienteCadastrado)
-                {
-                    btnNotaPaulista.Enabled = false;
-                }
-
-                lblValorVista.Text = txtTotalVista.Text;
-                lblValorCheque.Text = txtSubTotal.Text;
-                lblValorPrazo.Text = txtSubTotal.Text;
-
-                lblValorParcela.Text = (Convert.ToDecimal(lblValorPrazo.Text) / 2).ToString("0.00");
-                lblValorParcelaCheque.Text = lblValorCheque.Text;
-                ddlQntCheques.SelectedIndex = 0;
-                ddlParcelas.SelectedIndex = 0;
-
-                //valorDevido = Convert.ToDouble(txtSubTotal.Text);
-                venda = new Vendas();
-                controle.salvarVenda(venda);
-                venda.data_Venda = DateTime.Today;
-                venda.id_Cliente = cliente.id;
-                venda.id_Usuario = user.id;
-                if (clienteCadastrado)
-                {
-                    if (pessoaFisica)
-                    {
-                        venda.cnpj = "";
-                        venda.cpf = cliente.cpf;
-                    }
-                    else
-                    {
-                        venda.cnpj = cliente.cpf;
-                        venda.cpf = "";
-                    }
-                }
-                venda.desconto = Convert.ToInt32(txtDesconto.Text);
-                venda.comissao = 0;
-                venda.ICMS = icmsTotal;
-                venda.valor_Venda = 0;
-                controle.salvaAtualiza();
+                ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "message", "alert('Falha ao tentar concluir a venda, por favor, tente novamente.');", true);
             }
         }
 
@@ -656,74 +731,101 @@ namespace WebLoja1._0.View
 
         protected void btnContinuarCompra_Click(object sender, EventArgs e)
         {
-            btnRemover.Enabled = false;
-            pnlPagamento.Visible = false;
-            pnlAdjacente.Visible = true;
-            pnlBasico.Visible = true;
-
-            if (clienteCadastrado)
-            {
-                pnlCliente.Visible = true;
-            }
-
-            if (rdbVista.Checked)
-            {
-                txtTotalVista.Text = valorDevido.ToString("0.00");
-                txtSubTotal.Text = (valorDevido + valorDevido * 0.07).ToString("0.00");
-            }
-            else
-            {
-                txtSubTotal.Text = valorDevido.ToString("0.00");
-            }
-        }
-
-        protected void btnAceitarPag_Click(object sender, EventArgs e)
-        {
             try
-            {                                
-                string saldo;
+            {
+                btnRemover.Enabled = false;
+                pnlPagamento.Visible = false;
+                pnlAdjacente.Visible = true;
+                pnlBasico.Visible = true;
+
+                if (clienteCadastrado)
+                {
+                    pnlCliente.Visible = true;
+                }
 
                 if (rdbVista.Checked)
                 {
+                    txtTotalVista.Text = valorDevido.ToString("0.00");
+                    txtSubTotal.Text = (valorDevido + valorDevido * 0.07).ToString("0.00");
+                }
+                else
+                {
+                    txtSubTotal.Text = valorDevido.ToString("0.00");
+                }
+            }
+            catch
+            {
+                ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "message", "alert('Falha ao tentar retornar ao painel de venda, por favor, tente novamente.');", true);
+            }
+        }
+
+        //ENTRADA DO PAGAMENTO NO SISTEMA E REALIZAÇÃO DE MOVIMENTAÇÃO FINANCEIRA
+        protected void btnAceitarPag_Click(object sender, EventArgs e)
+        {
+
+            string saldo;
+
+            if (rdbVista.Checked)
+            {
+                try
+                {
                     pagamento = new Pagamentos();
                     controle.salvarPagamento(pagamento);
+
                     pagamento.valorTotal = Convert.ToDecimal(lblValorVista.Text);
 
                     if (ddlFormaVista.SelectedIndex == 3)
                     {
                         if (clienteCadastrado)
                         {
-                            if (cliente.creditos < valorDevido)
+                            if (Convert.ToDouble(txtRecebido.Text) > cliente.creditos)
                             {
-                                pagamento.numParcela = 0;
-                                saldo = (valorDevido - Convert.ToDouble(cliente.creditos)).ToString("0,00");
-                                pagamento.valorParcela = Convert.ToDecimal(cliente.creditos);
-                                ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "alerta", "alert('Créditos debitados insuficientes! Saldo a receber de R$" + saldo + ".');", true);
-                                cliente.creditos = 0.00;
-                                valorDevido = Convert.ToDouble(saldo);
+                                ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "alerta", "alert('Saldo insuficiente, cliente possuí R$:" + cliente.creditos + " em créditos.');", true);
+                            }
+                            else if (Convert.ToDouble(txtRecebido.Text) < valorDevido)
+                            {
+                                mov_id = 30;
+
                                 pagamento.tipoPag = "Entrada";
-                                venda.ICMS = venda.ICMS + (Convert.ToDouble(pagamento.valorParcela) * gerencia.percIcms);
-                                venda.comissao = venda.comissao + (pagamento.valorParcela * Convert.ToDecimal(gerencia.comissao));                       
-                                venda.valor_Venda = venda.valor_Venda + Convert.ToDouble(pagamento.valorParcela);
+                                pagamento.numParcela = 0;
+                                pagamento.valorParcela = Convert.ToDecimal(txtRecebido.Text);
+
+                                cliente.creditos = cliente.creditos - Convert.ToDouble(txtRecebido.Text);
+
+                                icmsTotal = icmsTotal + (Convert.ToDouble(pagamento.valorParcela) * gerencia.percIcms);
+                                valorComissao = valorComissao + Convert.ToDouble(pagamento.valorParcela * Convert.ToDecimal(gerencia.comissao));
+                                valorVenda = valorVenda + Convert.ToDouble(pagamento.valorParcela);
+
                                 entrada = true;
+                                saldo = (valorDevido - Convert.ToDouble(txtRecebido.Text)).ToString("0,00");
+                                valorDevido = Convert.ToDouble(saldo);
+
+                                ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "alerta", "alert('Créditos debitados insuficientes! Saldo a receber de R$" + saldo + ".');", true);
+
                             }
                             else
                             {
+                                mov_id = 30;
+
                                 pagamento.numParcela = 1;
                                 pagamento.valorParcela = Convert.ToDecimal(valorDevido);
                                 pagamento.tipoPag = "Vista";
+
                                 cliente.creditos = cliente.creditos - valorDevido;
-                                venda.ICMS = venda.ICMS + (Convert.ToDouble(pagamento.valorParcela) * gerencia.percIcms);
-                                venda.comissao = venda.comissao + (pagamento.valorParcela * Convert.ToDecimal(gerencia.comissao));
-                                venda.valor_Venda = venda.valor_Venda + Convert.ToDouble(pagamento.valorParcela);
-                                ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "alerta", "alert('Créditos debitados! Seu saldo atual é de R$" + cliente.creditos + ".');", true);
+
+                                icmsTotal = icmsTotal + (Convert.ToDouble(pagamento.valorParcela) * gerencia.percIcms);
+                                valorComissao = valorComissao + Convert.ToDouble(pagamento.valorParcela * Convert.ToDecimal(gerencia.comissao));
+                                valorVenda = valorVenda + Convert.ToDouble(pagamento.valorParcela);
+
                                 valorDevido = 0;
                                 entrada = false;
+
+                                ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "alerta", "alert('Créditos debitados! Seu saldo atual é de R$" + cliente.creditos + ".');", true);
                             }
                             pagamento.numChequePrimeiro = "";
                             pagamento.numChequeUltimo = "";
                             pagamento.qntParcelas = 1;
-                            pagamento.id_venda = venda.id;
+                            pagamento.id_venda = id_venda;
                             pagamento.dataPagamento = DateTime.Today;
                             pagamento.formaPag = ddlFormaVista.SelectedValue;
                             controle.salvaAtualiza();
@@ -740,37 +842,49 @@ namespace WebLoja1._0.View
                     {
                         if (Convert.ToDecimal(txtRecebido.Text) < Convert.ToDecimal(valorDevido))
                         {
+                            mov_id = 19;
+
                             pagamento.numParcela = 0;
-                            saldo = (valorDevido - Convert.ToDouble(txtRecebido.Text)).ToString("0.00");
-                            pagamento.valorParcela = Convert.ToDecimal(txtRecebido.Text);                                                        
-                            valorDevido = Convert.ToDouble(saldo);                           
+                            pagamento.valorParcela = Convert.ToDecimal(txtRecebido.Text);
                             pagamento.tipoPag = "Entrada";
-                            venda.ICMS = venda.ICMS + (Convert.ToDouble(pagamento.valorParcela) * gerencia.percIcms);
-                            venda.comissao = venda.comissao + (pagamento.valorParcela * Convert.ToDecimal(gerencia.comissao));
-                            venda.valor_Venda = venda.valor_Venda + Convert.ToDouble(pagamento.valorParcela);
-                            ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "alerta", "alert('Valor recebido insuficientes! Saldo a receber de R$" + saldo + ".');", true);
+
+                            icmsTotal = icmsTotal + (Convert.ToDouble(pagamento.valorParcela) * gerencia.percIcms);
+                            valorComissao = valorComissao + Convert.ToDouble(pagamento.valorParcela * Convert.ToDecimal(gerencia.comissao));
+                            valorVenda = valorVenda + Convert.ToDouble(pagamento.valorParcela);
+
                             entrada = true;
+                            saldo = (valorDevido - Convert.ToDouble(txtRecebido.Text)).ToString("0.00");
+                            valorDevido = Convert.ToDouble(saldo);
+
+                            ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "alerta", "alert('Valor recebido insuficientes! Saldo a receber de R$" + saldo + ".');", true);
                         }
                         else
                         {
+                            mov_id = 19;
+
                             pagamento.numParcela = 1;
                             pagamento.valorParcela = Convert.ToDecimal(valorDevido);
                             pagamento.tipoPag = "Vista";
+
+                            icmsTotal = icmsTotal + (Convert.ToDouble(pagamento.valorParcela) * gerencia.percIcms);
+                            valorComissao = valorComissao + Convert.ToDouble(pagamento.valorParcela * Convert.ToDecimal(gerencia.comissao));
+                            valorVenda = valorVenda + Convert.ToDouble(pagamento.valorParcela);
+
                             lblValorTroco.Text = (Convert.ToDouble(txtRecebido.Text) - valorDevido).ToString("0.00");
                             ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "alerta", "alert('Valor recebido pelo sistema de R$" + Convert.ToDecimal(txtRecebido.Text).ToString("0.00") + ", Troco devido de R$" + lblValorTroco.Text + ".');", true);
+
                             valorDevido = 0;
-                            venda.ICMS = venda.ICMS + (Convert.ToDouble(pagamento.valorParcela) * gerencia.percIcms);
-                            venda.comissao = venda.comissao + (pagamento.valorParcela * Convert.ToDecimal(gerencia.comissao));
-                            venda.valor_Venda = venda.valor_Venda + Convert.ToDouble(pagamento.valorParcela);
                             entrada = false;
+
                         }
                         pagamento.numChequePrimeiro = "";
                         pagamento.numChequeUltimo = "";
                         pagamento.qntParcelas = 1;
-                        pagamento.id_venda = venda.id;
+                        pagamento.id_venda = id_venda;
                         pagamento.dataPagamento = DateTime.Today;
                         pagamento.formaPag = ddlFormaVista.SelectedValue;
                         controle.salvaAtualiza();
+
                         txtRecebido.Text = "0,00";
                         lblValorVista.Text = valorDevido.ToString("0.00");
                     }
@@ -779,35 +893,44 @@ namespace WebLoja1._0.View
                     {
                         if (Convert.ToDecimal(txtRecebido.Text) < Convert.ToDecimal(valorDevido))
                         {
+                            mov_id = 33;
+
                             pagamento.numParcela = 0;
-                            saldo = (valorDevido - Convert.ToDouble(txtRecebido.Text)).ToString("0,00");
                             pagamento.valorParcela = Convert.ToDecimal(txtRecebido.Text);
-                            ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "alerta", "alert('Valor recebido insuficientes! Saldo a receber de R$" + saldo + ".');", true);
-                            cliente.creditos = 0.00;
-                            valorDevido = Convert.ToDouble(saldo);
                             pagamento.tipoPag = "Entrada";
-                            venda.ICMS = venda.ICMS + (Convert.ToDouble(pagamento.valorParcela) * gerencia.percIcms);
-                            venda.comissao = venda.comissao + (pagamento.valorParcela * Convert.ToDecimal(gerencia.comissao));
-                            venda.valor_Venda = venda.valor_Venda + Convert.ToDouble(pagamento.valorParcela);
+
+                            icmsTotal = icmsTotal + (Convert.ToDouble(pagamento.valorParcela) * gerencia.percIcms);
+                            valorComissao = valorComissao + Convert.ToDouble(pagamento.valorParcela * Convert.ToDecimal(gerencia.comissao));
+                            valorVenda = valorVenda + Convert.ToDouble(pagamento.valorParcela);
+
+                            saldo = (valorDevido - Convert.ToDouble(txtRecebido.Text)).ToString("0,00");
+                            valorDevido = Convert.ToDouble(saldo);
                             entrada = true;
+
+                            ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "alerta", "alert('Valor recebido insuficientes! Saldo a receber de R$" + saldo + ".');", true);
                         }
                         else
                         {
+                            mov_id = 33;
+
                             pagamento.numParcela = 1;
                             pagamento.valorParcela = Convert.ToDecimal(valorDevido);
                             pagamento.tipoPag = "Vista";
+
+                            icmsTotal = icmsTotal + (Convert.ToDouble(pagamento.valorParcela) * gerencia.percIcms);
+                            valorComissao = valorComissao + Convert.ToDouble(pagamento.valorParcela * Convert.ToDecimal(gerencia.comissao));
+                            valorVenda = valorVenda + Convert.ToDouble(pagamento.valorParcela);
+
                             lblValorTroco.Text = (Convert.ToDouble(txtRecebido.Text) - valorDevido).ToString("0.00");
                             ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "alerta", "alert('Valor recebido pelo sistema de R$" + Convert.ToDecimal(txtRecebido.Text).ToString("0.00") + ".');", true);
+
                             valorDevido = 0;
-                            venda.ICMS = venda.ICMS + (Convert.ToDouble(pagamento.valorParcela) * gerencia.percIcms);
-                            venda.comissao = venda.comissao + (pagamento.valorParcela * Convert.ToDecimal(gerencia.comissao));
-                            venda.valor_Venda = venda.valor_Venda + Convert.ToDouble(pagamento.valorParcela);
                             entrada = false;
                         }
                         pagamento.numChequePrimeiro = "";
                         pagamento.numChequeUltimo = "";
                         pagamento.qntParcelas = 1;
-                        pagamento.id_venda = venda.id;
+                        pagamento.id_venda = id_venda;
                         pagamento.dataPagamento = DateTime.Today;
                         pagamento.formaPag = ddlFormaVista.SelectedValue;
                         controle.salvaAtualiza();
@@ -822,16 +945,26 @@ namespace WebLoja1._0.View
                         {
                             prodVendido = new Vendas_Produtos();
                             controle.salvaProdutosVendidos(prodVendido);
-                            prodVendido.id_venda = venda.id;
+                            prodVendido.id_venda = id_venda;
                             prodVendido.id_produto = ListaProd[i].id;
                             prodVendido.num_item = i + 1;
                             prodVendido.quantidade = QntProd[i];
+
                             produto = controle.pesquisaProdutoId(ListaProd[i].id);
                             produto.Estoque.qnt_atual = produto.Estoque.qnt_atual - QntProd[i];
+
+                            movimento = new Movimentos();
+                            controle.salvarMovimento(movimento);
+                            movimento.data = DateTime.Today;
+                            movimento.desc = "Custo Venda ID:" + id_venda;
+                            movimento.id_tipo = 65;
+                            movimento.valor = produto.preco_compra * prodVendido.quantidade;
                             controle.salvaAtualiza();
-                        }                       
+                        }
+
                         ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "alerta", "alert('Venda efetuada com sucesso!')", true);
                         situacaoInicial();
+
                     }
 
                     else
@@ -839,17 +972,35 @@ namespace WebLoja1._0.View
                         lblValorVista.Text = valorDevido.ToString("0.00");
                         lblValorPrazo.Text = ((valorDevido * 0.07) + valorDevido).ToString("0.00");
                         lblValorCheque.Text = ((valorDevido * 0.07) + valorDevido).ToString("0.00");
-
                         lblValorParcela.Text = (Convert.ToDecimal(lblValorPrazo.Text) / 2).ToString("0.00");
                         lblValorParcelaCheque.Text = lblValorCheque.Text;
+
                         ddlQntCheques.SelectedIndex = 0;
                         ddlParcelas.SelectedIndex = 0;
 
                         controle.salvaAtualiza();
                     }
+
+                    movimento = new Movimentos();
+                    controle.salvarMovimento(movimento);
+                    movimento.id_tipo = mov_id;
+                    movimento.valor = Convert.ToDecimal(valorVenda);
+                    movimento.data = DateTime.Now;
+                    movimento.desc = "Venda ID: " + id_venda;
+                    controle.salvaAtualiza();
+
+                    pagamento.id_movimento = movimento.id;
+                    controle.salvaAtualiza();
                 }
-                
-                else if (rdbPrazo.Checked)
+                catch
+                {
+                    ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "alerta", "alert('Falha no registro de pagamento a vista, por favor, tente novamente.');", true);
+                }
+            }
+
+            else if (rdbPrazo.Checked)
+            {
+                try
                 {
                     for (int i = 0; i < Convert.ToInt32(ddlParcelas.SelectedValue); i++)
                     {
@@ -861,33 +1012,48 @@ namespace WebLoja1._0.View
                         pagamento.numParcela = i + 1;
                         pagamento.qntParcelas = Convert.ToInt32(ddlParcelas.SelectedValue);
                         pagamento.valorTotal = Convert.ToDecimal(lblValorPrazo.Text);
-                        pagamento.id_venda = venda.id;
+                        pagamento.id_venda = id_venda;
 
                         if (entrada)
                         {
                             pagamento.tipoPag = "Entrada + Parcelas";
                             pagamento.dataPagamento = DateTime.Today.AddMonths(i + 1);
+                            mov_id = 18;
+
                         }
                         else if (i == 0)
                         {
                             pagamento.tipoPag = "Parcelado";
                             pagamento.dataPagamento = DateTime.Today;
+                            mov_id = 33;
                         }
                         else
                         {
                             pagamento.tipoPag = "Parcelado";
                             pagamento.dataPagamento = DateTime.Today.AddMonths(i);
+                            mov_id = 18;
                         }
                         pagamento.valorParcela = Convert.ToDecimal(lblValorParcela.Text);
                         pagamento.formaPag = "Cartão Crédito";
 
-                        venda.ICMS = venda.ICMS + (Convert.ToDouble(pagamento.valorParcela) * gerencia.percIcms);
-                        venda.comissao = venda.comissao + (pagamento.valorParcela * Convert.ToDecimal(gerencia.comissao));
-                        venda.valor_Venda = venda.valor_Venda + Convert.ToDouble(pagamento.valorParcela);
+                        icmsTotal = icmsTotal + (Convert.ToDouble(pagamento.valorParcela) * gerencia.percIcms);
+                        valorComissao = valorComissao + Convert.ToDouble(pagamento.valorParcela * Convert.ToDecimal(gerencia.comissao));
+                        valorVenda = valorVenda + Convert.ToDouble(pagamento.valorParcela);
 
                         controle.salvaAtualiza();
 
+                        movimento = new Movimentos();
+                        controle.salvarMovimento(movimento);
+                        movimento.id_tipo = mov_id;
+                        movimento.valor = pagamento.valorParcela;
+                        movimento.data = pagamento.dataPagamento;
+                        movimento.desc = "Venda ID: " + id_venda;
+                        controle.salvaAtualiza();
+
+                        pagamento.id_movimento = movimento.id;
+                        controle.salvaAtualiza();
                     }
+
 
                     entrada = false;
 
@@ -895,20 +1061,35 @@ namespace WebLoja1._0.View
                     {
                         prodVendido = new Vendas_Produtos();
                         controle.salvaProdutosVendidos(prodVendido);
-                        prodVendido.id_venda = venda.id;
+                        prodVendido.id_venda = id_venda;
                         prodVendido.id_produto = ListaProd[i].id;
                         prodVendido.num_item = i + 1;
                         prodVendido.quantidade = QntProd[i];
                         produto = controle.pesquisaProdutoId(ListaProd[i].id);
                         produto.Estoque.qnt_atual = produto.Estoque.qnt_atual - QntProd[i];
+
+                        movimento = new Movimentos();
+                        controle.salvarMovimento(movimento);
+                        movimento.data = DateTime.Today;
+                        movimento.desc = "Custo Venda ID:" + id_venda;
+                        movimento.id_tipo = 65;
+                        movimento.valor = produto.preco_compra * prodVendido.quantidade;
                         controle.salvaAtualiza();
                     }
-                    
+
                     ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "alerta", "alert('Registrado o recebimento em " + ddlParcelas.SelectedValue + " parcelas de R$" + lblValorParcela.Text + ".');", true);
                     situacaoInicial();
                 }
+                catch
+                {
+                    ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "alerta", "alert('Falha no registro de pagamento a prazo, por favor, tente novamente.');", true);
+                }
+            
+            }
 
-                else if (rdbCheque.Checked)
+            else if (rdbCheque.Checked)
+            {
+                try
                 {
 
                     for (int i = 0; i < Convert.ToInt32(ddlQntCheques.SelectedValue); i++)
@@ -920,55 +1101,81 @@ namespace WebLoja1._0.View
                         pagamento.numParcela = i + 1;
                         pagamento.qntParcelas = Convert.ToInt32(ddlQntCheques.SelectedValue);
                         pagamento.valorTotal = Convert.ToDecimal(lblValorCheque.Text);
-                        pagamento.id_venda = venda.id;
+                        pagamento.id_venda = id_venda;
 
                         if (Convert.ToInt32(ddlQntCheques.SelectedValue) > 1)
                         {
-                            if(entrada)
+                            if (entrada)
                             {
                                 pagamento.tipoPag = "Entrada + Parcelas";
                                 pagamento.dataPagamento = DateTime.Today.AddMonths(i + 1);
+                                mov_id = 18;
                             }
                             else if (i == 0)
                             {
                                 pagamento.tipoPag = "Parcelado";
                                 pagamento.dataPagamento = DateTime.Today;
+                                mov_id = 33;
                             }
                             else
                             {
                                 pagamento.tipoPag = "Parcelado";
                                 pagamento.dataPagamento = DateTime.Today.AddMonths(i);
+                                mov_id = 18;
                             }
-                            
+
                             pagamento.valorParcela = Convert.ToDecimal(lblValorParcelaCheque.Text);
                             pagamento.formaPag = "Cheques";
 
+                            mov_id = 18;
                         }
                         else
                         {
+                            mov_id = 33;
                             pagamento.dataPagamento = DateTime.Today;
                             pagamento.tipoPag = "Vista";
                             pagamento.valorParcela = Convert.ToDecimal(lblValorCheque.Text);
                             pagamento.formaPag = "Cheques";
                         }
-                        venda.ICMS = venda.ICMS + (Convert.ToDouble(pagamento.valorParcela) * gerencia.percIcms);
-                        venda.comissao = venda.comissao + (pagamento.valorParcela * Convert.ToDecimal(gerencia.comissao));
-                        venda.valor_Venda = venda.valor_Venda + Convert.ToDouble(pagamento.valorParcela);                       
+
+                        icmsTotal = icmsTotal + (Convert.ToDouble(pagamento.valorParcela) * gerencia.percIcms);
+                        valorComissao = valorComissao + Convert.ToDouble(pagamento.valorParcela * Convert.ToDecimal(gerencia.comissao));
+                        valorVenda = valorVenda + Convert.ToDouble(pagamento.valorParcela);
+
                         controle.salvaAtualiza();
+
+                        movimento = new Movimentos();
+                        controle.salvarMovimento(movimento);
+                        movimento.id_tipo = mov_id;
+                        movimento.valor = pagamento.valorParcela;
+                        movimento.data = pagamento.dataPagamento;
+                        movimento.desc = "Venda ID: " + id_venda;
+                        controle.salvaAtualiza();
+
+                        pagamento.id_movimento = movimento.id;
+                        controle.salvaAtualiza();
+
                     }
 
-                    entrada = false;   
-                    
+                    entrada = false;
+
                     for (int i = 0; i < ListaProd.Count; i++)
                     {
                         prodVendido = new Vendas_Produtos();
                         controle.salvaProdutosVendidos(prodVendido);
-                        prodVendido.id_venda = venda.id;
+                        prodVendido.id_venda = id_venda;
                         prodVendido.id_produto = ListaProd[i].id;
                         prodVendido.num_item = i + 1;
                         prodVendido.quantidade = QntProd[i];
                         produto = controle.pesquisaProdutoId(ListaProd[i].id);
                         produto.Estoque.qnt_atual = produto.Estoque.qnt_atual - QntProd[i];
+
+                        movimento = new Movimentos();
+                        controle.salvarMovimento(movimento);
+                        movimento.data = DateTime.Today;
+                        movimento.desc = "Custo Venda ID:" + id_venda;
+                        movimento.id_tipo = 65;
+                        movimento.valor = produto.preco_compra * prodVendido.quantidade;
                         controle.salvaAtualiza();
                     }
 
@@ -976,23 +1183,44 @@ namespace WebLoja1._0.View
                     situacaoInicial();
 
                 }
-                if (notaPaulista)
+                catch
                 {
-                    if (nfpCpf.Length > nfpCnpj.Length)
+                    ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "alerta", "alert('Falha no registro do pagamento em cheque, por favor, tente novamente.');", true);
+                }
+
+                try
+                {
+                    if (notaPaulista)
                     {
-                        venda.cpf = nfpCpf;
+                        if (nfpCpf.Length > nfpCnpj.Length)
+                        {
+                            venda.cpf = nfpCpf;
+                        }
+                        else
+                        {
+                            venda.cpf = nfpCnpj;
+                        }
+                        controle.salvaAtualiza();
                     }
-                    else
-                    {
-                        venda.cpf = nfpCnpj;
-                    }
+                    venda = new Vendas();
+                    venda = controle.pesquisaVendaID(id_venda);
+                    venda.ICMS = icmsTotal;
+                    venda.comissao = Convert.ToDecimal(valorComissao);
+                    venda.valor_Venda = valorVenda;
+                    controle.salvaAtualiza();
+
+                    movimento = new Movimentos();
+                    controle.salvarMovimento(movimento);
+                    movimento.id_tipo = 11;
+                    movimento.valor = Convert.ToDecimal(icmsTotal);
+                    movimento.data = DateTime.Now;
+                    movimento.desc = "ICMS Venda ID: " + id_venda;
                     controle.salvaAtualiza();
                 }
-                
-            }
-            catch
-            {
-                ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "alerta", "alert(' Houve algum problema ao incluir os dados, tente novamente.');", true);
+                catch
+                {
+                    ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "alerta", "alert('Falha ao registrar venda e movimento de tributação, tente novamente.');", true);
+                }
             }
         }
 
@@ -1162,9 +1390,9 @@ namespace WebLoja1._0.View
             else if(ddlFormaVista.SelectedIndex == 2)
             {
                 lblRecebido.Visible = true;
-                btnReceber.Visible = true;
+                btnReceber.Visible = false;
                 txtRecebido.Visible = true;
-                btnReceber.Enabled = true;
+                btnReceber.Enabled = false;
                 txtRecebido.Enabled = true;
                 lblTroco.Visible = false;
                 lblValorTroco.Visible = false;
