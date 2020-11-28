@@ -62,25 +62,28 @@
             <br />
             <br />
             <asp:Label ID="lblNome" runat="server" Text="Nome Fornecedor: "></asp:Label>
-            <asp:TextBox ID="txtNome" runat="server" Width="479px"></asp:TextBox>
+            <asp:TextBox ID="txtNome" runat="server" Width="478px"></asp:TextBox>
             <br />
             <br />
             <asp:Label ID="lblCnpj" runat="server" Text="CNPJ/CPF: "></asp:Label>
-            <asp:TextBox ID="txtCnpj" runat="server" Width="256px"></asp:TextBox>
+            <asp:TextBox ID="txtCnpj" runat="server" Width="255px"></asp:TextBox>
             &nbsp;
             <asp:Label ID="lblResponsavel" runat="server" Text="Responsável: "></asp:Label>
             <asp:TextBox ID="txtResponsavel" runat="server" Width="160px" Enabled="False"></asp:TextBox>
             <br />
             <br />
-            <asp:Label ID="lblTelefone" runat="server" Text="Telefone: "></asp:Label>
-            <asp:TextBox ID="txtTelefone" runat="server" Width="231px" Enabled="False"></asp:TextBox>
+            <asp:Label ID="lblTelefone" runat="server" Text="Telefone : "></asp:Label>
+            <asp:TextBox ID="txtTelefone" runat="server" Width="125px" Enabled="False"></asp:TextBox>
             &nbsp;
-            <asp:Label ID="lblCelular" runat="server" Text="Celular: "></asp:Label>
-            <asp:TextBox ID="txtCelular" runat="server" Width="231px" Enabled="False"></asp:TextBox>
+            <asp:Label ID="lblCelular" runat="server" Text="Celular : "></asp:Label>
+            <asp:TextBox ID="txtCelular" runat="server" Width="125px" Enabled="False"></asp:TextBox>
+            &nbsp;
+            <asp:Label ID="lblRecado" runat="server" Text="Recado : "></asp:Label>
+            <asp:TextBox ID="txtRecado" runat="server" Enabled="False" Width="125px"></asp:TextBox>
             <br />
             <br />
             <asp:Label ID="lblEndereco" runat="server" Text="Endereço: "></asp:Label>
-            <asp:TextBox ID="txtEndereço" runat="server" Width="535px" Enabled="False"></asp:TextBox>
+            <asp:TextBox ID="txtEndereço" runat="server" Enabled="False" Width="535px"></asp:TextBox>
             &nbsp;<br /> <br />
             &nbsp;<asp:Label ID="lblNumero" runat="server" Text="Nº: "></asp:Label>
             <asp:TextBox ID="txtNumero" runat="server" Width="86px" Enabled="False"></asp:TextBox>

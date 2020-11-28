@@ -19,22 +19,27 @@
       <End Role="Usuarios" EntitySet="Usuarios" />
     </AssociationSet>
     <EntitySet Name="Vendas_Produtos" EntityType="DatabaseModel.Vendas_Produtos" />
-    <EntitySet Name="Vendas" EntityType="DatabaseModel.Vendas" />
-    <AssociationSet Name="id_usuario" Association="DatabaseModel.id_usuario">
-      <End Role="Usuarios" EntitySet="Usuarios" />
-      <End Role="Vendas" EntitySet="Vendas" />
+    <EntitySet Name="Estoque" EntityType="DatabaseModel.Estoque" />
+    <EntitySet Name="Gerenciamento" EntityType="DatabaseModel.Gerenciamento" />
+    <EntitySet Name="Contabilidade" EntityType="DatabaseModel.Contabilidade" />
+    <EntitySet Name="Movimentos" EntityType="DatabaseModel.Movimentos" />
+    <EntitySet Name="Tipos_Movimentacao" EntityType="DatabaseModel.Tipos_Movimentacao" />
+    <AssociationSet Name="FK__Movimento__id_va__0371755F" Association="DatabaseModel.FK__Movimento__id_va__0371755F">
+      <End Role="Tipos_Movimentacao" EntitySet="Tipos_Movimentacao" />
+      <End Role="Movimentos" EntitySet="Movimentos" />
     </AssociationSet>
-    <AssociationSet Name="id_venda" Association="DatabaseModel.id_venda">
-      <End Role="Vendas" EntitySet="Vendas" />
-      <End Role="Vendas_Produtos" EntitySet="Vendas_Produtos" />
+    <EntitySet Name="Clientes" EntityType="DatabaseModel.Clientes" />
+    <AssociationSet Name="FK__Clientes__id_Cid__390E6C01" Association="DatabaseModel.FK__Clientes__id_Cid__390E6C01">
+      <End Role="Cidades" EntitySet="Cidades" />
+      <End Role="Clientes" EntitySet="Clientes" />
     </AssociationSet>
     <EntitySet Name="Pagamentos" EntityType="DatabaseModel.Pagamentos" />
-    <AssociationSet Name="FK__Pagamento__id_ve__17236851" Association="DatabaseModel.FK__Pagamento__id_ve__17236851">
-      <End Role="Vendas" EntitySet="Vendas" />
-      <End Role="Pagamentos" EntitySet="Pagamentos" />
-    </AssociationSet>
-    <EntitySet Name="Estoque" EntityType="DatabaseModel.Estoque" />
     <EntitySet Name="Produtos" EntityType="DatabaseModel.Produtos" />
+    <EntitySet Name="Vendas" EntityType="DatabaseModel.Vendas" />
+    <AssociationSet Name="FK__Vendas__id_Clien__3A02903A" Association="DatabaseModel.FK__Vendas__id_Clien__3A02903A">
+      <End Role="Clientes" EntitySet="Clientes" />
+      <End Role="Vendas" EntitySet="Vendas" />
+    </AssociationSet>
     <AssociationSet Name="FK__Estoque__id_prod__7CF981FA" Association="DatabaseModel.FK__Estoque__id_prod__7CF981FA">
       <End Role="Produtos" EntitySet="Produtos" />
       <End Role="Estoque" EntitySet="Estoque" />
@@ -43,19 +48,25 @@
       <End Role="Fornecedores" EntitySet="Fornecedores" />
       <End Role="Produtos" EntitySet="Produtos" />
     </AssociationSet>
+    <AssociationSet Name="FK__Pagamento__id_mo__04659998" Association="DatabaseModel.FK__Pagamento__id_mo__04659998">
+      <End Role="Movimentos" EntitySet="Movimentos" />
+      <End Role="Pagamentos" EntitySet="Pagamentos" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Pagamento__id_ve__17236851" Association="DatabaseModel.FK__Pagamento__id_ve__17236851">
+      <End Role="Vendas" EntitySet="Vendas" />
+      <End Role="Pagamentos" EntitySet="Pagamentos" />
+    </AssociationSet>
     <AssociationSet Name="id_produto" Association="DatabaseModel.id_produto">
       <End Role="Produtos" EntitySet="Produtos" />
       <End Role="Vendas_Produtos" EntitySet="Vendas_Produtos" />
     </AssociationSet>
-    <EntitySet Name="Gerenciamento" EntityType="DatabaseModel.Gerenciamento" />
-    <EntitySet Name="Clientes" EntityType="DatabaseModel.Clientes" />
-    <AssociationSet Name="FK__Clientes__id_Cid__390E6C01" Association="DatabaseModel.FK__Clientes__id_Cid__390E6C01">
-      <End Role="Cidades" EntitySet="Cidades" />
-      <End Role="Clientes" EntitySet="Clientes" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Vendas__id_Clien__3A02903A" Association="DatabaseModel.FK__Vendas__id_Clien__3A02903A">
-      <End Role="Clientes" EntitySet="Clientes" />
+    <AssociationSet Name="id_usuario" Association="DatabaseModel.id_usuario">
+      <End Role="Usuarios" EntitySet="Usuarios" />
       <End Role="Vendas" EntitySet="Vendas" />
+    </AssociationSet>
+    <AssociationSet Name="id_venda" Association="DatabaseModel.id_venda">
+      <End Role="Vendas" EntitySet="Vendas" />
+      <End Role="Vendas_Produtos" EntitySet="Vendas_Produtos" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Cidades">
@@ -95,6 +106,7 @@
     <Property Name="status" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Cidades" Relationship="DatabaseModel.FK__Fornecedo__id_Ci__22FF2F51" FromRole="Fornecedores" ToRole="Cidades" />
     <NavigationProperty Name="Produtos" Relationship="DatabaseModel.FK__Produtos__id_for__664B26CC" FromRole="Fornecedores" ToRole="Produtos" />
+    <Property Name="recado" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="Perfis">
     <Key>
@@ -163,81 +175,9 @@
     <Property Name="num_item" Type="Int32" />
     <Property Name="id_produto" Type="Int32" />
     <Property Name="quantidade" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Vendas" Relationship="DatabaseModel.id_venda" FromRole="Vendas_Produtos" ToRole="Vendas" />
     <NavigationProperty Name="Produtos" Relationship="DatabaseModel.id_produto" FromRole="Vendas_Produtos" ToRole="Produtos" />
+    <NavigationProperty Name="Vendas" Relationship="DatabaseModel.id_venda" FromRole="Vendas_Produtos" ToRole="Vendas" />
   </EntityType>
-  <EntityType Name="Vendas">
-    <Key>
-      <PropertyRef Name="id" />
-    </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="data_Venda" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="cpf" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
-    <Property Name="cnpj" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-    <Property Name="ICMS" Type="Double" />
-    <Property Name="valor_Venda" Type="Double" />
-    <Property Name="id_Usuario" Type="Int32" Nullable="false" />
-    <Property Name="id_Cliente" Type="Int32" />
-    <Property Name="desconto" Type="Int32" />
-    <Property Name="comissao" Type="Decimal" Precision="10" Scale="2" />
-    <NavigationProperty Name="Usuarios" Relationship="DatabaseModel.id_usuario" FromRole="Vendas" ToRole="Usuarios" />
-    <NavigationProperty Name="Vendas_Produtos" Relationship="DatabaseModel.id_venda" FromRole="Vendas" ToRole="Vendas_Produtos" />
-    <NavigationProperty Name="Pagamentos" Relationship="DatabaseModel.FK__Pagamento__id_ve__17236851" FromRole="Vendas" ToRole="Pagamentos" />
-    <NavigationProperty Name="Clientes" Relationship="DatabaseModel.FK__Vendas__id_Clien__3A02903A" FromRole="Vendas" ToRole="Clientes" />
-  </EntityType>
-  <Association Name="id_usuario">
-    <End Type="DatabaseModel.Usuarios" Role="Usuarios" Multiplicity="1" />
-    <End Type="DatabaseModel.Vendas" Role="Vendas" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Usuarios">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="Vendas">
-        <PropertyRef Name="id_Usuario" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="id_venda">
-    <End Type="DatabaseModel.Vendas" Role="Vendas" Multiplicity="0..1" />
-    <End Type="DatabaseModel.Vendas_Produtos" Role="Vendas_Produtos" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Vendas">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="Vendas_Produtos">
-        <PropertyRef Name="id_venda" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <EntityType Name="Pagamentos">
-    <Key>
-      <PropertyRef Name="id" />
-    </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="tipoPag" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="formaPag" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="valorTotal" Type="Decimal" Precision="7" Scale="2" />
-    <Property Name="qntParcelas" Type="Int32" />
-    <Property Name="dataPagamento" Type="DateTime" Precision="3" />
-    <Property Name="numParcela" Type="Int32" />
-    <Property Name="valorParcela" Type="Decimal" Precision="7" Scale="2" />
-    <Property Name="numChequePrimeiro" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="numChequeUltimo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="id_venda" Type="Int32" />
-    <NavigationProperty Name="Vendas" Relationship="DatabaseModel.FK__Pagamento__id_ve__17236851" FromRole="Pagamentos" ToRole="Vendas" />
-  </EntityType>
-  <Association Name="FK__Pagamento__id_ve__17236851">
-    <End Type="DatabaseModel.Vendas" Role="Vendas" Multiplicity="0..1" />
-    <End Type="DatabaseModel.Pagamentos" Role="Pagamentos" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Vendas">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="Pagamentos">
-        <PropertyRef Name="id_venda" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityType Name="Estoque">
     <Key>
       <PropertyRef Name="id_produto" />
@@ -252,60 +192,6 @@
     <Property Name="ref_local" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="Produtos" Relationship="DatabaseModel.FK__Estoque__id_prod__7CF981FA" FromRole="Estoque" ToRole="Produtos" />
   </EntityType>
-  <EntityType Name="Produtos">
-    <Key>
-      <PropertyRef Name="id" />
-    </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="cod_produto" Type="String" Nullable="false" MaxLength="13" FixedLength="false" Unicode="false" />
-    <Property Name="desc_produto" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
-    <Property Name="und_medida" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-    <Property Name="preco_compra" Type="Decimal" Nullable="false" Precision="7" Scale="2" />
-    <Property Name="preco_venda" Type="Decimal" Nullable="false" Precision="7" Scale="2" />
-    <Property Name="ICMS_pago" Type="Decimal" Nullable="false" Precision="7" Scale="2" />
-    <Property Name="imagem" Type="Binary" MaxLength="Max" FixedLength="false" />
-    <Property Name="id_fornecedor" Type="Int32" Nullable="false" />
-    <Property Name="status" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Estoque" Relationship="DatabaseModel.FK__Estoque__id_prod__7CF981FA" FromRole="Produtos" ToRole="Estoque" />
-    <NavigationProperty Name="Fornecedores" Relationship="DatabaseModel.FK__Produtos__id_for__664B26CC" FromRole="Produtos" ToRole="Fornecedores" />
-    <NavigationProperty Name="Vendas_Produtos" Relationship="DatabaseModel.id_produto" FromRole="Produtos" ToRole="Vendas_Produtos" />
-  </EntityType>
-  <Association Name="FK__Estoque__id_prod__7CF981FA">
-    <End Type="DatabaseModel.Produtos" Role="Produtos" Multiplicity="1" />
-    <End Type="DatabaseModel.Estoque" Role="Estoque" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="Produtos">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="Estoque">
-        <PropertyRef Name="id_produto" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__Produtos__id_for__664B26CC">
-    <End Type="DatabaseModel.Fornecedores" Role="Fornecedores" Multiplicity="1" />
-    <End Type="DatabaseModel.Produtos" Role="Produtos" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Fornecedores">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="Produtos">
-        <PropertyRef Name="id_fornecedor" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="id_produto">
-    <End Type="DatabaseModel.Produtos" Role="Produtos" Multiplicity="0..1" />
-    <End Type="DatabaseModel.Vendas_Produtos" Role="Vendas_Produtos" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Produtos">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="Vendas_Produtos">
-        <PropertyRef Name="id_produto" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityType Name="Gerenciamento">
     <Key>
       <PropertyRef Name="Id" />
@@ -339,6 +225,72 @@
     <Property Name="jurosCheque12x" Type="Double" Nullable="false" />
     <Property Name="lucroMinimo" Type="Double" Nullable="false" />
   </EntityType>
+  <EntityType Name="Contabilidade">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="caixa" Type="Decimal" Precision="9" Scale="2" />
+    <Property Name="banco" Type="Decimal" Precision="9" Scale="2" />
+    <Property Name="a_receber_cp" Type="Decimal" Precision="9" Scale="2" />
+    <Property Name="a_pagar_cp" Type="Decimal" Precision="9" Scale="2" />
+    <Property Name="a_receber_lp" Type="Decimal" Precision="9" Scale="2" />
+    <Property Name="a_pagar_lp" Type="Decimal" Precision="9" Scale="2" />
+    <Property Name="imposto_recolher" Type="Decimal" Precision="9" Scale="2" />
+    <Property Name="moveis_utensilios" Type="Decimal" Precision="9" Scale="2" />
+    <Property Name="maquinario" Type="Decimal" Precision="9" Scale="2" />
+    <Property Name="veiculos" Type="Decimal" Precision="9" Scale="2" />
+    <Property Name="salarios" Type="Decimal" Precision="9" Scale="2" />
+    <Property Name="fornecedores" Type="Decimal" Precision="9" Scale="2" />
+    <Property Name="clientes" Type="Decimal" Precision="9" Scale="2" />
+    <Property Name="outras_entradas_cp" Type="Decimal" Precision="9" Scale="2" />
+    <Property Name="outras_saidas_lp" Type="Decimal" Precision="9" Scale="2" />
+    <Property Name="empréstimo" Type="Decimal" Precision="9" Scale="2" />
+    <Property Name="despesas" Type="Decimal" Precision="9" Scale="2" />
+    <Property Name="estoques" Type="Decimal" Precision="9" Scale="2" />
+    <Property Name="cap_soc_integ" Type="Decimal" Precision="9" Scale="2" />
+    <Property Name="cap_soc_n_integ" Type="Decimal" Precision="9" Scale="2" />
+    <Property Name="lucro" Type="Decimal" Precision="9" Scale="2" />
+    <Property Name="pro_labore" Type="Decimal" Precision="9" Scale="2" />
+    <Property Name="reserva_lucro" Type="Decimal" Precision="9" Scale="2" />
+  </EntityType>
+  <EntityType Name="Movimentos">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="desc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="valor" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="data" Type="DateTime" Precision="0" />
+    <Property Name="id_tipo" Type="Int32" />
+    <NavigationProperty Name="Tipos_Movimentacao" Relationship="DatabaseModel.FK__Movimento__id_va__0371755F" FromRole="Movimentos" ToRole="Tipos_Movimentacao" />
+    <NavigationProperty Name="Pagamentos" Relationship="DatabaseModel.FK__Pagamento__id_mo__04659998" FromRole="Movimentos" ToRole="Pagamentos" />
+  </EntityType>
+  <EntityType Name="Tipos_Movimentacao">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="descricao" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="direcao" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="sub_tipo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="conta" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="forma_pag" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Movimentos" Relationship="DatabaseModel.FK__Movimento__id_va__0371755F" FromRole="Tipos_Movimentacao" ToRole="Movimentos" />
+    <Property Name="mostrar" Type="Boolean" />
+  </EntityType>
+  <Association Name="FK__Movimento__id_va__0371755F">
+    <End Type="DatabaseModel.Tipos_Movimentacao" Role="Tipos_Movimentacao" Multiplicity="0..1" />
+    <End Type="DatabaseModel.Movimentos" Role="Movimentos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tipos_Movimentacao">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Movimentos">
+        <PropertyRef Name="id_tipo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityType Name="Clientes">
     <Key>
       <PropertyRef Name="id" />
@@ -359,6 +311,8 @@
     <Property Name="creditos" Type="Double" />
     <NavigationProperty Name="Cidades" Relationship="DatabaseModel.FK__Clientes__id_Cid__390E6C01" FromRole="Clientes" ToRole="Cidades" />
     <NavigationProperty Name="Vendas" Relationship="DatabaseModel.FK__Vendas__id_Clien__3A02903A" FromRole="Clientes" ToRole="Vendas" />
+    <Property Name="recado" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
   <Association Name="FK__Clientes__id_Cid__390E6C01">
     <End Type="DatabaseModel.Cidades" Role="Cidades" Multiplicity="1" />
@@ -372,6 +326,62 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="Pagamentos">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tipoPag" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="formaPag" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="valorTotal" Type="Decimal" Precision="9" Scale="2" />
+    <Property Name="qntParcelas" Type="Int32" />
+    <Property Name="dataPagamento" Type="DateTime" Precision="3" />
+    <Property Name="numParcela" Type="Int32" />
+    <Property Name="valorParcela" Type="Decimal" Precision="9" Scale="2" />
+    <Property Name="numChequePrimeiro" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="numChequeUltimo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="id_venda" Type="Int32" />
+    <Property Name="id_movimento" Type="Int32" />
+    <NavigationProperty Name="Movimentos" Relationship="DatabaseModel.FK__Pagamento__id_mo__04659998" FromRole="Pagamentos" ToRole="Movimentos" />
+    <NavigationProperty Name="Vendas" Relationship="DatabaseModel.FK__Pagamento__id_ve__17236851" FromRole="Pagamentos" ToRole="Vendas" />
+  </EntityType>
+  <EntityType Name="Produtos">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="cod_produto" Type="String" Nullable="false" MaxLength="13" FixedLength="false" Unicode="false" />
+    <Property Name="desc_produto" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="und_medida" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="preco_compra" Type="Decimal" Nullable="false" Precision="9" Scale="2" />
+    <Property Name="preco_venda" Type="Decimal" Nullable="false" Precision="9" Scale="2" />
+    <Property Name="ICMS_pago" Type="Decimal" Nullable="false" Precision="9" Scale="2" />
+    <Property Name="imagem" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="id_fornecedor" Type="Int32" Nullable="false" />
+    <Property Name="status" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Estoque" Relationship="DatabaseModel.FK__Estoque__id_prod__7CF981FA" FromRole="Produtos" ToRole="Estoque" />
+    <NavigationProperty Name="Fornecedores" Relationship="DatabaseModel.FK__Produtos__id_for__664B26CC" FromRole="Produtos" ToRole="Fornecedores" />
+    <NavigationProperty Name="Vendas_Produtos" Relationship="DatabaseModel.id_produto" FromRole="Produtos" ToRole="Vendas_Produtos" />
+  </EntityType>
+  <EntityType Name="Vendas">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="data_Venda" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="cpf" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+    <Property Name="cnpj" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="ICMS" Type="Double" />
+    <Property Name="valor_Venda" Type="Double" />
+    <Property Name="id_Usuario" Type="Int32" Nullable="false" />
+    <Property Name="id_Cliente" Type="Int32" />
+    <Property Name="desconto" Type="Int32" />
+    <Property Name="comissao" Type="Decimal" Precision="10" Scale="2" />
+    <NavigationProperty Name="Clientes" Relationship="DatabaseModel.FK__Vendas__id_Clien__3A02903A" FromRole="Vendas" ToRole="Clientes" />
+    <NavigationProperty Name="Pagamentos" Relationship="DatabaseModel.FK__Pagamento__id_ve__17236851" FromRole="Vendas" ToRole="Pagamentos" />
+    <NavigationProperty Name="Usuarios" Relationship="DatabaseModel.id_usuario" FromRole="Vendas" ToRole="Usuarios" />
+    <NavigationProperty Name="Vendas_Produtos" Relationship="DatabaseModel.id_venda" FromRole="Vendas" ToRole="Vendas_Produtos" />
+  </EntityType>
   <Association Name="FK__Vendas__id_Clien__3A02903A">
     <End Type="DatabaseModel.Clientes" Role="Clientes" Multiplicity="0..1" />
     <End Type="DatabaseModel.Vendas" Role="Vendas" Multiplicity="*" />
@@ -381,6 +391,90 @@
       </Principal>
       <Dependent Role="Vendas">
         <PropertyRef Name="id_Cliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Estoque__id_prod__7CF981FA">
+    <End Type="DatabaseModel.Produtos" Role="Produtos" Multiplicity="1" />
+    <End Type="DatabaseModel.Estoque" Role="Estoque" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Produtos">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Estoque">
+        <PropertyRef Name="id_produto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Produtos__id_for__664B26CC">
+    <End Type="DatabaseModel.Fornecedores" Role="Fornecedores" Multiplicity="1" />
+    <End Type="DatabaseModel.Produtos" Role="Produtos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Fornecedores">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Produtos">
+        <PropertyRef Name="id_fornecedor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Pagamento__id_mo__04659998">
+    <End Type="DatabaseModel.Movimentos" Role="Movimentos" Multiplicity="0..1" />
+    <End Type="DatabaseModel.Pagamentos" Role="Pagamentos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Movimentos">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Pagamentos">
+        <PropertyRef Name="id_movimento" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Pagamento__id_ve__17236851">
+    <End Type="DatabaseModel.Vendas" Role="Vendas" Multiplicity="0..1" />
+    <End Type="DatabaseModel.Pagamentos" Role="Pagamentos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vendas">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Pagamentos">
+        <PropertyRef Name="id_venda" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="id_produto">
+    <End Type="DatabaseModel.Produtos" Role="Produtos" Multiplicity="0..1" />
+    <End Type="DatabaseModel.Vendas_Produtos" Role="Vendas_Produtos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Produtos">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Vendas_Produtos">
+        <PropertyRef Name="id_produto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="id_usuario">
+    <End Type="DatabaseModel.Usuarios" Role="Usuarios" Multiplicity="1" />
+    <End Type="DatabaseModel.Vendas" Role="Vendas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuarios">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Vendas">
+        <PropertyRef Name="id_Usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="id_venda">
+    <End Type="DatabaseModel.Vendas" Role="Vendas" Multiplicity="0..1" />
+    <End Type="DatabaseModel.Vendas_Produtos" Role="Vendas_Produtos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vendas">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Vendas_Produtos">
+        <PropertyRef Name="id_venda" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

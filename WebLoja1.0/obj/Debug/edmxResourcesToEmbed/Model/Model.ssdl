@@ -17,8 +17,10 @@
     <Property Name="cpf" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="rg" Type="varchar" MaxLength="50" />
     <Property Name="contato" Type="varchar" MaxLength="50" />
+    <Property Name="email" Type="varchar" MaxLength="50" />
     <Property Name="telefone" Type="varchar" MaxLength="20" />
     <Property Name="celular" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="recado" Type="varchar" MaxLength="20" />
     <Property Name="endereço" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="numeral" Type="varchar" MaxLength="10" Nullable="false" />
     <Property Name="bairro" Type="varchar" MaxLength="50" />
@@ -26,6 +28,35 @@
     <Property Name="pessoa_fisica" Type="int" />
     <Property Name="status" Type="int" Nullable="false" />
     <Property Name="creditos" Type="float" />
+  </EntityType>
+  <EntityType Name="Contabilidade">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="caixa" Type="decimal" Precision="9" Scale="2" />
+    <Property Name="banco" Type="decimal" Precision="9" Scale="2" />
+    <Property Name="a_receber_cp" Type="decimal" Precision="9" Scale="2" />
+    <Property Name="a_pagar_cp" Type="decimal" Precision="9" Scale="2" />
+    <Property Name="a_receber_lp" Type="decimal" Precision="9" Scale="2" />
+    <Property Name="a_pagar_lp" Type="decimal" Precision="9" Scale="2" />
+    <Property Name="imposto_recolher" Type="decimal" Precision="9" Scale="2" />
+    <Property Name="moveis_utensilios" Type="decimal" Precision="9" Scale="2" />
+    <Property Name="maquinario" Type="decimal" Precision="9" Scale="2" />
+    <Property Name="veiculos" Type="decimal" Precision="9" Scale="2" />
+    <Property Name="salarios" Type="decimal" Precision="9" Scale="2" />
+    <Property Name="fornecedores" Type="decimal" Precision="9" Scale="2" />
+    <Property Name="clientes" Type="decimal" Precision="9" Scale="2" />
+    <Property Name="outras_entradas_cp" Type="decimal" Precision="9" Scale="2" />
+    <Property Name="outras_saidas_lp" Type="decimal" Precision="9" Scale="2" />
+    <Property Name="empréstimo" Type="decimal" Precision="9" Scale="2" />
+    <Property Name="despesas" Type="decimal" Precision="9" Scale="2" />
+    <Property Name="estoques" Type="decimal" Precision="9" Scale="2" />
+    <Property Name="cap_soc_integ" Type="decimal" Precision="9" Scale="2" />
+    <Property Name="cap_soc_n_integ" Type="decimal" Precision="9" Scale="2" />
+    <Property Name="lucro" Type="decimal" Precision="9" Scale="2" />
+    <Property Name="pro_labore" Type="decimal" Precision="9" Scale="2" />
+    <Property Name="reserva_lucro" Type="decimal" Precision="9" Scale="2" />
   </EntityType>
   <EntityType Name="Estados">
     <Key>
@@ -57,6 +88,7 @@
     <Property Name="cnpj" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="telefone" Type="varchar" MaxLength="20" />
     <Property Name="celular" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="recado" Type="varchar" MaxLength="20" />
     <Property Name="endereço" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="numeral" Type="varchar" MaxLength="10" Nullable="false" />
     <Property Name="bairro" Type="varchar" MaxLength="25" />
@@ -97,6 +129,16 @@
     <Property Name="jurosCheque12x" Type="float" Nullable="false" />
     <Property Name="lucroMinimo" Type="float" Nullable="false" />
   </EntityType>
+  <EntityType Name="Movimentos">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="desc" Type="varchar" MaxLength="50" />
+    <Property Name="valor" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="data" Type="date" />
+    <Property Name="id_tipo" Type="int" />
+  </EntityType>
   <EntityType Name="Pagamentos">
     <Key>
       <PropertyRef Name="id" />
@@ -104,14 +146,15 @@
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="tipoPag" Type="varchar" MaxLength="50" />
     <Property Name="formaPag" Type="varchar" MaxLength="50" />
-    <Property Name="valorTotal" Type="decimal" Precision="7" Scale="2" />
+    <Property Name="valorTotal" Type="decimal" Precision="9" Scale="2" />
     <Property Name="qntParcelas" Type="int" />
     <Property Name="dataPagamento" Type="datetime" />
     <Property Name="numParcela" Type="int" />
-    <Property Name="valorParcela" Type="decimal" Precision="7" Scale="2" />
+    <Property Name="valorParcela" Type="decimal" Precision="9" Scale="2" />
     <Property Name="numChequePrimeiro" Type="varchar" MaxLength="50" />
     <Property Name="numChequeUltimo" Type="varchar" MaxLength="50" />
     <Property Name="id_venda" Type="int" />
+    <Property Name="id_movimento" Type="int" />
   </EntityType>
   <EntityType Name="Perfis">
     <Key>
@@ -129,12 +172,24 @@
     <Property Name="cod_produto" Type="varchar" MaxLength="13" Nullable="false" />
     <Property Name="desc_produto" Type="varchar" MaxLength="30" Nullable="false" />
     <Property Name="und_medida" Type="varchar" MaxLength="10" Nullable="false" />
-    <Property Name="preco_compra" Type="decimal" Precision="7" Scale="2" Nullable="false" />
-    <Property Name="preco_venda" Type="decimal" Precision="7" Scale="2" Nullable="false" />
-    <Property Name="ICMS_pago" Type="decimal" Precision="7" Scale="2" Nullable="false" />
+    <Property Name="preco_compra" Type="decimal" Precision="9" Scale="2" Nullable="false" />
+    <Property Name="preco_venda" Type="decimal" Precision="9" Scale="2" Nullable="false" />
+    <Property Name="ICMS_pago" Type="decimal" Precision="9" Scale="2" Nullable="false" />
     <Property Name="imagem" Type="varbinary(max)" />
     <Property Name="id_fornecedor" Type="int" Nullable="false" />
     <Property Name="status" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Tipos_Movimentacao">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="descricao" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="direcao" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="sub_tipo" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="conta" Type="varchar" MaxLength="20" />
+    <Property Name="forma_pag" Type="varchar" MaxLength="20" />
+    <Property Name="mostrar" Type="bit" />
   </EntityType>
   <EntityType Name="Usuarios">
     <Key>
@@ -184,7 +239,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Clientes__id_Cid__390E6C01">
+  <Association Name="FK__Clientes__id_Cid__529933DA">
     <End Role="Cidades" Type="Self.Cidades" Multiplicity="1" />
     <End Role="Clientes" Type="Self.Clientes" Multiplicity="*" />
     <ReferentialConstraint>
@@ -208,7 +263,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Fornecedo__id_Ci__22FF2F51">
+  <Association Name="FK__Fornecedo__id_Ci__3D9E16F4">
     <End Role="Cidades" Type="Self.Cidades" Multiplicity="1" />
     <End Role="Fornecedores" Type="Self.Fornecedores" Multiplicity="*" />
     <ReferentialConstraint>
@@ -217,6 +272,30 @@
       </Principal>
       <Dependent Role="Fornecedores">
         <PropertyRef Name="id_Cidade" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Movimento__id_va__0371755F">
+    <End Role="Tipos_Movimentacao" Type="Self.Tipos_Movimentacao" Multiplicity="0..1" />
+    <End Role="Movimentos" Type="Self.Movimentos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tipos_Movimentacao">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Movimentos">
+        <PropertyRef Name="id_tipo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Pagamento__id_mo__04659998">
+    <End Role="Movimentos" Type="Self.Movimentos" Multiplicity="0..1" />
+    <End Role="Pagamentos" Type="Self.Pagamentos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Movimentos">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Pagamentos">
+        <PropertyRef Name="id_movimento" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -232,7 +311,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Produtos__id_for__664B26CC">
+  <Association Name="FK__Produtos__id_for__3E923B2D">
     <End Role="Fornecedores" Type="Self.Fornecedores" Multiplicity="1" />
     <End Role="Produtos" Type="Self.Produtos" Multiplicity="*" />
     <ReferentialConstraint>
@@ -256,7 +335,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Vendas__id_Clien__3A02903A">
+  <Association Name="FK__Vendas__id_Clien__538D5813">
     <End Role="Clientes" Type="Self.Clientes" Multiplicity="0..1" />
     <End Role="Vendas" Type="Self.Vendas" Multiplicity="*" />
     <ReferentialConstraint>
@@ -307,13 +386,16 @@
   <EntityContainer Name="DatabaseModelStoreContainer">
     <EntitySet Name="Cidades" EntityType="Self.Cidades" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Clientes" EntityType="Self.Clientes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Contabilidade" EntityType="Self.Contabilidade" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Estados" EntityType="Self.Estados" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Estoque" EntityType="Self.Estoque" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Fornecedores" EntityType="Self.Fornecedores" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Gerenciamento" EntityType="Self.Gerenciamento" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Movimentos" EntityType="Self.Movimentos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Pagamentos" EntityType="Self.Pagamentos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Perfis" EntityType="Self.Perfis" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Produtos" EntityType="Self.Produtos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Tipos_Movimentacao" EntityType="Self.Tipos_Movimentacao" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Vendas" EntityType="Self.Vendas" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Vendas_Produtos" EntityType="Self.Vendas_Produtos" Schema="dbo" store:Type="Tables" />
@@ -321,7 +403,7 @@
       <End Role="Estados" EntitySet="Estados" />
       <End Role="Cidades" EntitySet="Cidades" />
     </AssociationSet>
-    <AssociationSet Name="FK__Clientes__id_Cid__390E6C01" Association="Self.FK__Clientes__id_Cid__390E6C01">
+    <AssociationSet Name="FK__Clientes__id_Cid__529933DA" Association="Self.FK__Clientes__id_Cid__529933DA">
       <End Role="Cidades" EntitySet="Cidades" />
       <End Role="Clientes" EntitySet="Clientes" />
     </AssociationSet>
@@ -329,15 +411,23 @@
       <End Role="Produtos" EntitySet="Produtos" />
       <End Role="Estoque" EntitySet="Estoque" />
     </AssociationSet>
-    <AssociationSet Name="FK__Fornecedo__id_Ci__22FF2F51" Association="Self.FK__Fornecedo__id_Ci__22FF2F51">
+    <AssociationSet Name="FK__Fornecedo__id_Ci__3D9E16F4" Association="Self.FK__Fornecedo__id_Ci__3D9E16F4">
       <End Role="Cidades" EntitySet="Cidades" />
       <End Role="Fornecedores" EntitySet="Fornecedores" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Movimento__id_va__0371755F" Association="Self.FK__Movimento__id_va__0371755F">
+      <End Role="Tipos_Movimentacao" EntitySet="Tipos_Movimentacao" />
+      <End Role="Movimentos" EntitySet="Movimentos" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Pagamento__id_mo__04659998" Association="Self.FK__Pagamento__id_mo__04659998">
+      <End Role="Movimentos" EntitySet="Movimentos" />
+      <End Role="Pagamentos" EntitySet="Pagamentos" />
     </AssociationSet>
     <AssociationSet Name="FK__Pagamento__id_ve__17236851" Association="Self.FK__Pagamento__id_ve__17236851">
       <End Role="Vendas" EntitySet="Vendas" />
       <End Role="Pagamentos" EntitySet="Pagamentos" />
     </AssociationSet>
-    <AssociationSet Name="FK__Produtos__id_for__664B26CC" Association="Self.FK__Produtos__id_for__664B26CC">
+    <AssociationSet Name="FK__Produtos__id_for__3E923B2D" Association="Self.FK__Produtos__id_for__3E923B2D">
       <End Role="Fornecedores" EntitySet="Fornecedores" />
       <End Role="Produtos" EntitySet="Produtos" />
     </AssociationSet>
@@ -345,7 +435,7 @@
       <End Role="Perfis" EntitySet="Perfis" />
       <End Role="Usuarios" EntitySet="Usuarios" />
     </AssociationSet>
-    <AssociationSet Name="FK__Vendas__id_Clien__3A02903A" Association="Self.FK__Vendas__id_Clien__3A02903A">
+    <AssociationSet Name="FK__Vendas__id_Clien__538D5813" Association="Self.FK__Vendas__id_Clien__538D5813">
       <End Role="Clientes" EntitySet="Clientes" />
       <End Role="Vendas" EntitySet="Vendas" />
     </AssociationSet>

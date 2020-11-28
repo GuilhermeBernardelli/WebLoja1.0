@@ -72,6 +72,7 @@ namespace WebLoja1._0.View
             txtResponsavel.Enabled = true;
             txtTelefone.Enabled = true;
             txtCelular.Enabled = true;
+            txtRecado.Enabled = true;
             txtEndereço.Enabled = true;
             txtNumero.Enabled = true;
             txtBairro.Enabled = true;
@@ -93,6 +94,7 @@ namespace WebLoja1._0.View
             txtResponsavel.Enabled = true;
             txtTelefone.Enabled = true;
             txtCelular.Enabled = true;
+            txtRecado.Enabled = true;
             txtEndereço.Enabled = true;
             txtNumero.Enabled = true;
             txtBairro.Enabled = true;
@@ -118,6 +120,10 @@ namespace WebLoja1._0.View
             {
                 ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "message", "alert('O campo \"Celular\" deve conter somente números e no minimo 9 caracteres.');", true);
             }
+            else if (!txtRecado.Text.All(char.IsNumber) || txtTelefone.Text.Length < 7)
+            {
+                ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "message", "alert('O campo \"Celular\" deve conter somente números e no minimo 9 caracteres.');", true);
+            }
 
             else
             {
@@ -133,6 +139,7 @@ namespace WebLoja1._0.View
                     fornecedor.bairro = txtBairro.Text.ToUpper().Trim();
                     fornecedor.telefone = txtTelefone.Text.Trim();
                     fornecedor.celular = txtCelular.Text.Trim();
+                    fornecedor.recado = txtRecado.Text.Trim();
                     fornecedor.id_Cidade = ddlCidade.SelectedIndex;
                     fornecedor.status = Convert.ToInt32(chkStatus.Checked);
                     controle.salvaAtualiza();
@@ -151,6 +158,7 @@ namespace WebLoja1._0.View
                     fornecedor.bairro = txtBairro.Text.ToUpper().Trim();
                     fornecedor.telefone = txtTelefone.Text.Trim();
                     fornecedor.celular = txtCelular.Text.Trim();
+                    fornecedor.recado = txtRecado.Text.Trim();
                     fornecedor.status = Convert.ToInt32(chkStatus.Checked);
 
                     cidade = controle.pesquisaCidade(ddlCidade.SelectedItem.Text);
@@ -193,6 +201,7 @@ namespace WebLoja1._0.View
             ddlCidade.SelectedIndex = -1;
             txtTelefone.Text = "";
             txtCelular.Text = "";
+            txtRecado.Text = "";
             txtBairro.Text = "";
             chkStatus.Checked = false;
             ddlCidade.SelectedIndex = -1;
@@ -359,6 +368,7 @@ namespace WebLoja1._0.View
             txtResponsavel.Enabled = false;
             txtTelefone.Enabled = false;
             txtCelular.Enabled = false;
+            txtRecado.Enabled = false;
             txtEndereço.Enabled = false;
             txtNumero.Enabled = false;
             txtBairro.Enabled = false;
@@ -376,6 +386,7 @@ namespace WebLoja1._0.View
             txtEndereço.Text = fornecedor.endereço;
             txtBairro.Text = fornecedor.bairro;
             txtCelular.Text = fornecedor.celular;
+            txtRecado.Text = fornecedor.recado;
             txtNumero.Text = fornecedor.numeral;
             txtResponsavel.Text = fornecedor.contato;
             txtTelefone.Text = fornecedor.telefone;

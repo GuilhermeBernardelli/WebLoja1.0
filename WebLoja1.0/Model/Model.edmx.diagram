@@ -13,21 +13,26 @@
         <AssociationConnector Association="DatabaseModel.FK__Cidades__id_Esta__308E3499" />
         <AssociationConnector Association="DatabaseModel.FK__Fornecedo__id_Ci__22FF2F51" />
         <AssociationConnector Association="DatabaseModel.FK__Usuarios__num_pe__2C88998B" />
-        <EntityTypeShape EntityType="DatabaseModel.Vendas_Produtos" Width="1.5" PointX="8" PointY="4.625" />
-        <EntityTypeShape EntityType="DatabaseModel.Vendas" Width="1.5" PointX="8" PointY="7.375" />
-        <AssociationConnector Association="DatabaseModel.id_usuario" />
-        <AssociationConnector Association="DatabaseModel.id_venda" />
-        <EntityTypeShape EntityType="DatabaseModel.Pagamentos" Width="1.5" PointX="10.25" PointY="7.125" />
-        <AssociationConnector Association="DatabaseModel.FK__Pagamento__id_ve__17236851" />
+        <EntityTypeShape EntityType="DatabaseModel.Vendas_Produtos" Width="1.5" PointX="8.125" PointY="4.375" />
         <EntityTypeShape EntityType="DatabaseModel.Estoque" Width="1.5" PointX="11.125" PointY="0.875" />
-        <EntityTypeShape EntityType="DatabaseModel.Produtos" Width="1.5" PointX="7.875" PointY="0.5" />
+        <EntityTypeShape EntityType="DatabaseModel.Gerenciamento" Width="1.5" PointX="0.875" PointY="0.5" />
+        <EntityTypeShape EntityType="DatabaseModel.Contabilidade" Width="1.5" PointX="0.875" PointY="6.5" />
+        <EntityTypeShape EntityType="DatabaseModel.Movimentos" Width="1.5" PointX="10.625" PointY="4.625" />
+        <EntityTypeShape EntityType="DatabaseModel.Tipos_Movimentacao" Width="1.5" PointX="13.25" PointY="4.625" />
+        <AssociationConnector Association="DatabaseModel.FK__Movimento__id_va__0371755F" />
+        <EntityTypeShape EntityType="DatabaseModel.Clientes" Width="1.5" PointX="5.625" PointY="4.125" />
+        <AssociationConnector Association="DatabaseModel.FK__Clientes__id_Cid__390E6C01" />
+        <EntityTypeShape EntityType="DatabaseModel.Pagamentos" Width="1.5" PointX="10.625" PointY="7.75" />
+        <EntityTypeShape EntityType="DatabaseModel.Produtos" Width="1.5" PointX="8.125" PointY="0.5" />
+        <EntityTypeShape EntityType="DatabaseModel.Vendas" Width="1.5" PointX="8" PointY="7.125" />
+        <AssociationConnector Association="DatabaseModel.FK__Vendas__id_Clien__3A02903A" />
         <AssociationConnector Association="DatabaseModel.FK__Estoque__id_prod__7CF981FA" />
         <AssociationConnector Association="DatabaseModel.FK__Produtos__id_for__664B26CC" />
+        <AssociationConnector Association="DatabaseModel.FK__Pagamento__id_mo__04659998" />
+        <AssociationConnector Association="DatabaseModel.FK__Pagamento__id_ve__17236851" />
         <AssociationConnector Association="DatabaseModel.id_produto" />
-        <EntityTypeShape EntityType="DatabaseModel.Gerenciamento" Width="1.5" PointX="0.875" PointY="0.5" />
-        <EntityTypeShape EntityType="DatabaseModel.Clientes" Width="1.5" PointX="5.375" PointY="4.25" />
-        <AssociationConnector Association="DatabaseModel.FK__Clientes__id_Cid__390E6C01" />
-        <AssociationConnector Association="DatabaseModel.FK__Vendas__id_Clien__3A02903A" />
+        <AssociationConnector Association="DatabaseModel.id_usuario" />
+        <AssociationConnector Association="DatabaseModel.id_venda" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

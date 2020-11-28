@@ -16,6 +16,7 @@ namespace WebLoja1._0.View
         List<Cidades> listaCidades = new List<Cidades>();
         Clientes cliente = new Clientes();
         Cidades cidade = new Cidades();
+        Movimentos movimento = new Movimentos();
 
         Controle controle = new Controle();
         Usuarios user = new Usuarios();
@@ -89,6 +90,7 @@ namespace WebLoja1._0.View
             txtRg.Enabled = true;
             txtTelefone.Enabled = true;
             txtCelular.Enabled = true;
+            txtRecado.Enabled = true;
             txtEndereço.Enabled = true;
             txtNumero.Enabled = true;
             txtBairro.Enabled = true;
@@ -116,6 +118,7 @@ namespace WebLoja1._0.View
             txtResponsavel.Enabled = true;
             txtTelefone.Enabled = true;
             txtCelular.Enabled = true;
+            txtRecado.Enabled = true;
             txtEndereço.Enabled = true;
             txtNumero.Enabled = true;
             txtBairro.Enabled = true;
@@ -153,9 +156,32 @@ namespace WebLoja1._0.View
             {
                 ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "message", "alert('O campo \"Celular\" deve conter somente números e no minimo 9 caracteres.');", true);
             }
-            
+
+            else if (!txtRecado.Text.All(char.IsNumber) || txtTelefone.Text.Length < 7)
+            {
+                ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "message", "alert('O campo \"Celular\" deve conter somente números e no minimo 9 caracteres.');", true);
+            }
+
             else
             {
+                if(Convert.ToDouble(txtCredito.Text) > 0.00)
+                {
+                    movimento = new Movimentos();
+                    controle.salvarMovimento(movimento);
+
+                    movimento.data = DateTime.Today;
+                    movimento.desc = "Inserção de Créditos";
+                    if (rdbDinheiro.Checked)
+                    {
+                        movimento.id_tipo = 29;
+                    }
+                    else if (rdbTef.Checked)
+                    {
+                        movimento.id_tipo = 53;
+                    }
+                    movimento.valor = Convert.ToDecimal(txtCredito.Text);
+
+                }
             
                 if (validaCampos() && flagNovo)
                 {
@@ -165,12 +191,13 @@ namespace WebLoja1._0.View
                     cliente.contato = txtResponsavel.Text.ToUpper().Trim();
                     cliente.cpf = txtCpf.Text.Trim();
                     cliente.rg = txtRg.Text.Trim();
-                    cliente.creditos = Convert.ToUInt32(txtCredito.Text.Trim());
+                    cliente.creditos = Convert.ToDouble(txtCredito.Text.Trim());
                     cliente.endereço = txtEndereço.Text.ToUpper().Trim();
                     cliente.numeral = txtNumero.Text.Trim();
                     cliente.bairro = txtBairro.Text.ToUpper().Trim();
                     cliente.telefone = txtTelefone.Text.Trim();
                     cliente.celular = txtCelular.Text.Trim();
+                    cliente.recado = txtRecado.Text.Trim();
                     cliente.id_Cidade = Convert.ToInt32(ddlCidade.SelectedValue);
                     cliente.status = Convert.ToInt32(chkStatus.Checked);
 
@@ -202,6 +229,7 @@ namespace WebLoja1._0.View
                     cliente.bairro = txtBairro.Text.ToUpper().Trim();
                     cliente.telefone = txtTelefone.Text.Trim();
                     cliente.celular = txtCelular.Text.Trim();
+                    cliente.recado = txtRecado.Text.Trim();
                     cliente.status = Convert.ToInt32(chkStatus.Checked);
 
                     cidade = controle.pesquisaCidade(ddlCidade.SelectedItem.Text);
@@ -256,7 +284,11 @@ namespace WebLoja1._0.View
             ddlCidade.SelectedIndex = -1;
             txtTelefone.Text = "";
             txtCelular.Text = "";
+            txtRecado.Text = "";
             txtBairro.Text = "";
+            rdbDinheiro.Checked = true;
+            rdbDinheiro.Visible = false;
+            rdbTef.Visible = false;
             rdbFisica.Checked = true;
             chkStatus.Checked = false;
             ddlCidade.SelectedIndex = -1;
@@ -444,6 +476,7 @@ namespace WebLoja1._0.View
             txtResponsavel.Enabled = false;
             txtTelefone.Enabled = false;
             txtCelular.Enabled = false;
+            txtRecado.Enabled = false;
             txtEndereço.Enabled = false;
             txtNumero.Enabled = false;
             txtBairro.Enabled = false;
@@ -478,6 +511,7 @@ namespace WebLoja1._0.View
             txtEndereço.Text = cliente.endereço;
             txtBairro.Text = cliente.bairro;
             txtCelular.Text = cliente.celular;
+            txtRecado.Text = cliente.recado;
             txtNumero.Text = cliente.numeral;
             txtResponsavel.Text = cliente.contato;
             txtTelefone.Text = cliente.telefone;
@@ -496,6 +530,24 @@ namespace WebLoja1._0.View
             txtNome.Enabled = false;
             txtCpf.Enabled = false;
 
+        }
+
+        protected void txtCredito_TextChanged(object sender, EventArgs e)
+        {
+            if(!txtCredito.Text.Equals("") && Convert.ToInt32(txtCredito.Text) > 0)
+            {
+                rdbDinheiro.Visible = true;
+                rdbTef.Visible = true;
+                rdbDinheiro.Enabled = true;
+                rdbTef.Enabled = true;
+            }
+            else
+            {
+                rdbDinheiro.Visible = false;
+                rdbTef.Visible = false;
+                rdbDinheiro.Enabled = false;
+                rdbTef.Enabled = false;
+            }
         }
     }
 }

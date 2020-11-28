@@ -33,6 +33,8 @@ namespace WebLoja1._0.Model
         public Nullable<int> pessoa_fisica { get; set; }
         public int status { get; set; }
         public Nullable<double> creditos { get; set; }
+        public string recado { get; set; }
+        public string email { get; set; }
     
         public virtual Cidades Cidades { get; set; }
         public virtual ICollection<Vendas> Vendas { get; set; }

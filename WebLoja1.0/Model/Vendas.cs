@@ -16,8 +16,8 @@ namespace WebLoja1._0.Model
     {
         public Vendas()
         {
-            this.Vendas_Produtos = new HashSet<Vendas_Produtos>();
             this.Pagamentos = new HashSet<Pagamentos>();
+            this.Vendas_Produtos = new HashSet<Vendas_Produtos>();
         }
     
         public int id { get; set; }
@@ -31,9 +31,9 @@ namespace WebLoja1._0.Model
         public Nullable<int> desconto { get; set; }
         public Nullable<decimal> comissao { get; set; }
     
+        public virtual Clientes Clientes { get; set; }
+        public virtual ICollection<Pagamentos> Pagamentos { get; set; }
         public virtual Usuarios Usuarios { get; set; }
         public virtual ICollection<Vendas_Produtos> Vendas_Produtos { get; set; }
-        public virtual ICollection<Pagamentos> Pagamentos { get; set; }
-        public virtual Clientes Clientes { get; set; }
     }
 }

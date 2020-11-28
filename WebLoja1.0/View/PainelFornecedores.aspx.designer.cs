@@ -130,6 +130,24 @@ namespace WebLoja1._0.View {
         protected global::System.Web.UI.WebControls.TextBox txtCelular;
         
         /// <summary>
+        /// Controle lblRecado.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblRecado;
+        
+        /// <summary>
+        /// Controle txtRecado.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtRecado;
+        
+        /// <summary>
         /// Controle lblEndereco.
         /// </summary>
         /// <remarks>

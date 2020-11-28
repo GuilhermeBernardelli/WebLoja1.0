@@ -24,10 +24,12 @@ namespace WebLoja1._0.View
         static Produtos produto = new Produtos();
         static Estoque estoque = new Estoque();
         static Gerenciamento gerencia = new Gerenciamento();
+        Movimentos movimento = new Movimentos();
 
         static Byte[] bytes;
         static System.Drawing.Image img;
         static bool flagNovo = true;
+        static int qntTemp = 0;
         int i;        
 
         protected void Page_Load(object sender, EventArgs e)
@@ -151,6 +153,8 @@ namespace WebLoja1._0.View
                 img.Save("C:\\Users\\Bernardelli\\Documents\\Visual Studio 2015\\Projects\\WebLoja1.0\\WebLoja1.0\\Image\\temp.jpg");
             }            
 
+            qntTemp = produto.Estoque.qnt_atual;
+
         }
         
         protected void btnNovo_Click(object sender, EventArgs e)
@@ -176,7 +180,8 @@ namespace WebLoja1._0.View
             btnEditar.Enabled = false;
             btnSalvar.Enabled = true;
             Upload.Enabled = true;
-            btnImage.Enabled = true;            
+            btnImage.Enabled = true;
+            qntTemp = 0;
         }
 
         private bool validaCampos()
@@ -215,6 +220,8 @@ namespace WebLoja1._0.View
 
         protected void btnSalvar_Click(object sender, EventArgs e)
         {
+            movimento = new Movimentos();
+            controle.salvarMovimento(movimento);
 
             gvlProdutos.Enabled = true;
 
@@ -273,6 +280,10 @@ namespace WebLoja1._0.View
             //se flag novo = false, novo elemento
             else if (flagNovo)
             {
+                movimento.data = DateTime.Today;
+                movimento.desc = "Aquisição de Estoque";
+                movimento.id_tipo = 12;
+                movimento.valor = Convert.ToDecimal(txtCusto.Text) * Convert.ToInt32(txtQnt.Text.Trim());
 
                 txtCusto.Text = Convert.ToDecimal(txtCusto.Text).ToString("0.00");
                 txtPreco.Text = Convert.ToDecimal(txtPreco.Text).ToString("0.00");
@@ -314,6 +325,11 @@ namespace WebLoja1._0.View
             //alteração de elemento existente na base de dados
             else if (!flagNovo)
             {
+                movimento.data = DateTime.Today;
+                movimento.desc = "Aquisição de Estoque";
+                movimento.id_tipo = 12;
+                movimento.valor = Convert.ToDecimal(txtCusto.Text) * (Convert.ToInt32(txtQnt.Text.Trim()) - qntTemp);
+
                 txtCusto.Text = Convert.ToDecimal(txtCusto.Text).ToString("0.00");
                 txtPreco.Text = Convert.ToDecimal(txtPreco.Text).ToString("0.00");
                 txtIcms.Text = Convert.ToDecimal(txtIcms.Text).ToString("0.00");
@@ -349,6 +365,7 @@ namespace WebLoja1._0.View
 
         private void limpaForm()
         {
+            qntTemp = 0;
             gvlProdutos.Enabled = true;
             gvlProdutos.SelectedIndex = -1;
             lblAlerta.Visible = false;

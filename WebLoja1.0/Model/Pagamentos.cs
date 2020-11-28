@@ -25,7 +25,9 @@ namespace WebLoja1._0.Model
         public string numChequePrimeiro { get; set; }
         public string numChequeUltimo { get; set; }
         public Nullable<int> id_venda { get; set; }
+        public Nullable<int> id_movimento { get; set; }
     
+        public virtual Movimentos Movimentos { get; set; }
         public virtual Vendas Vendas { get; set; }
     }
 }
